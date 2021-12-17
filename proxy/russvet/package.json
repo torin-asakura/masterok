@@ -1,0 +1,10 @@
+{
+  "name": "@proxy/russvet",
+  "version": "0.0.0",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@proxy/common": "workspace:0.0.0",
+    "axios": "^0.24.0"
+  }
+}

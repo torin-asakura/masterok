@@ -1,0 +1,71 @@
+version: '3.9'
+
+services:
+  yarn:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+      - unplugged:/workspace/.yarn/unplugged
+    entrypoint: yarn
+
+  gateway:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @gateway/application dev
+    environment:
+      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+      RUSSVET_URL: https://cdis.russvet.ru
+      STOCKS: Тула Тверь
+    env_file:
+      - .env
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+
+  migrate:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @proxy/repository run migrate
+    environment:
+      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+
+  migrate-reset:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @proxy/repository run migrate-reset
+    environment:
+      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+
+  prisma-generate:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @proxy/repository run generate
+    environment:
+      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    ports:
+      - 5432:5432
+    depends_on:
+      - migrate
+
+volumes:
+  unplugged:
