@@ -26,3 +26,8 @@ model Position {
   img                Json?
   specs              Json?
 }
+
+model Attribute {
+    id Int @id @default(autoincrement())
+    name String
+}

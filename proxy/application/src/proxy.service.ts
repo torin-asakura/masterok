@@ -39,4 +39,12 @@ export class ProxyService {
     const positions = await this.proxyRepository.findAllPositions()
     return positions.filter(({ name }) => name.search(/Лампа/) !== -1)
   }
+
+  async writeAttributes() {
+    await this.syncService.writeAttributes()
+  }
+
+  async uniqueAttributes() {
+    await this.syncService.uniqueAttributes()
+  }
 }

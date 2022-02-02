@@ -10,6 +10,21 @@ export class ProxyRepository {
     this.prisma = new PrismaClient()
   }
 
+  async writeAttribute(attribute: any) {
+    this.prisma.attribute
+      .create({
+        data: attribute
+      })
+      .catch(e => {
+        this.logger.error('Could not write attribute')
+        throw e
+      })
+  }
+
+  async getAttributes() {
+    return this.prisma.attribute.findMany()
+  }
+
   async writePosition(position: any) {
     this.prisma.position
       .create({

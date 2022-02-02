@@ -16,7 +16,7 @@ services:
       - ./:/workspace
     entrypoint: yarn workspace @gateway/application dev
     environment:
-      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
       RUSSVET_URL: https://cdis.russvet.ru
       STOCKS: Тула Тверь
     env_file:
@@ -33,7 +33,9 @@ services:
       - ./:/workspace
     entrypoint: yarn workspace @proxy/repository run migrate
     environment:
-      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
+    depends_on:
+      - db
 
   migrate-reset:
     image: node:16-alpine
@@ -42,7 +44,9 @@ services:
       - ./:/workspace
     entrypoint: yarn workspace @proxy/repository run migrate-reset
     environment:
-      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
+    depends_on:
+      - db
 
   prisma-generate:
     image: node:16-alpine
@@ -51,7 +55,7 @@ services:
       - ./:/workspace
     entrypoint: yarn workspace @proxy/repository run generate
     environment:
-      DATABASE_URL: postgresql://user:password@docker.for.mac.host.internal:5432/db?schema=public
+      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
     depends_on:
       - db
 
@@ -64,8 +68,6 @@ services:
       POSTGRES_DB: db
     ports:
       - 5432:5432
-    depends_on:
-      - migrate
 
 volumes:
   unplugged:

@@ -64,6 +64,6 @@ frontend/ui/icons/src
 .yarn/build-state.yml
 .yarn/install-state.gz
 
-# Local dump file
+# Local dump files
 
-russvet_positions.sql
+*.sql

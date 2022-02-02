@@ -45,6 +45,34 @@ const bootstrap = async () => {
     }
   })
 
+  app.get('/write-attrs', async (req,res) => {
+    try {
+      await proxyService.writeAttributes()
+      res.statusCode = 200
+      res.send({
+        message: 'OK'
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`
+      })
+    }
+  })
+
+  app.get('/unique-attrs', async (req,res) => {
+    try {
+      await proxyService.uniqueAttributes()
+      res.statusCode = 200
+      res.send({
+        message: 'OK'
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`
+      })
+    }
+  })
+
   app.listen(process.env.PORT || 4000, () => {
     logger.info(`Application started on port ${process.env.PORT || 4000}`)
   })

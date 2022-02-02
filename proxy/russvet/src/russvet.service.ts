@@ -104,7 +104,7 @@ export class RussvetService {
       return {
         info: {} as any,
         barcode: {} as any,
-        specs: {} as any,
+        specs: [] as any,
         img: [],
       }
     }
@@ -112,7 +112,7 @@ export class RussvetService {
     return {
       info: specs.data.info[0],
       barcode: specs.data.barcode[0],
-      specs: specs.data.specs[0],
+      specs: specs.data.specs,
       img: specs.data.img,
     }
   }

@@ -67,7 +67,7 @@ export interface GetResidueResponse {
 export interface GetSpecsResponse {
   info: Info
   barcode: Barcode
-  specs: Specs
+  specs: Specs[]
   img: Img[]
 }
 
