@@ -52,4 +52,26 @@ export class MoyskladService {
       stocks: response.data.rows,
     }
   }
+
+  async createAttribute(attribute: any): Promise<any> {
+    const response: any = await axios
+      .post(
+        'https://online.moysklad.ru/api/remap/1.2/entity/product/metadata/attributes',
+        attribute,
+        { headers: this.headers }
+      )
+      .catch((e) => this.logger.error(e.response.data.errors))
+
+    return response
+  }
+
+  async getAttributes(): Promise<any> {
+    const response: any = await axios
+      .get('https://online.moysklad.ru/api/remap/1.2/entity/product/metadata/attributes', {
+        headers: this.headers,
+      })
+      .catch((e) => this.logger.error(e.response.data.errors))
+
+    return response?.data?.rows
+  }
 }

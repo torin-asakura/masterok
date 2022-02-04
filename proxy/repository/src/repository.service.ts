@@ -13,9 +13,9 @@ export class ProxyRepository {
   async writeAttribute(attribute: any) {
     this.prisma.attribute
       .create({
-        data: attribute
+        data: attribute,
       })
-      .catch(e => {
+      .catch((e) => {
         this.logger.error('Could not write attribute')
         throw e
       })
@@ -63,6 +63,24 @@ export class ProxyRepository {
     throw new Error(
       `${this.NAME}: Could not updatePosition, entry with code ${code} does not exist`
     )
+  }
+
+  async syncAttributesWithDb() {
+    const dict = require('../../../.data/attr-dict.json')
+
+    Object.entries(dict).forEach(([key, value]) => {
+      this.prisma.attribute
+        .create({
+          data: {
+            name: key,
+            key: value as string,
+          },
+        })
+        .catch((e) => {
+          this.logger.error('Could not write attribute')
+          throw e
+        })
+    })
   }
 
   async $disconnect() {

@@ -33,42 +33,42 @@ const bootstrap = async () => {
       })
     }
   })
-  app.get('/lamps', async (req,res) => {
+  app.get('/lamps', async (req, res) => {
     try {
       const lamps = await proxyService.getLamps()
       res.statusCode = 200
-      res.send(lamps.reduce((acc, { name }) => `${acc}<br />${name}`,''))
+      res.send(lamps.reduce((acc, { name }) => `${acc}<br />${name}`, ''))
     } catch (e) {
       res.send({
-        message: `Error: ${e}`
+        message: `Error: ${e}`,
       })
     }
   })
 
-  app.get('/write-attrs', async (req,res) => {
+  app.get('/write-attrs', async (req, res) => {
     try {
       await proxyService.writeAttributes()
       res.statusCode = 200
       res.send({
-        message: 'OK'
+        message: 'OK',
       })
     } catch (e) {
       res.send({
-        message: `Error: ${e}`
+        message: `Error: ${e}`,
       })
     }
   })
 
-  app.get('/unique-attrs', async (req,res) => {
+  app.get('/unique-attrs', async (req, res) => {
     try {
       await proxyService.uniqueAttributes()
       res.statusCode = 200
       res.send({
-        message: 'OK'
+        message: 'OK',
       })
     } catch (e) {
       res.send({
-        message: `Error: ${e}`
+        message: `Error: ${e}`,
       })
     }
   })

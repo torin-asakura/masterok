@@ -70,7 +70,9 @@ export class SyncService {
           }
 
           if (progress === totalPositions) {
-            this.logger.info(`${this.NAME}: Completed writing positions (${progress}/${totalPositions})`)
+            this.logger.info(
+              `${this.NAME}: Completed writing positions (${progress}/${totalPositions})`
+            )
           }
 
           progress += 1
@@ -146,7 +148,7 @@ export class SyncService {
 
         for (const spec of specs) {
           await this.proxyRepository.writeAttribute({
-            name: spec.NAME
+            name: spec.NAME,
           })
         }
       }
@@ -160,7 +162,7 @@ export class SyncService {
     const { createWriteStream } = await import('fs')
 
     const attributes = await this.proxyRepository.getAttributes()
-    const uniqueAttributes = new Set(attributes.map(attr => attr.name))
+    const uniqueAttributes = new Set(attributes.map((attr) => attr.name))
 
     const stream = createWriteStream(join(__dirname, './attrs.txt'))
 
@@ -169,5 +171,21 @@ export class SyncService {
     }
 
     stream.close()
+  }
+
+  async syncAttributesWithMoySklad() {
+    const existingAttributes = await this.moyskladService.getAttributes()
+    const existingAttrNames = existingAttributes.map((attr) => attr.name)
+    const attrsToWrite = await this.proxyRepository.getAttributes()
+
+    for (const attribute of attrsToWrite) {
+      if (existingAttrNames.indexOf(attribute.name) === -1) {
+        await this.moyskladService.createAttribute({
+          name: attribute.name,
+          type: 'string',
+          required: false,
+        })
+      }
+    }
   }
 }

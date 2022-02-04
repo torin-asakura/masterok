@@ -47,4 +47,16 @@ export class ProxyService {
   async uniqueAttributes() {
     await this.syncService.uniqueAttributes()
   }
+
+  async syncAttrsWithFile() {
+    await this.proxyRepository.syncAttributesWithDb()
+  }
+
+  async syncAttrsWithMoysklad() {
+    await this.syncService.syncAttributesWithMoySklad()
+  }
+
+  async getInstockLamps() {
+    return this.moyskladService.getResidueByPositions()
+  }
 }

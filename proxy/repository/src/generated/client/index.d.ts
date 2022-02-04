@@ -1,20 +1,22 @@
-
 /**
  * Client
-**/
+ **/
 
-import * as runtime from './runtime/index';
+import * as runtime from './runtime/index'
 declare const prisma: unique symbol
-export type PrismaPromise<A> = Promise<A> & {[prisma]: true}
+export type PrismaPromise<A> = Promise<A> & { [prisma]: true }
 type UnwrapPromise<P extends any> = P extends Promise<infer R> ? R : P
 type UnwrapTuple<Tuple extends readonly unknown[]> = {
-  [K in keyof Tuple]: K extends `${number}` ? Tuple[K] extends PrismaPromise<infer X> ? X : UnwrapPromise<Tuple[K]> : UnwrapPromise<Tuple[K]>
-};
-
+  [K in keyof Tuple]: K extends `${number}`
+    ? Tuple[K] extends PrismaPromise<infer X>
+      ? X
+      : UnwrapPromise<Tuple[K]>
+    : UnwrapPromise<Tuple[K]>
+}
 
 /**
  * Model Position
- * 
+ *
  */
 export type Position = {
   id: number
@@ -32,17 +34,19 @@ export type Position = {
 
 /**
  * Model Attribute
- * 
+ *
  */
 export type Attribute = {
   id: number
   name: string
+  key: string
+  description: string | null
+  meta: Prisma.JsonValue | null
 }
-
 
 /**
  * ##  Prisma Client ʲˢ
- * 
+ *
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
@@ -51,44 +55,46 @@ export type Attribute = {
  * const positions = await prisma.position.findMany()
  * ```
  *
- * 
+ *
  * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
  */
 export class PrismaClient<
   T extends Prisma.PrismaClientOptions = Prisma.PrismaClientOptions,
-  U = 'log' extends keyof T ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition> ? Prisma.GetEvents<T['log']> : never : never,
-  GlobalReject = 'rejectOnNotFound' extends keyof T
-    ? T['rejectOnNotFound']
-    : false
-      > {
-      /**
-       * @private
-       */
-      private fetcher;
-      /**
-       * @private
-       */
-      private readonly dmmf;
-      /**
-       * @private
-       */
-      private connectionPromise?;
-      /**
-       * @private
-       */
-      private disconnectionPromise?;
-      /**
-       * @private
-       */
-      private readonly engineConfig;
-      /**
-       * @private
-       */
-      private readonly measurePerformance;
+  U = 'log' extends keyof T
+    ? T['log'] extends Array<Prisma.LogLevel | Prisma.LogDefinition>
+      ? Prisma.GetEvents<T['log']>
+      : never
+    : never,
+  GlobalReject = 'rejectOnNotFound' extends keyof T ? T['rejectOnNotFound'] : false
+> {
+  /**
+   * @private
+   */
+  private fetcher
+  /**
+   * @private
+   */
+  private readonly dmmf
+  /**
+   * @private
+   */
+  private connectionPromise?
+  /**
+   * @private
+   */
+  private disconnectionPromise?
+  /**
+   * @private
+   */
+  private readonly engineConfig
+  /**
+   * @private
+   */
+  private readonly measurePerformance
 
-    /**
+  /**
    * ##  Prisma Client ʲˢ
-   * 
+   *
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
@@ -97,22 +103,31 @@ export class PrismaClient<
    * const positions = await prisma.position.findMany()
    * ```
    *
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client).
    */
 
-  constructor(optionsArg ?: Prisma.Subset<T, Prisma.PrismaClientOptions>);
-  $on<V extends (U | 'beforeExit')>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : V extends 'beforeExit' ? () => Promise<void> : Prisma.LogEvent) => void): void;
+  constructor(optionsArg?: Prisma.Subset<T, Prisma.PrismaClientOptions>)
+  $on<V extends U | 'beforeExit'>(
+    eventType: V,
+    callback: (
+      event: V extends 'query'
+        ? Prisma.QueryEvent
+        : V extends 'beforeExit'
+        ? () => Promise<void>
+        : Prisma.LogEvent
+    ) => void
+  ): void
 
   /**
    * Connect with the database
    */
-  $connect(): Promise<void>;
+  $connect(): Promise<void>
 
   /**
    * Disconnect from the database
    */
-  $disconnect(): Promise<void>;
+  $disconnect(): Promise<void>
 
   /**
    * Add a middleware
@@ -125,10 +140,13 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$executeRaw`UPDATE User SET cool = ${true} WHERE email = ${'user@email.com'};`
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<number>;
+  $executeRaw<T = unknown>(
+    query: TemplateStringsArray | Prisma.Sql,
+    ...values: any[]
+  ): PrismaPromise<number>
 
   /**
    * Executes a raw query and returns the number of affected rows.
@@ -137,10 +155,10 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$executeRawUnsafe('UPDATE User SET cool = $1 WHERE email = $2 ;', true, 'user@email.com')
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<number>;
+  $executeRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<number>
 
   /**
    * Performs a prepared raw query and returns the `SELECT` data.
@@ -148,10 +166,13 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$queryRaw`SELECT * FROM User WHERE id = ${1} OR email = ${'user@email.com'};`
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRaw<T = unknown>(query: TemplateStringsArray | Prisma.Sql, ...values: any[]): PrismaPromise<T>;
+  $queryRaw<T = unknown>(
+    query: TemplateStringsArray | Prisma.Sql,
+    ...values: any[]
+  ): PrismaPromise<T>
 
   /**
    * Performs a raw query and returns the `SELECT` data.
@@ -160,10 +181,10 @@ export class PrismaClient<
    * ```
    * const result = await prisma.$queryRawUnsafe('SELECT * FROM User WHERE id = $1 OR email = $2;', 1, 'user@email.com')
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/raw-database-access).
    */
-  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>;
+  $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): PrismaPromise<T>
 
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
@@ -175,32 +196,37 @@ export class PrismaClient<
    *   prisma.user.create({ data: { name: 'Alice' } }),
    * ])
    * ```
-   * 
+   *
    * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
-  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>;
+  $transaction<P extends PrismaPromise<any>[]>(arg: [...P]): Promise<UnwrapTuple<P>>
 
-  $transaction<R>(fn: (prisma: Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>) => Promise<R>, options?: { maxWait?: number, timeout?: number }): Promise<R>;
+  $transaction<R>(
+    fn: (
+      prisma: Omit<PrismaClient, '$connect' | '$disconnect' | '$on' | '$transaction' | '$use'>
+    ) => Promise<R>,
+    options?: { maxWait?: number; timeout?: number }
+  ): Promise<R>
 
-      /**
+  /**
    * `prisma.position`: Exposes CRUD operations for the **Position** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Positions
-    * const positions = await prisma.position.findMany()
-    * ```
-    */
-  get position(): Prisma.PositionDelegate<GlobalReject>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Positions
+   * const positions = await prisma.position.findMany()
+   * ```
+   */
+  get position(): Prisma.PositionDelegate<GlobalReject>
 
   /**
    * `prisma.attribute`: Exposes CRUD operations for the **Attribute** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Attributes
-    * const attributes = await prisma.attribute.findMany()
-    * ```
-    */
-  get attribute(): Prisma.AttributeDelegate<GlobalReject>;
+   * Example usage:
+   * ```ts
+   * // Fetch zero or more Attributes
+   * const attributes = await prisma.attribute.findMany()
+   * ```
+   */
+  get attribute(): Prisma.AttributeDelegate<GlobalReject>
 }
 
 export namespace Prisma {
@@ -237,7 +263,7 @@ export namespace Prisma {
     client: string
   }
 
-  export const prismaVersion: PrismaVersion 
+  export const prismaVersion: PrismaVersion
 
   /**
    * Utility Types
@@ -246,9 +272,9 @@ export namespace Prisma {
   /**
    * From https://github.com/sindresorhus/type-fest/
    * Matches a JSON object.
-   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. 
+   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from.
    */
-  export type JsonObject = {[Key in string]?: JsonValue}
+  export type JsonObject = { [Key in string]?: JsonValue }
 
   /**
    * From https://github.com/sindresorhus/type-fest/
@@ -266,7 +292,7 @@ export namespace Prisma {
    * Matches a JSON object.
    * Unlike `JsonObject`, this type allows undefined and read-only properties.
    */
-  export type InputJsonObject = {readonly [Key in string]?: InputJsonValue | null}
+  export type InputJsonObject = { readonly [Key in string]?: InputJsonValue | null }
 
   /**
    * Matches a JSON array.
@@ -291,21 +317,21 @@ export namespace Prisma {
 
   /**
    * Helper for filtering JSON entries that have `null` on the database (empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const DbNull: 'DbNull'
 
   /**
    * Helper for filtering JSON entries that have JSON `null` values (not empty on the db)
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const JsonNull: 'JsonNull'
 
   /**
    * Helper for filtering JSON entries that are `Prisma.DbNull` or `Prisma.JsonNull`
-   * 
+   *
    * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-on-a-json-field
    */
   export const AnyNull: 'AnyNull'
@@ -331,22 +357,23 @@ export namespace Prisma {
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T;
+  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<infer U> ? U : T
 
   /**
    * Get the return type of a function which returns a Promise.
    */
-  export type PromiseReturnType<T extends (...args: any) => Promise<any>> = PromiseType<ReturnType<T>>
+  export type PromiseReturnType<T extends (...args: any) => Promise<any>> = PromiseType<
+    ReturnType<T>
+  >
 
   /**
    * From T, pick a set of properties whose keys are in the union K
    */
   type Prisma__Pick<T, K extends keyof T> = {
-      [P in K]: T[P];
-  };
+    [P in K]: T[P]
+  }
 
-
-  export type Enumerable<T> = T | Array<T>;
+  export type Enumerable<T> = T | Array<T>
 
   export type RequiredKeys<T> = {
     [K in keyof T]-?: {} extends Prisma__Pick<T, K> ? never : K
@@ -363,8 +390,8 @@ export namespace Prisma {
    * @desc From `T` pick properties that exist in `U`. Simple version of Intersection
    */
   export type Subset<T, U> = {
-    [key in keyof T]: key extends keyof U ? T[key] : never;
-  };
+    [key in keyof T]: key extends keyof U ? T[key] : never
+  }
 
   /**
    * SelectSubset
@@ -373,10 +400,7 @@ export namespace Prisma {
    */
   export type SelectSubset<T, U> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    (T extends SelectAndInclude
-      ? 'Please either choose `select` or `include`.'
-      : {})
+  } & (T extends SelectAndInclude ? 'Please either choose `select` or `include`.' : {})
 
   /**
    * Subset + Intersection
@@ -384,33 +408,30 @@ export namespace Prisma {
    */
   export type SubsetIntersection<T, U, K> = {
     [key in keyof T]: key extends keyof U ? T[key] : never
-  } &
-    K
+  } & K
 
-  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+  type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never }
 
   /**
    * XOR is needed to have a real mutually exclusive union type
    * https://stackoverflow.com/questions/42123407/does-typescript-support-mutually-exclusive-types
    */
-  type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-
+  type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U
 
   /**
    * Is T a Record?
    */
   type IsObject<T extends any> = T extends Array<any>
-  ? False
-  : T extends Date
-  ? False
-  : T extends Buffer
-  ? False
-  : T extends BigInt
-  ? False
-  : T extends object
-  ? True
-  : False
-
+    ? False
+    : T extends Date
+    ? False
+    : T extends Buffer
+    ? False
+    : T extends BigInt
+    ? False
+    : T extends object
+    ? True
+    : False
 
   /**
    * If it's T[], return T
@@ -431,20 +452,14 @@ export namespace Prisma {
 
   type EitherLoose<O extends object, K extends Key> = ComputeRaw<__Either<O, K>>
 
-  type _Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean
-  > = {
+  type _Either<O extends object, K extends Key, strict extends Boolean> = {
     1: EitherStrict<O, K>
     0: EitherLoose<O, K>
   }[strict]
 
-  type Either<
-    O extends object,
-    K extends Key,
-    strict extends Boolean = 1
-  > = O extends unknown ? _Either<O, K, strict> : never
+  type Either<O extends object, K extends Key, strict extends Boolean = 1> = O extends unknown
+    ? _Either<O, K, strict>
+    : never
 
   export type Union = any
 
@@ -453,47 +468,56 @@ export namespace Prisma {
   } & {}
 
   /** Helper Types for "Merge" **/
-  export type IntersectOf<U extends Union> = (
-    U extends unknown ? (k: U) => void : never
-  ) extends (k: infer I) => void
+  export type IntersectOf<U extends Union> = (U extends unknown ? (k: U) => void : never) extends (
+    k: infer I
+  ) => void
     ? I
     : never
 
   export type Overwrite<O extends object, O1 extends object> = {
-      [K in keyof O]: K extends keyof O1 ? O1[K] : O[K];
-  } & {};
+    [K in keyof O]: K extends keyof O1 ? O1[K] : O[K]
+  } & {}
 
-  type _Merge<U extends object> = IntersectOf<Overwrite<U, {
-      [K in keyof U]-?: At<U, K>;
-  }>>;
+  type _Merge<U extends object> = IntersectOf<
+    Overwrite<
+      U,
+      {
+        [K in keyof U]-?: At<U, K>
+      }
+    >
+  >
 
-  type Key = string | number | symbol;
-  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never;
-  type AtStrict<O extends object, K extends Key> = O[K & keyof O];
-  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never;
+  type Key = string | number | symbol
+  type AtBasic<O extends object, K extends Key> = K extends keyof O ? O[K] : never
+  type AtStrict<O extends object, K extends Key> = O[K & keyof O]
+  type AtLoose<O extends object, K extends Key> = O extends unknown ? AtStrict<O, K> : never
   export type At<O extends object, K extends Key, strict extends Boolean = 1> = {
-      1: AtStrict<O, K>;
-      0: AtLoose<O, K>;
-  }[strict];
+    1: AtStrict<O, K>
+    0: AtLoose<O, K>
+  }[strict]
 
-  export type ComputeRaw<A extends any> = A extends Function ? A : {
-    [K in keyof A]: A[K];
-  } & {};
+  export type ComputeRaw<A extends any> = A extends Function
+    ? A
+    : {
+        [K in keyof A]: A[K]
+      } & {}
 
   export type OptionalFlat<O> = {
-    [K in keyof O]?: O[K];
-  } & {};
+    [K in keyof O]?: O[K]
+  } & {}
 
   type _Record<K extends keyof any, T> = {
-    [P in K]: T;
-  };
+    [P in K]: T
+  }
 
-  type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
+  type _Strict<U, _U = U> = U extends unknown
+    ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>>
+    : never
 
-  export type Strict<U extends object> = ComputeRaw<_Strict<U>>;
+  export type Strict<U extends object> = ComputeRaw<_Strict<U>>
   /** End Helper Types for "Merge" **/
 
-  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>;
+  export type Merge<U extends object> = ComputeRaw<_Merge<Strict<U>>>
 
   /**
   A [[Boolean]]
@@ -521,9 +545,7 @@ export namespace Prisma {
     ? 1
     : 0
 
-  export type Has<U extends Union, U1 extends Union> = Not<
-    Extends<Exclude<U1, U>, U1>
-  >
+  export type Has<U extends Union, U1 extends Union> = Not<Extends<Exclude<U1, U>, U1>>
 
   export type Or<B1 extends Boolean, B2 extends Boolean> = {
     0: {
@@ -538,29 +560,32 @@ export namespace Prisma {
 
   export type Keys<U extends Union> = U extends unknown ? keyof U : never
 
-  type Exact<A, W = unknown> = 
-  W extends unknown ? A extends Narrowable ? Cast<A, W> : Cast<
-  {[K in keyof A]: K extends keyof W ? Exact<A[K], W[K]> : never},
-  {[K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : W[K]}>
-  : never;
+  type Exact<A, W = unknown> = W extends unknown
+    ? A extends Narrowable
+      ? Cast<A, W>
+      : Cast<
+          { [K in keyof A]: K extends keyof W ? Exact<A[K], W[K]> : never },
+          { [K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : W[K] }
+        >
+    : never
 
-  type Narrowable = string | number | boolean | bigint;
+  type Narrowable = string | number | boolean | bigint
 
-  type Cast<A, B> = A extends B ? A : B;
+  type Cast<A, B> = A extends B ? A : B
 
-  export const type: unique symbol;
+  export const type: unique symbol
 
-  export function validator<V>(): <S>(select: Exact<S, V>) => S;
+  export function validator<V>(): <S>(select: Exact<S, V>) => S
 
   /**
    * Used by group by
    */
 
-  export type GetScalarType<T, O> = O extends object ? {
-    [P in keyof T]: P extends keyof O
-      ? O[P]
-      : never
-  } : never
+  export type GetScalarType<T, O> = O extends object
+    ? {
+        [P in keyof T]: P extends keyof O ? O[P] : never
+      }
+    : never
 
   type FieldPaths<
     T,
@@ -568,10 +593,7 @@ export namespace Prisma {
   > = IsObject<T> extends True ? U : T
 
   type GetHavingFields<T> = {
-    [K in keyof T]: Or<
-      Or<Extends<'OR', K>, Extends<'AND', K>>,
-      Extends<'NOT', K>
-    > extends True
+    [K in keyof T]: Or<Or<Extends<'OR', K>, Extends<'AND', K>>, Extends<'NOT', K>> extends True
       ? // infer is only needed to not hit TS limit
         // based on the brilliant idea of Pierre-Antoine Mills
         // https://github.com/microsoft/TypeScript/issues/30188#issuecomment-478938437
@@ -601,22 +623,34 @@ export namespace Prisma {
   type ExcludeUnderscoreKeys<T extends string> = T extends `_${string}` ? never : T
 
   class PrismaClientFetcher {
-    private readonly prisma;
-    private readonly debug;
-    private readonly hooks?;
-    constructor(prisma: PrismaClient<any, any>, debug?: boolean, hooks?: Hooks | undefined);
-    request<T>(document: any, dataPath?: string[], rootField?: string, typeName?: string, isList?: boolean, callsite?: string): Promise<T>;
-    sanitizeMessage(message: string): string;
-    protected unpack(document: any, data: any, path: string[], rootField?: string, isList?: boolean): any;
+    private readonly prisma
+    private readonly debug
+    private readonly hooks?
+    constructor(prisma: PrismaClient<any, any>, debug?: boolean, hooks?: Hooks | undefined)
+    request<T>(
+      document: any,
+      dataPath?: string[],
+      rootField?: string,
+      typeName?: string,
+      isList?: boolean,
+      callsite?: string
+    ): Promise<T>
+    sanitizeMessage(message: string): string
+    protected unpack(
+      document: any,
+      data: any,
+      path: string[],
+      rootField?: string,
+      isList?: boolean
+    ): any
   }
 
   export const ModelName: {
-    Position: 'Position',
+    Position: 'Position'
     Attribute: 'Attribute'
-  };
+  }
 
-  export type ModelName = (typeof ModelName)[keyof typeof ModelName]
-
+  export type ModelName = typeof ModelName[keyof typeof ModelName]
 
   export type Datasources = {
     db?: Datasource
@@ -624,7 +658,9 @@ export namespace Prisma {
 
   export type RejectOnNotFound = boolean | ((error: Error) => Error)
   export type RejectPerModel = { [P in ModelName]?: RejectOnNotFound }
-  export type RejectPerOperation =  { [P in "findUnique" | "findFirst"]?: RejectPerModel | RejectOnNotFound } 
+  export type RejectPerOperation = {
+    [P in 'findUnique' | 'findFirst']?: RejectPerModel | RejectOnNotFound
+  }
   type IsReject<T> = T extends true ? True : T extends (err: Error) => Error ? True : False
   export type HasReject<
     GlobalRejectSettings extends Prisma.PrismaClientOptions['rejectOnNotFound'],
@@ -648,7 +684,7 @@ export namespace Prisma {
 
   export interface PrismaClientOptions {
     /**
-     * Configure findUnique/findFirst to throw an error if the query returns null. 
+     * Configure findUnique/findFirst to throw an error if the query returns null.
      *  * @example
      * ```
      * // Reject on both findUnique/findFirst
@@ -675,7 +711,7 @@ export namespace Prisma {
      * ```
      * // Defaults to stdout
      * log: ['query', 'info', 'warn', 'error']
-     * 
+     *
      * // Emit as events
      * log: [
      *  { emit: 'stdout', level: 'query' },
@@ -690,7 +726,13 @@ export namespace Prisma {
   }
 
   export type Hooks = {
-    beforeRequest?: (options: { query: string, path: string[], rootField?: string, typeName?: string, document: any }) => any
+    beforeRequest?: (options: {
+      query: string
+      path: string[]
+      rootField?: string
+      typeName?: string
+      document: any
+    }) => any
   }
 
   /* Types for Logging */
@@ -700,9 +742,13 @@ export namespace Prisma {
     emit: 'stdout' | 'event'
   }
 
-  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition ? T['emit'] extends 'event' ? T['level'] : never : never
-  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition> ?
-    GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
+  export type GetLogType<T extends LogLevel | LogDefinition> = T extends LogDefinition
+    ? T['emit'] extends 'event'
+      ? T['level']
+      : never
+    : never
+  export type GetEvents<T extends any> = T extends Array<LogLevel | LogDefinition>
+    ? GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
     : never
 
   export type QueryEvent = {
@@ -719,7 +765,6 @@ export namespace Prisma {
     target: string
   }
   /* End Types for Logging */
-
 
   export type PrismaAction =
     | 'findUnique'
@@ -753,11 +798,11 @@ export namespace Prisma {
    */
   export type Middleware<T = any> = (
     params: MiddlewareParams,
-    next: (params: MiddlewareParams) => Promise<T>,
+    next: (params: MiddlewareParams) => Promise<T>
   ) => Promise<T>
 
   // tested in getLogLevel.test.ts
-  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined; 
+  export function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLevel | undefined
   export type Datasource = {
     url?: string
   }
@@ -766,8 +811,6 @@ export namespace Prisma {
    * Count Types
    */
 
-
-
   /**
    * Models
    */
@@ -775,7 +818,6 @@ export namespace Prisma {
   /**
    * Model Position
    */
-
 
   export type AggregatePosition = {
     _count: PositionCountAggregateOutputType | null
@@ -824,7 +866,6 @@ export namespace Prisma {
     _all: number
   }
 
-
   export type PositionAvgAggregateInputType = {
     id?: true
   }
@@ -867,79 +908,76 @@ export namespace Prisma {
   export type PositionAggregateArgs = {
     /**
      * Filter which Position to aggregate.
-     * 
-    **/
+     *
+     **/
     where?: PositionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Positions to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<PositionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
-     * 
-    **/
+     *
+     **/
     cursor?: PositionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Positions from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Positions.
-     * 
-    **/
+     *
+     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Positions
-    **/
+     **/
     _count?: true | PositionCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
+     **/
     _avg?: PositionAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
+     **/
     _sum?: PositionSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: PositionMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: PositionMaxAggregateInputType
   }
 
   export type GetPositionAggregateType<T extends PositionAggregateArgs> = {
-        [P in keyof T & keyof AggregatePosition]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregatePosition]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregatePosition[P]>
       : GetScalarType<T[P], AggregatePosition[P]>
   }
-
-
-
 
   export type PositionGroupByArgs = {
     where?: PositionWhereInput
@@ -954,7 +992,6 @@ export namespace Prisma {
     _min?: PositionMinAggregateInputType
     _max?: PositionMaxAggregateInputType
   }
-
 
   export type PositionGroupByOutputType = {
     id: number
@@ -977,17 +1014,15 @@ export namespace Prisma {
 
   type GetPositionGroupByPayload<T extends PositionGroupByArgs> = Promise<
     Array<
-      PickArray<PositionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof PositionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], PositionGroupByOutputType[P]>
+      PickArray<PositionGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof PositionGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], PositionGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], PositionGroupByOutputType[P]>
+      }
     >
-
+  >
 
   export type PositionSelect = {
     id?: boolean
@@ -1006,22 +1041,19 @@ export namespace Prisma {
   export type PositionGetPayload<
     S extends boolean | null | undefined | PositionArgs,
     U = keyof S
-      > = S extends true
-        ? Position
+  > = S extends true
+    ? Position
     : S extends undefined
     ? never
     : S extends PositionArgs | PositionFindManyArgs
-    ?'include' extends U
-    ? Position 
-    : 'select' extends U
-    ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Position ?Position [P]
-  : 
-     never
-  } 
+    ? 'include' extends U
+      ? Position
+      : 'select' extends U
+      ? {
+          [P in TrueKeys<S['select']>]: P extends keyof Position ? Position[P] : never
+        }
+      : Position
     : Position
-  : Position
-
 
   type PositionCountArgs = Merge<
     Omit<PositionFindManyArgs, 'select' | 'include'> & {
@@ -1040,10 +1072,25 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findUnique<T extends PositionFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+     **/
+    findUnique<
+      T extends PositionFindUniqueArgs,
+      LocalRejectSettings = T['rejectOnNotFound'] extends RejectOnNotFound
+        ? T['rejectOnNotFound']
+        : undefined
+    >(
       args: SelectSubset<T, PositionFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Position'> extends True ? CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>> : CheckSelect<T, Prisma__PositionClient<Position | null >, Prisma__PositionClient<PositionGetPayload<T> | null >>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Position'> extends True
+      ? CheckSelect<
+          T,
+          Prisma__PositionClient<Position>,
+          Prisma__PositionClient<PositionGetPayload<T>>
+        >
+      : CheckSelect<
+          T,
+          Prisma__PositionClient<Position | null>,
+          Prisma__PositionClient<PositionGetPayload<T> | null>
+        >
 
     /**
      * Find the first Position that matches the filter.
@@ -1057,10 +1104,25 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findFirst<T extends PositionFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+     **/
+    findFirst<
+      T extends PositionFindFirstArgs,
+      LocalRejectSettings = T['rejectOnNotFound'] extends RejectOnNotFound
+        ? T['rejectOnNotFound']
+        : undefined
+    >(
       args?: SelectSubset<T, PositionFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Position'> extends True ? CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>> : CheckSelect<T, Prisma__PositionClient<Position | null >, Prisma__PositionClient<PositionGetPayload<T> | null >>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Position'> extends True
+      ? CheckSelect<
+          T,
+          Prisma__PositionClient<Position>,
+          Prisma__PositionClient<PositionGetPayload<T>>
+        >
+      : CheckSelect<
+          T,
+          Prisma__PositionClient<Position | null>,
+          Prisma__PositionClient<PositionGetPayload<T> | null>
+        >
 
     /**
      * Find zero or more Positions that matches the filter.
@@ -1070,14 +1132,14 @@ export namespace Prisma {
      * @example
      * // Get all Positions
      * const positions = await prisma.position.findMany()
-     * 
+     *
      * // Get first 10 Positions
      * const positions = await prisma.position.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const positionWithIdOnly = await prisma.position.findMany({ select: { id: true } })
-     * 
-    **/
+     *
+     **/
     findMany<T extends PositionFindManyArgs>(
       args?: SelectSubset<T, PositionFindManyArgs>
     ): CheckSelect<T, PrismaPromise<Array<Position>>, PrismaPromise<Array<PositionGetPayload<T>>>>
@@ -1092,11 +1154,15 @@ export namespace Prisma {
      *     // ... data to create a Position
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     create<T extends PositionCreateArgs>(
       args: SelectSubset<T, PositionCreateArgs>
-    ): CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__PositionClient<Position>,
+      Prisma__PositionClient<PositionGetPayload<T>>
+    >
 
     /**
      * Create many Positions.
@@ -1108,8 +1174,8 @@ export namespace Prisma {
      *         // ... provide data here
      *       }
      *     })
-     *     
-    **/
+     *
+     **/
     createMany<T extends PositionCreateManyArgs>(
       args?: SelectSubset<T, PositionCreateManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -1124,11 +1190,15 @@ export namespace Prisma {
      *     // ... filter to delete one Position
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     delete<T extends PositionDeleteArgs>(
       args: SelectSubset<T, PositionDeleteArgs>
-    ): CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__PositionClient<Position>,
+      Prisma__PositionClient<PositionGetPayload<T>>
+    >
 
     /**
      * Update one Position.
@@ -1143,11 +1213,15 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     update<T extends PositionUpdateArgs>(
       args: SelectSubset<T, PositionUpdateArgs>
-    ): CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__PositionClient<Position>,
+      Prisma__PositionClient<PositionGetPayload<T>>
+    >
 
     /**
      * Delete zero or more Positions.
@@ -1159,8 +1233,8 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     deleteMany<T extends PositionDeleteManyArgs>(
       args?: SelectSubset<T, PositionDeleteManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -1180,8 +1254,8 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     updateMany<T extends PositionUpdateManyArgs>(
       args: SelectSubset<T, PositionUpdateManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -1202,10 +1276,14 @@ export namespace Prisma {
      *     // ... the filter for the Position we want to update
      *   }
      * })
-    **/
+     **/
     upsert<T extends PositionUpsertArgs>(
       args: SelectSubset<T, PositionUpsertArgs>
-    ): CheckSelect<T, Prisma__PositionClient<Position>, Prisma__PositionClient<PositionGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__PositionClient<Position>,
+      Prisma__PositionClient<PositionGetPayload<T>>
+    >
 
     /**
      * Count the number of Positions.
@@ -1219,9 +1297,9 @@ export namespace Prisma {
      *     // ... the filter for the Positions we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends PositionCountArgs>(
-      args?: Subset<T, PositionCountArgs>,
+      args?: Subset<T, PositionCountArgs>
     ): PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
@@ -1253,8 +1331,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends PositionAggregateArgs>(args: Subset<T, PositionAggregateArgs>): PrismaPromise<GetPositionAggregateType<T>>
+     **/
+    aggregate<T extends PositionAggregateArgs>(
+      args: Subset<T, PositionAggregateArgs>
+    ): PrismaPromise<GetPositionAggregateType<T>>
 
     /**
      * Group by Position.
@@ -1272,14 +1352,11 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends PositionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: PositionGroupByArgs['orderBy'] }
         : { orderBy?: PositionGroupByArgs['orderBy'] },
@@ -1290,48 +1367,45 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, PositionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPositionGroupByPayload<T> : Promise<InputErrors>
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+        ? {
+            [P in HavingFields]: P extends ByFields
+              ? never
+              : P extends string
+              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+              : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+          }[HavingFields]
+        : 'take' extends Keys<T>
+        ? 'orderBy' extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+              }[OrderFields]
+          : 'Error: If you provide "take", you also need to provide "orderBy"'
+        : 'skip' extends Keys<T>
+        ? 'orderBy' extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+              }[OrderFields]
+          : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : ByValid extends True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+    >(
+      args: SubsetIntersection<T, PositionGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetPositionGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -1341,44 +1415,59 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__PositionClient<T> implements PrismaPromise<T> {
-    [prisma]: true;
-    private readonly _dmmf;
-    private readonly _fetcher;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    [prisma]: true
+    private readonly _dmmf
+    private readonly _fetcher
+    private readonly _queryType
+    private readonly _rootField
+    private readonly _clientMethod
+    private readonly _args
+    private readonly _dataPath
+    private readonly _errorFormat
+    private readonly _measurePerformance?
+    private _isList
+    private _callsite
+    private _requestPromise?
+    constructor(
+      _dmmf: runtime.DMMFClass,
+      _fetcher: PrismaClientFetcher,
+      _queryType: 'query' | 'mutation',
+      _rootField: string,
+      _clientMethod: string,
+      _args: any,
+      _dataPath: string[],
+      _errorFormat: ErrorFormat,
+      _measurePerformance?: boolean | undefined,
+      _isList?: boolean
+    )
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise'
 
-
-    private get _document();
+    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): Promise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): Promise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>
   }
 
   // Custom InputTypes
@@ -1389,21 +1478,20 @@ export namespace Prisma {
   export type PositionFindUniqueArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * Throw an Error if a Position can't be found
-     * 
-    **/
+     *
+     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Position to fetch.
-     * 
-    **/
+     *
+     **/
     where: PositionWhereUniqueInput
   }
-
 
   /**
    * Position findFirst
@@ -1411,56 +1499,55 @@ export namespace Prisma {
   export type PositionFindFirstArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * Throw an Error if a Position can't be found
-     * 
-    **/
+     *
+     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Position to fetch.
-     * 
-    **/
+     *
+     **/
     where?: PositionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Positions to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<PositionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Positions.
-     * 
-    **/
+     *
+     **/
     cursor?: PositionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Positions from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Positions.
-     * 
-    **/
+     *
+     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Positions.
-     * 
-    **/
+     *
+     **/
     distinct?: Enumerable<PositionScalarFieldEnum>
   }
-
 
   /**
    * Position findMany
@@ -1468,45 +1555,44 @@ export namespace Prisma {
   export type PositionFindManyArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * Filter, which Positions to fetch.
-     * 
-    **/
+     *
+     **/
     where?: PositionWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Positions to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<PositionOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Positions.
-     * 
-    **/
+     *
+     **/
     cursor?: PositionWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Positions from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Positions.
-     * 
-    **/
+     *
+     **/
     skip?: number
     distinct?: Enumerable<PositionScalarFieldEnum>
   }
-
 
   /**
    * Position create
@@ -1514,16 +1600,15 @@ export namespace Prisma {
   export type PositionCreateArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * The data needed to create a Position.
-     * 
-    **/
+     *
+     **/
     data: XOR<PositionCreateInput, PositionUncheckedCreateInput>
   }
-
 
   /**
    * Position createMany
@@ -1533,28 +1618,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-
   /**
    * Position update
    */
   export type PositionUpdateArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * The data needed to update a Position.
-     * 
-    **/
+     *
+     **/
     data: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
     /**
      * Choose, which Position to update.
-     * 
-    **/
+     *
+     **/
     where: PositionWhereUniqueInput
   }
-
 
   /**
    * Position updateMany
@@ -1564,33 +1647,31 @@ export namespace Prisma {
     where?: PositionWhereInput
   }
 
-
   /**
    * Position upsert
    */
   export type PositionUpsertArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * The filter to search for the Position to update in case it exists.
-     * 
-    **/
+     *
+     **/
     where: PositionWhereUniqueInput
     /**
      * In case the Position found by the `where` argument doesn't exist, create a new Position with this data.
-     * 
-    **/
+     *
+     **/
     create: XOR<PositionCreateInput, PositionUncheckedCreateInput>
     /**
      * In case the Position was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     *
+     **/
     update: XOR<PositionUpdateInput, PositionUncheckedUpdateInput>
   }
-
 
   /**
    * Position delete
@@ -1598,16 +1679,15 @@ export namespace Prisma {
   export type PositionDeleteArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
     /**
      * Filter which Position to delete.
-     * 
-    **/
+     *
+     **/
     where: PositionWhereUniqueInput
   }
-
 
   /**
    * Position deleteMany
@@ -1616,24 +1696,20 @@ export namespace Prisma {
     where?: PositionWhereInput
   }
 
-
   /**
    * Position without action
    */
   export type PositionArgs = {
     /**
      * Select specific fields to fetch from the Position
-     * 
-    **/
+     *
+     **/
     select?: PositionSelect | null
   }
-
-
 
   /**
    * Model Attribute
    */
-
 
   export type AggregateAttribute = {
     _count: AttributeCountAggregateOutputType | null
@@ -1654,19 +1730,25 @@ export namespace Prisma {
   export type AttributeMinAggregateOutputType = {
     id: number | null
     name: string | null
+    key: string | null
+    description: string | null
   }
 
   export type AttributeMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    key: string | null
+    description: string | null
   }
 
   export type AttributeCountAggregateOutputType = {
     id: number
     name: number
+    key: number
+    description: number
+    meta: number
     _all: number
   }
-
 
   export type AttributeAvgAggregateInputType = {
     id?: true
@@ -1679,95 +1761,99 @@ export namespace Prisma {
   export type AttributeMinAggregateInputType = {
     id?: true
     name?: true
+    key?: true
+    description?: true
   }
 
   export type AttributeMaxAggregateInputType = {
     id?: true
     name?: true
+    key?: true
+    description?: true
   }
 
   export type AttributeCountAggregateInputType = {
     id?: true
     name?: true
+    key?: true
+    description?: true
+    meta?: true
     _all?: true
   }
 
   export type AttributeAggregateArgs = {
     /**
      * Filter which Attribute to aggregate.
-     * 
-    **/
+     *
+     **/
     where?: AttributeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Attributes to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<AttributeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the start position
-     * 
-    **/
+     *
+     **/
     cursor?: AttributeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Attributes from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Attributes.
-     * 
-    **/
+     *
+     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Count returned Attributes
-    **/
+     **/
     _count?: true | AttributeCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to average
-    **/
+     **/
     _avg?: AttributeAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to sum
-    **/
+     **/
     _sum?: AttributeSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the minimum value
-    **/
+     **/
     _min?: AttributeMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
+     *
      * Select which fields to find the maximum value
-    **/
+     **/
     _max?: AttributeMaxAggregateInputType
   }
 
   export type GetAttributeAggregateType<T extends AttributeAggregateArgs> = {
-        [P in keyof T & keyof AggregateAttribute]: P extends '_count' | 'count'
+    [P in keyof T & keyof AggregateAttribute]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
         : GetScalarType<T[P], AggregateAttribute[P]>
       : GetScalarType<T[P], AggregateAttribute[P]>
   }
-
-
-
 
   export type AttributeGroupByArgs = {
     where?: AttributeWhereInput
@@ -1783,10 +1869,12 @@ export namespace Prisma {
     _max?: AttributeMaxAggregateInputType
   }
 
-
   export type AttributeGroupByOutputType = {
     id: number
     name: string
+    key: string
+    description: string | null
+    meta: JsonValue | null
     _count: AttributeCountAggregateOutputType | null
     _avg: AttributeAvgAggregateOutputType | null
     _sum: AttributeSumAggregateOutputType | null
@@ -1796,42 +1884,40 @@ export namespace Prisma {
 
   type GetAttributeGroupByPayload<T extends AttributeGroupByArgs> = Promise<
     Array<
-      PickArray<AttributeGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AttributeGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AttributeGroupByOutputType[P]>
+      PickArray<AttributeGroupByOutputType, T['by']> & {
+        [P in keyof T & keyof AttributeGroupByOutputType]: P extends '_count'
+          ? T[P] extends boolean
+            ? number
             : GetScalarType<T[P], AttributeGroupByOutputType[P]>
-        }
-      >
+          : GetScalarType<T[P], AttributeGroupByOutputType[P]>
+      }
     >
-
+  >
 
   export type AttributeSelect = {
     id?: boolean
     name?: boolean
+    key?: boolean
+    description?: boolean
+    meta?: boolean
   }
 
   export type AttributeGetPayload<
     S extends boolean | null | undefined | AttributeArgs,
     U = keyof S
-      > = S extends true
-        ? Attribute
+  > = S extends true
+    ? Attribute
     : S extends undefined
     ? never
     : S extends AttributeArgs | AttributeFindManyArgs
-    ?'include' extends U
-    ? Attribute 
-    : 'select' extends U
-    ? {
-    [P in TrueKeys<S['select']>]: P extends keyof Attribute ?Attribute [P]
-  : 
-     never
-  } 
+    ? 'include' extends U
+      ? Attribute
+      : 'select' extends U
+      ? {
+          [P in TrueKeys<S['select']>]: P extends keyof Attribute ? Attribute[P] : never
+        }
+      : Attribute
     : Attribute
-  : Attribute
-
 
   type AttributeCountArgs = Merge<
     Omit<AttributeFindManyArgs, 'select' | 'include'> & {
@@ -1850,10 +1936,25 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findUnique<T extends AttributeFindUniqueArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+     **/
+    findUnique<
+      T extends AttributeFindUniqueArgs,
+      LocalRejectSettings = T['rejectOnNotFound'] extends RejectOnNotFound
+        ? T['rejectOnNotFound']
+        : undefined
+    >(
       args: SelectSubset<T, AttributeFindUniqueArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Attribute'> extends True ? CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>> : CheckSelect<T, Prisma__AttributeClient<Attribute | null >, Prisma__AttributeClient<AttributeGetPayload<T> | null >>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findUnique', 'Attribute'> extends True
+      ? CheckSelect<
+          T,
+          Prisma__AttributeClient<Attribute>,
+          Prisma__AttributeClient<AttributeGetPayload<T>>
+        >
+      : CheckSelect<
+          T,
+          Prisma__AttributeClient<Attribute | null>,
+          Prisma__AttributeClient<AttributeGetPayload<T> | null>
+        >
 
     /**
      * Find the first Attribute that matches the filter.
@@ -1867,10 +1968,25 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-    **/
-    findFirst<T extends AttributeFindFirstArgs,  LocalRejectSettings = T["rejectOnNotFound"] extends RejectOnNotFound ? T['rejectOnNotFound'] : undefined>(
+     **/
+    findFirst<
+      T extends AttributeFindFirstArgs,
+      LocalRejectSettings = T['rejectOnNotFound'] extends RejectOnNotFound
+        ? T['rejectOnNotFound']
+        : undefined
+    >(
       args?: SelectSubset<T, AttributeFindFirstArgs>
-    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Attribute'> extends True ? CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>> : CheckSelect<T, Prisma__AttributeClient<Attribute | null >, Prisma__AttributeClient<AttributeGetPayload<T> | null >>
+    ): HasReject<GlobalRejectSettings, LocalRejectSettings, 'findFirst', 'Attribute'> extends True
+      ? CheckSelect<
+          T,
+          Prisma__AttributeClient<Attribute>,
+          Prisma__AttributeClient<AttributeGetPayload<T>>
+        >
+      : CheckSelect<
+          T,
+          Prisma__AttributeClient<Attribute | null>,
+          Prisma__AttributeClient<AttributeGetPayload<T> | null>
+        >
 
     /**
      * Find zero or more Attributes that matches the filter.
@@ -1880,14 +1996,14 @@ export namespace Prisma {
      * @example
      * // Get all Attributes
      * const attributes = await prisma.attribute.findMany()
-     * 
+     *
      * // Get first 10 Attributes
      * const attributes = await prisma.attribute.findMany({ take: 10 })
-     * 
+     *
      * // Only select the `id`
      * const attributeWithIdOnly = await prisma.attribute.findMany({ select: { id: true } })
-     * 
-    **/
+     *
+     **/
     findMany<T extends AttributeFindManyArgs>(
       args?: SelectSubset<T, AttributeFindManyArgs>
     ): CheckSelect<T, PrismaPromise<Array<Attribute>>, PrismaPromise<Array<AttributeGetPayload<T>>>>
@@ -1902,11 +2018,15 @@ export namespace Prisma {
      *     // ... data to create a Attribute
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     create<T extends AttributeCreateArgs>(
       args: SelectSubset<T, AttributeCreateArgs>
-    ): CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__AttributeClient<Attribute>,
+      Prisma__AttributeClient<AttributeGetPayload<T>>
+    >
 
     /**
      * Create many Attributes.
@@ -1918,8 +2038,8 @@ export namespace Prisma {
      *         // ... provide data here
      *       }
      *     })
-     *     
-    **/
+     *
+     **/
     createMany<T extends AttributeCreateManyArgs>(
       args?: SelectSubset<T, AttributeCreateManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -1934,11 +2054,15 @@ export namespace Prisma {
      *     // ... filter to delete one Attribute
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     delete<T extends AttributeDeleteArgs>(
       args: SelectSubset<T, AttributeDeleteArgs>
-    ): CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__AttributeClient<Attribute>,
+      Prisma__AttributeClient<AttributeGetPayload<T>>
+    >
 
     /**
      * Update one Attribute.
@@ -1953,11 +2077,15 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     update<T extends AttributeUpdateArgs>(
       args: SelectSubset<T, AttributeUpdateArgs>
-    ): CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__AttributeClient<Attribute>,
+      Prisma__AttributeClient<AttributeGetPayload<T>>
+    >
 
     /**
      * Delete zero or more Attributes.
@@ -1969,8 +2097,8 @@ export namespace Prisma {
      *     // ... provide filter here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     deleteMany<T extends AttributeDeleteManyArgs>(
       args?: SelectSubset<T, AttributeDeleteManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -1990,8 +2118,8 @@ export namespace Prisma {
      *     // ... provide data here
      *   }
      * })
-     * 
-    **/
+     *
+     **/
     updateMany<T extends AttributeUpdateManyArgs>(
       args: SelectSubset<T, AttributeUpdateManyArgs>
     ): PrismaPromise<BatchPayload>
@@ -2012,10 +2140,14 @@ export namespace Prisma {
      *     // ... the filter for the Attribute we want to update
      *   }
      * })
-    **/
+     **/
     upsert<T extends AttributeUpsertArgs>(
       args: SelectSubset<T, AttributeUpsertArgs>
-    ): CheckSelect<T, Prisma__AttributeClient<Attribute>, Prisma__AttributeClient<AttributeGetPayload<T>>>
+    ): CheckSelect<
+      T,
+      Prisma__AttributeClient<Attribute>,
+      Prisma__AttributeClient<AttributeGetPayload<T>>
+    >
 
     /**
      * Count the number of Attributes.
@@ -2029,9 +2161,9 @@ export namespace Prisma {
      *     // ... the filter for the Attributes we want to count
      *   }
      * })
-    **/
+     **/
     count<T extends AttributeCountArgs>(
-      args?: Subset<T, AttributeCountArgs>,
+      args?: Subset<T, AttributeCountArgs>
     ): PrismaPromise<
       T extends _Record<'select', any>
         ? T['select'] extends true
@@ -2063,8 +2195,10 @@ export namespace Prisma {
      *   },
      *   take: 10,
      * })
-    **/
-    aggregate<T extends AttributeAggregateArgs>(args: Subset<T, AttributeAggregateArgs>): PrismaPromise<GetAttributeAggregateType<T>>
+     **/
+    aggregate<T extends AttributeAggregateArgs>(
+      args: Subset<T, AttributeAggregateArgs>
+    ): PrismaPromise<GetAttributeAggregateType<T>>
 
     /**
      * Group by Attribute.
@@ -2082,14 +2216,11 @@ export namespace Prisma {
      *     _all: true
      *   },
      * })
-     * 
-    **/
+     *
+     **/
     groupBy<
       T extends AttributeGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
+      HasSelectOrTake extends Or<Extends<'skip', Keys<T>>, Extends<'take', Keys<T>>>,
       OrderByArg extends True extends HasSelectOrTake
         ? { orderBy: AttributeGroupByArgs['orderBy'] }
         : { orderBy?: AttributeGroupByArgs['orderBy'] },
@@ -2100,48 +2231,45 @@ export namespace Prisma {
       HavingValid extends Has<ByFields, HavingFields>,
       ByEmpty extends T['by'] extends never[] ? True : False,
       InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AttributeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAttributeGroupByPayload<T> : Promise<InputErrors>
+        ? `Error: "by" must not be empty.`
+        : HavingValid extends False
+        ? {
+            [P in HavingFields]: P extends ByFields
+              ? never
+              : P extends string
+              ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+              : [Error, 'Field ', P, ` in "having" needs to be provided in "by"`]
+          }[HavingFields]
+        : 'take' extends Keys<T>
+        ? 'orderBy' extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+              }[OrderFields]
+          : 'Error: If you provide "take", you also need to provide "orderBy"'
+        : 'skip' extends Keys<T>
+        ? 'orderBy' extends Keys<T>
+          ? ByValid extends True
+            ? {}
+            : {
+                [P in OrderFields]: P extends ByFields
+                  ? never
+                  : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+              }[OrderFields]
+          : 'Error: If you provide "skip", you also need to provide "orderBy"'
+        : ByValid extends True
+        ? {}
+        : {
+            [P in OrderFields]: P extends ByFields
+              ? never
+              : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+          }[OrderFields]
+    >(
+      args: SubsetIntersection<T, AttributeGroupByArgs, OrderByArg> & InputErrors
+    ): {} extends InputErrors ? GetAttributeGroupByPayload<T> : Promise<InputErrors>
   }
 
   /**
@@ -2151,44 +2279,59 @@ export namespace Prisma {
    * https://github.com/prisma/prisma-client-js/issues/707
    */
   export class Prisma__AttributeClient<T> implements PrismaPromise<T> {
-    [prisma]: true;
-    private readonly _dmmf;
-    private readonly _fetcher;
-    private readonly _queryType;
-    private readonly _rootField;
-    private readonly _clientMethod;
-    private readonly _args;
-    private readonly _dataPath;
-    private readonly _errorFormat;
-    private readonly _measurePerformance?;
-    private _isList;
-    private _callsite;
-    private _requestPromise?;
-    constructor(_dmmf: runtime.DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
-    readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+    [prisma]: true
+    private readonly _dmmf
+    private readonly _fetcher
+    private readonly _queryType
+    private readonly _rootField
+    private readonly _clientMethod
+    private readonly _args
+    private readonly _dataPath
+    private readonly _errorFormat
+    private readonly _measurePerformance?
+    private _isList
+    private _callsite
+    private _requestPromise?
+    constructor(
+      _dmmf: runtime.DMMFClass,
+      _fetcher: PrismaClientFetcher,
+      _queryType: 'query' | 'mutation',
+      _rootField: string,
+      _clientMethod: string,
+      _args: any,
+      _dataPath: string[],
+      _errorFormat: ErrorFormat,
+      _measurePerformance?: boolean | undefined,
+      _isList?: boolean
+    )
+    readonly [Symbol.toStringTag]: 'PrismaClientPromise'
 
-
-    private get _document();
+    private get _document()
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of which ever callback is executed.
      */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+    then<TResult1 = T, TResult2 = never>(
+      onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
+      onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null
+    ): Promise<TResult1 | TResult2>
     /**
      * Attaches a callback for only the rejection of the Promise.
      * @param onrejected The callback to execute when the Promise is rejected.
      * @returns A Promise for the completion of the callback.
      */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): Promise<T | TResult>;
+    catch<TResult = never>(
+      onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null
+    ): Promise<T | TResult>
     /**
      * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
      * resolved value cannot be modified from the callback.
      * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
      * @returns A Promise for the completion of the callback.
      */
-    finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+    finally(onfinally?: (() => void) | undefined | null): Promise<T>
   }
 
   // Custom InputTypes
@@ -2199,21 +2342,20 @@ export namespace Prisma {
   export type AttributeFindUniqueArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * Throw an Error if a Attribute can't be found
-     * 
-    **/
+     *
+     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Attribute to fetch.
-     * 
-    **/
+     *
+     **/
     where: AttributeWhereUniqueInput
   }
-
 
   /**
    * Attribute findFirst
@@ -2221,56 +2363,55 @@ export namespace Prisma {
   export type AttributeFindFirstArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * Throw an Error if a Attribute can't be found
-     * 
-    **/
+     *
+     **/
     rejectOnNotFound?: RejectOnNotFound
     /**
      * Filter, which Attribute to fetch.
-     * 
-    **/
+     *
+     **/
     where?: AttributeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Attributes to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<AttributeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for searching for Attributes.
-     * 
-    **/
+     *
+     **/
     cursor?: AttributeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Attributes from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Attributes.
-     * 
-    **/
+     *
+     **/
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
+     *
      * Filter by unique combinations of Attributes.
-     * 
-    **/
+     *
+     **/
     distinct?: Enumerable<AttributeScalarFieldEnum>
   }
-
 
   /**
    * Attribute findMany
@@ -2278,45 +2419,44 @@ export namespace Prisma {
   export type AttributeFindManyArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * Filter, which Attributes to fetch.
-     * 
-    **/
+     *
+     **/
     where?: AttributeWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
+     *
      * Determine the order of Attributes to fetch.
-     * 
-    **/
+     *
+     **/
     orderBy?: Enumerable<AttributeOrderByWithRelationInput>
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
+     *
      * Sets the position for listing Attributes.
-     * 
-    **/
+     *
+     **/
     cursor?: AttributeWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Take `±n` Attributes from the position of the cursor.
-     * 
-    **/
+     *
+     **/
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
+     *
      * Skip the first `n` Attributes.
-     * 
-    **/
+     *
+     **/
     skip?: number
     distinct?: Enumerable<AttributeScalarFieldEnum>
   }
-
 
   /**
    * Attribute create
@@ -2324,16 +2464,15 @@ export namespace Prisma {
   export type AttributeCreateArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * The data needed to create a Attribute.
-     * 
-    **/
+     *
+     **/
     data: XOR<AttributeCreateInput, AttributeUncheckedCreateInput>
   }
-
 
   /**
    * Attribute createMany
@@ -2343,28 +2482,26 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-
   /**
    * Attribute update
    */
   export type AttributeUpdateArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * The data needed to update a Attribute.
-     * 
-    **/
+     *
+     **/
     data: XOR<AttributeUpdateInput, AttributeUncheckedUpdateInput>
     /**
      * Choose, which Attribute to update.
-     * 
-    **/
+     *
+     **/
     where: AttributeWhereUniqueInput
   }
-
 
   /**
    * Attribute updateMany
@@ -2374,33 +2511,31 @@ export namespace Prisma {
     where?: AttributeWhereInput
   }
 
-
   /**
    * Attribute upsert
    */
   export type AttributeUpsertArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * The filter to search for the Attribute to update in case it exists.
-     * 
-    **/
+     *
+     **/
     where: AttributeWhereUniqueInput
     /**
      * In case the Attribute found by the `where` argument doesn't exist, create a new Attribute with this data.
-     * 
-    **/
+     *
+     **/
     create: XOR<AttributeCreateInput, AttributeUncheckedCreateInput>
     /**
      * In case the Attribute was found with the provided `where` argument, update it with this data.
-     * 
-    **/
+     *
+     **/
     update: XOR<AttributeUpdateInput, AttributeUncheckedUpdateInput>
   }
-
 
   /**
    * Attribute delete
@@ -2408,16 +2543,15 @@ export namespace Prisma {
   export type AttributeDeleteArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
     /**
      * Filter which Attribute to delete.
-     * 
-    **/
+     *
+     **/
     where: AttributeWhereUniqueInput
   }
-
 
   /**
    * Attribute deleteMany
@@ -2426,19 +2560,16 @@ export namespace Prisma {
     where?: AttributeWhereInput
   }
 
-
   /**
    * Attribute without action
    */
   export type AttributeArgs = {
     /**
      * Select specific fields to fetch from the Attribute
-     * 
-    **/
+     *
+     **/
     select?: AttributeSelect | null
   }
-
-
 
   /**
    * Enums
@@ -2448,67 +2579,66 @@ export namespace Prisma {
   // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
   export const PositionScalarFieldEnum: {
-    id: 'id',
-    code: 'code',
-    name: 'name',
-    brand: 'brand',
-    category: 'category',
-    price: 'price',
-    residue: 'residue',
-    info: 'info',
-    barcode: 'barcode',
-    img: 'img',
+    id: 'id'
+    code: 'code'
+    name: 'name'
+    brand: 'brand'
+    category: 'category'
+    price: 'price'
+    residue: 'residue'
+    info: 'info'
+    barcode: 'barcode'
+    img: 'img'
     specs: 'specs'
-  };
+  }
 
-  export type PositionScalarFieldEnum = (typeof PositionScalarFieldEnum)[keyof typeof PositionScalarFieldEnum]
-
+  export type PositionScalarFieldEnum =
+    typeof PositionScalarFieldEnum[keyof typeof PositionScalarFieldEnum]
 
   export const AttributeScalarFieldEnum: {
-    id: 'id',
+    id: 'id'
     name: 'name'
-  };
+    key: 'key'
+    description: 'description'
+    meta: 'meta'
+  }
 
-  export type AttributeScalarFieldEnum = (typeof AttributeScalarFieldEnum)[keyof typeof AttributeScalarFieldEnum]
-
+  export type AttributeScalarFieldEnum =
+    typeof AttributeScalarFieldEnum[keyof typeof AttributeScalarFieldEnum]
 
   export const SortOrder: {
-    asc: 'asc',
+    asc: 'asc'
     desc: 'desc'
-  };
+  }
 
-  export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
+  export type SortOrder = typeof SortOrder[keyof typeof SortOrder]
 
   export const NullableJsonNullValueInput: {
-    DbNull: 'DbNull',
+    DbNull: 'DbNull'
     JsonNull: 'JsonNull'
-  };
+  }
 
-  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
-
+  export type NullableJsonNullValueInput =
+    typeof NullableJsonNullValueInput[keyof typeof NullableJsonNullValueInput]
 
   export const QueryMode: {
-    default: 'default',
+    default: 'default'
     insensitive: 'insensitive'
-  };
+  }
 
-  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
+  export type QueryMode = typeof QueryMode[keyof typeof QueryMode]
 
   export const JsonNullValueFilter: {
-    DbNull: 'DbNull',
-    JsonNull: 'JsonNull',
+    DbNull: 'DbNull'
+    JsonNull: 'JsonNull'
     AnyNull: 'AnyNull'
-  };
+  }
 
-  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
+  export type JsonNullValueFilter = typeof JsonNullValueFilter[keyof typeof JsonNullValueFilter]
 
   /**
    * Deep Input Types
    */
-
 
   export type PositionWhereInput = {
     AND?: Enumerable<PositionWhereInput>
@@ -2587,11 +2717,17 @@ export namespace Prisma {
     NOT?: Enumerable<AttributeWhereInput>
     id?: IntFilter | number
     name?: StringFilter | string
+    key?: StringFilter | string
+    description?: StringNullableFilter | string | null
+    meta?: JsonNullableFilter
   }
 
   export type AttributeOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    key?: SortOrder
+    description?: SortOrder
+    meta?: SortOrder
   }
 
   export type AttributeWhereUniqueInput = {
@@ -2601,6 +2737,9 @@ export namespace Prisma {
   export type AttributeOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    key?: SortOrder
+    description?: SortOrder
+    meta?: SortOrder
     _count?: AttributeCountOrderByAggregateInput
     _avg?: AttributeAvgOrderByAggregateInput
     _max?: AttributeMaxOrderByAggregateInput
@@ -2614,6 +2753,9 @@ export namespace Prisma {
     NOT?: Enumerable<AttributeScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
     name?: StringWithAggregatesFilter | string
+    key?: StringWithAggregatesFilter | string
+    description?: StringNullableWithAggregatesFilter | string | null
+    meta?: JsonNullableWithAggregatesFilter
   }
 
   export type PositionCreateInput = {
@@ -2713,34 +2855,55 @@ export namespace Prisma {
 
   export type AttributeCreateInput = {
     name: string
+    key: string
+    description?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeUncheckedCreateInput = {
     id?: number
     name: string
+    key: string
+    description?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeCreateManyInput = {
     id?: number
     name: string
+    key: string
+    description?: string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type AttributeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    key?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    meta?: NullableJsonNullValueInput | InputJsonValue
   }
 
   export type IntFilter = {
@@ -2768,9 +2931,12 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringFilter | string
   }
-  export type JsonNullableFilter = 
+  export type JsonNullableFilter =
     | PatchUndefined<
-        Either<Required<JsonNullableFilterBase>, Exclude<keyof Required<JsonNullableFilterBase>, 'path'>>,
+        Either<
+          Required<JsonNullableFilterBase>,
+          Exclude<keyof Required<JsonNullableFilterBase>, 'path'>
+        >,
         Required<JsonNullableFilterBase>
       >
     | OptionalFlat<Omit<Required<JsonNullableFilterBase>, 'path'>>
@@ -2851,9 +3017,12 @@ export namespace Prisma {
     _min?: NestedStringFilter
     _max?: NestedStringFilter
   }
-  export type JsonNullableWithAggregatesFilter = 
+  export type JsonNullableWithAggregatesFilter =
     | PatchUndefined<
-        Either<Required<JsonNullableWithAggregatesFilterBase>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase>, 'path'>>,
+        Either<
+          Required<JsonNullableWithAggregatesFilterBase>,
+          Exclude<keyof Required<JsonNullableWithAggregatesFilterBase>, 'path'>
+        >,
         Required<JsonNullableWithAggregatesFilterBase>
       >
     | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase>, 'path'>>
@@ -2866,9 +3035,27 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter
   }
 
+  export type StringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableFilter | string | null
+  }
+
   export type AttributeCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    key?: SortOrder
+    description?: SortOrder
+    meta?: SortOrder
   }
 
   export type AttributeAvgOrderByAggregateInput = {
@@ -2878,15 +3065,37 @@ export namespace Prisma {
   export type AttributeMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    key?: SortOrder
+    description?: SortOrder
   }
 
   export type AttributeMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    key?: SortOrder
+    description?: SortOrder
   }
 
   export type AttributeSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -2899,6 +3108,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NestedIntFilter = {
@@ -2980,9 +3193,12 @@ export namespace Prisma {
     gte?: number
     not?: NestedIntNullableFilter | number | null
   }
-  export type NestedJsonNullableFilter = 
+  export type NestedJsonNullableFilter =
     | PatchUndefined<
-        Either<Required<NestedJsonNullableFilterBase>, Exclude<keyof Required<NestedJsonNullableFilterBase>, 'path'>>,
+        Either<
+          Required<NestedJsonNullableFilterBase>,
+          Exclude<keyof Required<NestedJsonNullableFilterBase>, 'path'>
+        >,
         Required<NestedJsonNullableFilterBase>
       >
     | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase>, 'path'>>
@@ -2992,7 +3208,36 @@ export namespace Prisma {
     not?: JsonNullValueFilter | InputJsonValue
   }
 
+  export type NestedStringNullableFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableFilter | string | null
+  }
 
+  export type NestedStringNullableWithAggregatesFilter = {
+    equals?: string | null
+    in?: Enumerable<string> | null
+    notIn?: Enumerable<string> | null
+    lt?: string
+    lte?: string
+    gt?: string
+    gte?: string
+    contains?: string
+    startsWith?: string
+    endsWith?: string
+    not?: NestedStringNullableWithAggregatesFilter | string | null
+    _count?: NestedIntNullableFilter
+    _min?: NestedStringNullableFilter
+    _max?: NestedStringNullableFilter
+  }
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
@@ -3005,5 +3250,5 @@ export namespace Prisma {
   /**
    * DMMF
    */
-  export const dmmf: runtime.DMMF.Document;
+  export const dmmf: runtime.DMMF.Document
 }

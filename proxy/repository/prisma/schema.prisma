@@ -14,20 +14,23 @@ datasource db {
 }
 
 model Position {
-  id                 Int             @id @default(autoincrement())
-  code               String
-  name               String
-  brand              String
-  category           String
-  price              Json?
-  residue            Json?
-  info               Json?
-  barcode            Json?
-  img                Json?
-  specs              Json?
+  id       Int    @id @default(autoincrement())
+  code     String
+  name     String
+  brand    String
+  category String
+  price    Json?
+  residue  Json?
+  info     Json?
+  barcode  Json?
+  img      Json?
+  specs    Json?
 }
 
 model Attribute {
-    id Int @id @default(autoincrement())
-    name String
+  id          Int     @id @default(autoincrement())
+  name        String
+  key         String
+  description String?
+  meta        Json?
 }
