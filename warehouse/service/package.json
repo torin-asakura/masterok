@@ -1,0 +1,9 @@
+{
+  "name": "@warehouse/service",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@warehouse/moysklad-adapter": "workspace:0.0.1"
+  }
+}

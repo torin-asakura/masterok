@@ -1,0 +1,10 @@
+{
+  "name": "@russvet/adapter",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@common/utils": "workspace:0.0.1",
+    "axios": "^0.24.0"
+  }
+}

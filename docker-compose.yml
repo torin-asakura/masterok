@@ -14,7 +14,7 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @gateway/application dev
+    entrypoint: yarn workspace @gateway/service-entrypoint dev
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
       RUSSVET_URL: https://cdis.russvet.ru
@@ -31,7 +31,7 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/repository run migrate
+    entrypoint: yarn workspace @proxy/persistence run migrate
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
     depends_on:
@@ -42,7 +42,7 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/repository run migrate-reset
+    entrypoint: yarn workspace @proxy/persistence run migrate-reset
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
     depends_on:
@@ -53,7 +53,7 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/repository run generate
+    entrypoint: yarn workspace @proxy/persistence run generate
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
     depends_on:

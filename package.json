@@ -3,9 +3,12 @@
   "private": true,
   "license": "BSD-3 Clause",
   "workspaces": [
-    "proxy/*",
-    "gateway/*",
-    "externals/*"
+    "externals/*",
+    "russvet/*",
+    "warehouse/**/*",
+    "common",
+    "proxy/**/*",
+    "gateway/**/*"
   ],
   "resolutions": {
     "@types/node": "16",
