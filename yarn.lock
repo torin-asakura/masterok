@@ -82,6 +82,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@common/utils@workspace:0.0.1, @common/utils@workspace:common":
+  version: 0.0.0-use.local
+  resolution: "@common/utils@workspace:common"
+  languageName: unknown
+  linkType: soft
+
 "@eslint/eslintrc@npm:^1.0.5":
   version: 1.0.5
   resolution: "@eslint/eslintrc@npm:1.0.5"
@@ -106,17 +112,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gateway/application@workspace:gateway/application":
+"@gateway/service-entrypoint@workspace:gateway/entrypoints/service":
   version: 0.0.0-use.local
-  resolution: "@gateway/application@workspace:gateway/application"
+  resolution: "@gateway/service-entrypoint@workspace:gateway/entrypoints/service"
   dependencies:
-    "@proxy/application": "workspace:0.0.0"
+    "@proxy/service": "workspace:0.0.1"
     "@types/express": ^4
     "@types/node": 16
     express: ^4.17.1
     nodemon: ^2.0.15
     os: ^0.1.2
-    pino: ^7.5.1
+    pino: ^7.6.5
     pino-pretty: ^7.3.0
     typescript: ^4.5.4
   languageName: unknown
@@ -181,12 +187,12 @@ __metadata:
   linkType: hard
 
 "@npmcli/fs@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@npmcli/fs@npm:1.0.0"
+  version: 1.1.0
+  resolution: "@npmcli/fs@npm:1.1.0"
   dependencies:
     "@gar/promisify": ^1.0.1
     semver: ^7.3.5
-  checksum: f2b4990107dd2a5b18794c89aaff6f62f3a67883d49a20602fdfc353cbc7f8c5fd50edeffdc769e454900e01b8b8e43d0b9eb524d00963d69f3c829be1a2e8ac
+  checksum: e435b883b4f8da8c95a820f458cabb7d86582406eed5ad79fc689000d3e2df17e1f475c4903627272c001357cabc70d8b4c62520cbdae8cfab1dfdd51949f408
   languageName: node
   linkType: hard
 
@@ -201,96 +207,75 @@ __metadata:
   linkType: hard
 
 "@prisma/client@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "@prisma/client@npm:3.8.1"
+  version: 3.9.1
+  resolution: "@prisma/client@npm:3.9.1"
   dependencies:
-    "@prisma/engines-version": 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
+    "@prisma/engines-version": 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
   peerDependencies:
     prisma: "*"
   peerDependenciesMeta:
     prisma:
       optional: true
-  checksum: 7139bbfad7cc1c1e235b02925e171e68370f50c1112e72ecacca0d13651ba808f1a63391dbbb11916b459a6fe9de699a4f7a8a12e390aa3ba394747890729496
+  checksum: ab18181b29df6868a8209e8f86d665f9a19253f330102a6c345044acbefa5796bfa22f092709c7c1aa618a364c9a47000b131701f90bcdd84333ed93c438c93a
   languageName: node
   linkType: hard
 
-"@prisma/engines-version@npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f":
-  version: 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
-  resolution: "@prisma/engines-version@npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
-  checksum: b41892214631a0f51a422ada47c7357cf757337bc17af4ad5f43ce2943f32c2eddc7f0517f57b95ff541f696ced8de373a46e22a91c6918262d2b28455aa733f
+"@prisma/engines-version@npm:3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009":
+  version: 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
+  resolution: "@prisma/engines-version@npm:3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009"
+  checksum: 413d478fc1980604de1f46a0d53ae6c752965283a7d8c51d8fb3881c371b4a71ab4aa10002dba411d961286caf1141871c3c85d209a316421cdf1e1fdac71b4e
   languageName: node
   linkType: hard
 
-"@prisma/engines@npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f":
-  version: 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
-  resolution: "@prisma/engines@npm:3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f"
-  checksum: 569496142dec78fb36ccfe55be72599cd45b84876089132491fbd3133040cbed7b9517e967bf370173ee8d66f06129f10912e1d7d8248f890817aa97fcb0cb14
+"@prisma/engines@npm:3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009":
+  version: 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
+  resolution: "@prisma/engines@npm:3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009"
+  checksum: f934a02f0d12b67a8b878da5b854a2df0b1d5adbedb9d6df552dddcb4f58af9401268c2066180a337daa0fd22d9005eae2197bf8a4cc7b9e1a20764fe93f1244
   languageName: node
   linkType: hard
 
-"@proxy/application@workspace:0.0.0, @proxy/application@workspace:proxy/application":
+"@proxy/persistence@workspace:0.0.1, @proxy/persistence@workspace:proxy/persistence":
   version: 0.0.0-use.local
-  resolution: "@proxy/application@workspace:proxy/application"
-  dependencies:
-    "@proxy/common": "workspace:0.0.0"
-    "@proxy/moysklad": "workspace:0.0.0"
-    "@proxy/repository": "workspace:0.0.0"
-    "@proxy/russvet": "workspace:0.0.0"
-    "@proxy/sync": "workspace:0.0.0"
-    axios: ^0.24.0
-    node-fetch: ^3.1.0
-    pino: ^7.5.1
-    pino-pretty: ^7.3.0
-  languageName: unknown
-  linkType: soft
-
-"@proxy/common@workspace:0.0.0, @proxy/common@workspace:proxy/common":
-  version: 0.0.0-use.local
-  resolution: "@proxy/common@workspace:proxy/common"
-  languageName: unknown
-  linkType: soft
-
-"@proxy/moysklad@workspace:0.0.0, @proxy/moysklad@workspace:proxy/moysklad":
-  version: 0.0.0-use.local
-  resolution: "@proxy/moysklad@workspace:proxy/moysklad"
-  dependencies:
-    "@proxy/common": "workspace:0.0.0"
-    axios: ^0.24.0
-    pino: ^7.5.1
-  languageName: unknown
-  linkType: soft
-
-"@proxy/repository@workspace:0.0.0, @proxy/repository@workspace:proxy/repository":
-  version: 0.0.0-use.local
-  resolution: "@proxy/repository@workspace:proxy/repository"
+  resolution: "@proxy/persistence@workspace:proxy/persistence"
   dependencies:
     "@prisma/client": ^3.8.1
     _http_common: "workspace:0.0.0"
     encoding: ^0.1.13
-    pino: ^7.6.4
+    pino: ^7.6.5
     prisma: ^3.8.1
   languageName: unknown
   linkType: soft
 
-"@proxy/russvet@workspace:0.0.0, @proxy/russvet@workspace:proxy/russvet":
+"@proxy/service@workspace:0.0.1, @proxy/service@workspace:proxy/service":
   version: 0.0.0-use.local
-  resolution: "@proxy/russvet@workspace:proxy/russvet"
+  resolution: "@proxy/service@workspace:proxy/service"
   dependencies:
-    "@proxy/common": "workspace:0.0.0"
+    "@proxy/persistence": "workspace:0.0.1"
+    "@russvet/service": "workspace:0.0.1"
+    "@warehouse/service": "workspace:0.0.1"
+    axios: ^0.24.0
+    node-fetch: ^3.1.0
+    pino: ^7.6.5
+    pino-pretty: ^7.3.0
+  languageName: unknown
+  linkType: soft
+
+"@russvet/adapter@workspace:0.0.1, @russvet/adapter@workspace:russvet/adapter":
+  version: 0.0.0-use.local
+  resolution: "@russvet/adapter@workspace:russvet/adapter"
+  dependencies:
+    "@common/utils": "workspace:0.0.1"
     axios: ^0.24.0
   languageName: unknown
   linkType: soft
 
-"@proxy/sync@workspace:0.0.0, @proxy/sync@workspace:proxy/sync":
+"@russvet/service@workspace:0.0.1, @russvet/service@workspace:russvet/service":
   version: 0.0.0-use.local
-  resolution: "@proxy/sync@workspace:proxy/sync"
+  resolution: "@russvet/service@workspace:russvet/service"
   dependencies:
-    "@proxy/common": "workspace:0.0.0"
-    "@proxy/moysklad": "workspace:0.0.0"
-    "@proxy/repository": "workspace:0.0.0"
-    "@proxy/russvet": "workspace:0.0.0"
-    camelcase: ^6.2.1
-    pino: ^7.5.1
+    "@common/utils": "workspace:0.0.1"
+    "@russvet/adapter": "workspace:0.0.1"
+    camelcase: ^6.3.0
   languageName: unknown
   linkType: soft
 
@@ -572,6 +557,24 @@ __metadata:
   checksum: 8e358aeb8f0c3758e59e2b8fcfdee5627ab2fe3d92f50f380503d966c7f33287be3322155516a50d27727fde1ad3878f48f60cd6648439126d4b0bbb1a1153ed
   languageName: node
   linkType: hard
+
+"@warehouse/moysklad-adapter@workspace:0.0.1, @warehouse/moysklad-adapter@workspace:warehouse/adapters/moysklad-adapter":
+  version: 0.0.0-use.local
+  resolution: "@warehouse/moysklad-adapter@workspace:warehouse/adapters/moysklad-adapter"
+  dependencies:
+    "@common/utils": "workspace:0.0.1"
+    axios: ^0.24.0
+    pino: ^7.6.5
+  languageName: unknown
+  linkType: soft
+
+"@warehouse/service@workspace:0.0.1, @warehouse/service@workspace:warehouse/service":
+  version: 0.0.0-use.local
+  resolution: "@warehouse/service@workspace:warehouse/service"
+  dependencies:
+    "@warehouse/moysklad-adapter": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
 
 "@webassemblyjs/ast@npm:1.11.1":
   version: 1.11.1
@@ -1206,12 +1209,12 @@ __metadata:
   linkType: hard
 
 "accepts@npm:~1.3.7":
-  version: 1.3.7
-  resolution: "accepts@npm:1.3.7"
+  version: 1.3.8
+  resolution: "accepts@npm:1.3.8"
   dependencies:
-    mime-types: ~2.1.24
-    negotiator: 0.6.2
-  checksum: 27fc8060ffc69481ff6719cd3ee06387d2b88381cb0ce626f087781bbd02201a645a9febc8e7e7333558354b33b1d2f922ad13560be4ec1b7ba9e76fc1c1241d
+    mime-types: ~2.1.34
+    negotiator: 0.6.3
+  checksum: 50c43d32e7b50285ebe84b613ee4a3aa426715a7d131b65b786e2ead0fd76b6b60091b9916d3478a75f11f162628a2139991b6c03ab3f1d9ab7c86075dc8eab4
   languageName: node
   linkType: hard
 
@@ -1261,13 +1264,13 @@ __metadata:
   linkType: hard
 
 "agentkeepalive@npm:^4.1.3":
-  version: 4.1.4
-  resolution: "agentkeepalive@npm:4.1.4"
+  version: 4.2.0
+  resolution: "agentkeepalive@npm:4.2.0"
   dependencies:
     debug: ^4.1.0
     depd: ^1.1.2
     humanize-ms: ^1.2.1
-  checksum: d49c24d4b333e9507119385895a583872f4f53d62764a89be165926e824056a126955bae4a6d3c6f7cd26f4089621a40f7b27675f7868214d82118f744b9e82d
+  checksum: 89806f83ceebbcaabf6bd581a8dce4870910fd2a11f66df8f505b4cd4ce4ca5ab9e6eec8d11ce8531a6b60f6748b75b0775e0e2fa33871503ef00d535418a19a
   languageName: node
   linkType: hard
 
@@ -1667,10 +1670,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"camelcase@npm:^6.2.0, camelcase@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "camelcase@npm:6.2.1"
-  checksum: d876272ef76391ebf8442fb7ea1d77e80ae179ce1339e021a8731b4895fd190dc19e148e045469cff5825d4c089089f3fff34d804d3f49115d55af97dd6ac0af
+"camelcase@npm:^6.2.0, camelcase@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "camelcase@npm:6.3.0"
+  checksum: 8c96818a9076434998511251dcb2761a94817ea17dbdc37f47ac080bd088fc62c7369429a19e2178b993497132c8cbcf5cc1f44ba963e76782ba469c0474938d
   languageName: node
   linkType: hard
 
@@ -2544,13 +2547,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fastify-warning@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "fastify-warning@npm:0.2.0"
-  checksum: c19ebccf54a3122877d2248400772ca98bacbabdf97826211ede29246c640d47431a2eebed1f52f9421139ed5e52e42d3bd4aefc46e27b6f34add3507529fd97
-  languageName: node
-  linkType: hard
-
 "fastq@npm:^1.6.0":
   version: 1.13.0
   resolution: "fastq@npm:1.13.0"
@@ -2560,12 +2556,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fetch-blob@npm:^3.1.2":
-  version: 3.1.3
-  resolution: "fetch-blob@npm:3.1.3"
+"fetch-blob@npm:^3.1.2, fetch-blob@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "fetch-blob@npm:3.1.4"
   dependencies:
+    node-domexception: ^1.0.0
     web-streams-polyfill: ^3.0.3
-  checksum: 7be20e9c9a936601c280ef3cfed1968dbcfb35e31564b9bdc807b48de73587cd358b7c3965a3f03483f5268dc373ae8526608947750f22eb214e20c94efab9c1
+  checksum: 81b074f38a2dbfd546dd58e482cefe14e605abd609e272804bf089d588d84f39e3e95b35640bfb376f71d5038c123d4d41be49d9cdf87e5ec8939d37738df0b6
   languageName: node
   linkType: hard
 
@@ -2701,21 +2698,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
-  version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
-  dependencies:
-    node-gyp: latest
-  conditions: os=darwin
-  languageName: node
-  linkType: hard
-
-fsevents@~2.3.2:
+"fsevents@npm:~2.3.2":
   version: 2.3.2
   resolution: "fsevents@npm:2.3.2"
   dependencies:
     node-gyp: latest
   checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  dependencies:
+    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -2748,13 +2745,6 @@ fsevents@~2.3.2:
     strip-ansi: ^6.0.1
     wide-align: ^1.1.2
   checksum: 637b34c84f518defa89319dbef68211a24e9302182ad2a619e3be1be5b7dcf2a962c8359e889294af667440f4722e7e6e61671859e00bd8ec280a136ded89b25
-  languageName: node
-  linkType: hard
-
-"get-caller-file@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "get-caller-file@npm:2.0.5"
-  checksum: b9769a836d2a98c3ee734a88ba712e62703f1df31b94b784762c433c27a386dd6029ff55c2a920c392e33657d80191edbf18c61487e198844844516f843496b9
   languageName: node
   linkType: hard
 
@@ -2915,14 +2905,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.4":
   version: 4.2.8
   resolution: "graceful-fs@npm:4.2.8"
   checksum: 5d224c8969ad0581d551dfabdb06882706b31af2561bd5e2034b4097e67cc27d05232849b8643866585fd0a41c7af152950f8776f4dd5579e9853733f31461c6
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.2.9":
+"graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
   version: 4.2.9
   resolution: "graceful-fs@npm:4.2.9"
   checksum: 68ea4e07ff2c041ada184f9278b830375f8e0b75154e3f080af6b70f66172fabb4108d19b3863a96b53fc068a310b9b6493d86d1291acc5f3861eb4b79d26ad6
@@ -3638,7 +3628,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.27, mime-types@npm:~2.1.24":
+"mime-types@npm:^2.1.27, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.34
   resolution: "mime-types@npm:2.1.34"
   dependencies:
@@ -3737,12 +3727,21 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"minipass@npm:^3.0.0, minipass@npm:^3.1.0, minipass@npm:^3.1.1, minipass@npm:^3.1.3":
+"minipass@npm:^3.0.0":
   version: 3.1.5
   resolution: "minipass@npm:3.1.5"
   dependencies:
     yallist: ^4.0.0
   checksum: 8b410b9a5bd99ceb9d63c895891d1c30511791fdc7b717da4cf9403ca2419bc57af63b8485ffdaa421ef6cff56f63ae0b2f5135f8df502d21296e8c91460ebf9
+  languageName: node
+  linkType: hard
+
+"minipass@npm:^3.1.0, minipass@npm:^3.1.1, minipass@npm:^3.1.3":
+  version: 3.1.6
+  resolution: "minipass@npm:3.1.6"
+  dependencies:
+    yallist: ^4.0.0
+  checksum: 57a04041413a3531a65062452cb5175f93383ef245d6f4a2961d34386eb9aa8ac11ac7f16f791f5e8bbaf1dfb1ef01596870c88e8822215db57aa591a5bb0a77
   languageName: node
   linkType: hard
 
@@ -3818,10 +3817,10 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"negotiator@npm:0.6.2, negotiator@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "negotiator@npm:0.6.2"
-  checksum: dfddaff6c06792f1c4c3809e29a427b8daef8cd437c83b08dd51d7ee11bbd1c29d9512d66b801144d6c98e910ffd8723f2432e0cbf8b18d41d2a09599c975ab3
+"negotiator@npm:0.6.3, negotiator@npm:^0.6.2":
+  version: 0.6.3
+  resolution: "negotiator@npm:0.6.3"
+  checksum: b8ffeb1e262eff7968fc90a2b6767b04cfd9842582a9d0ece0af7049537266e7b2506dfb1d107a32f06dd849ab2aea834d5830f7f4d0e5cb7d36e1ae55d021d9
   languageName: node
   linkType: hard
 
@@ -3832,14 +3831,21 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"node-domexception@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "node-domexception@npm:1.0.0"
+  checksum: ee1d37dd2a4eb26a8a92cd6b64dfc29caec72bff5e1ed9aba80c294f57a31ba4895a60fd48347cf17dd6e766da0ae87d75657dfd1f384ebfa60462c2283f5c7f
+  languageName: node
+  linkType: hard
+
 "node-fetch@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "node-fetch@npm:3.1.0"
+  version: 3.2.0
+  resolution: "node-fetch@npm:3.2.0"
   dependencies:
     data-uri-to-buffer: ^4.0.0
-    fetch-blob: ^3.1.2
+    fetch-blob: ^3.1.4
     formdata-polyfill: ^4.0.10
-  checksum: 23b5977554d21b72d7d99145d00bcf06e463fa621bf0afc276ad121a79509a133f38c7e470b34aad45d4032d3315bf5584ff6a1cb83e8f01be7a44cc7ac72693
+  checksum: 1c809a0f64dd11cc18b49f990440e22c471da47da2a6d6b3388a83beba9d23ba7eaca1b9bf706a792bd283b824cf1a76777910859b9c28ad33a59f2ae4e44f8e
   languageName: node
   linkType: hard
 
@@ -4188,17 +4194,17 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^2.0.4, picomatch@npm:^2.2.3":
-  version: 2.3.0
-  resolution: "picomatch@npm:2.3.0"
-  checksum: 16818720ea7c5872b6af110760dee856c8e4cd79aed1c7a006d076b1cc09eff3ae41ca5019966694c33fbd2e1cc6ea617ab10e4adac6df06556168f13be3fca2
-  languageName: node
-  linkType: hard
-
-"picomatch@npm:^2.2.1":
+"picomatch@npm:^2.0.4, picomatch@npm:^2.2.1":
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 050c865ce81119c4822c45d3c84f1ced46f93a0126febae20737bd05ca20589c564d6e9226977df859ed5e03dc73f02584a2b0faad36e896936238238b0446cf
+  languageName: node
+  linkType: hard
+
+"picomatch@npm:^2.2.3":
+  version: 2.3.0
+  resolution: "picomatch@npm:2.3.0"
+  checksum: 16818720ea7c5872b6af110760dee856c8e4cd79aed1c7a006d076b1cc09eff3ae41ca5019966694c33fbd2e1cc6ea617ab10e4adac6df06556168f13be3fca2
   languageName: node
   linkType: hard
 
@@ -4235,8 +4241,8 @@ fsevents@~2.3.2:
   linkType: hard
 
 "pino-pretty@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "pino-pretty@npm:7.3.0"
+  version: 7.5.1
+  resolution: "pino-pretty@npm:7.5.1"
   dependencies:
     args: ^5.0.1
     colorette: ^2.0.7
@@ -4252,7 +4258,7 @@ fsevents@~2.3.2:
     strip-json-comments: ^3.1.1
   bin:
     pino-pretty: bin.js
-  checksum: 28320e4f7d037934ca6d6f8457d724fa5635dfb0cbf2fcc12e8ad01bca35da1e7afa6fcc8fd071b667d9bca963cf317e9d6bf1b940f1abe2be9119a573f023cd
+  checksum: 41874497208de1f6ddb0891968a11fc3a446752b5f9e20bca4bea03849a9d5104de9ec6038572c5c24ecea6504c5db8f25cb93525754cd340308a1261d948165
   languageName: node
   linkType: hard
 
@@ -4263,30 +4269,9 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"pino@npm:^7.5.1":
-  version: 7.5.1
-  resolution: "pino@npm:7.5.1"
-  dependencies:
-    fast-redact: ^3.0.0
-    fastify-warning: ^0.2.0
-    get-caller-file: ^2.0.5
-    on-exit-leak-free: ^0.2.0
-    pino-abstract-transport: v0.5.0
-    pino-std-serializers: ^4.0.0
-    quick-format-unescaped: ^4.0.3
-    real-require: ^0.1.0
-    safe-stable-stringify: ^2.1.0
-    sonic-boom: ^2.2.1
-    thread-stream: ^0.13.0
-  bin:
-    pino: bin.js
-  checksum: 2f71ebadb08dd8a9d6cd82e9dd67c3be1f16756ec977aa8b5e65d28e8b70d7512543c071fe011cf187dcdb9d8b8aea434881a452a34d79040e44de54078a58b7
-  languageName: node
-  linkType: hard
-
-"pino@npm:^7.6.4":
-  version: 7.6.4
-  resolution: "pino@npm:7.6.4"
+"pino@npm:^7.6.5":
+  version: 7.6.5
+  resolution: "pino@npm:7.6.5"
   dependencies:
     fast-redact: ^3.0.0
     on-exit-leak-free: ^0.2.0
@@ -4300,7 +4285,7 @@ fsevents@~2.3.2:
     thread-stream: ^0.13.0
   bin:
     pino: bin.js
-  checksum: 0703361f03a04bc572085927d8c81f4b70911c8dfe1924524ee408a31ce15c6f189042f0fc0da56ff507691cfb9e184158bac6ff6a276643f6a9926b8eb3c969
+  checksum: 57a3dedb2ecdf6c6fffe31b19349c2a5578c95aefb98c78f8cec54ede9fc7562fe3d2b6ca56017ef01b5e8f379df437a4dcac6844336293d09dbf94a61f87989
   languageName: node
   linkType: hard
 
@@ -4345,14 +4330,14 @@ fsevents@~2.3.2:
   linkType: hard
 
 "prisma@npm:^3.8.1":
-  version: 3.8.1
-  resolution: "prisma@npm:3.8.1"
+  version: 3.9.1
+  resolution: "prisma@npm:3.9.1"
   dependencies:
-    "@prisma/engines": 3.8.0-43.34df67547cf5598f5a6cd3eb45f14ee70c3fb86f
+    "@prisma/engines": 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
   bin:
     prisma: build/index.js
     prisma2: build/index.js
-  checksum: dfd6cefa70b953a49e5c447719d16ac6aea7ac7e7a30544c4a522c9563d2b476a09fecf420c77b6e44632cd1b7a8cb0dc59ac6247810ec78611ac3e883caec77
+  checksum: c6feb7d0eb21bbf92d411dac0c39b7dd416840b305c180a1cf3a3699b0887160a4e9ca4a50bb4e5e255e80707b5f03643cc4a91590dc4852200b8e6e6570b5fd
   languageName: node
   linkType: hard
 
@@ -4877,9 +4862,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "signal-exit@npm:^3.0.0, signal-exit@npm:^3.0.2":
-  version: 3.0.6
-  resolution: "signal-exit@npm:3.0.6"
-  checksum: b819ac81ba757af559dad0804233ae31bf6f054591cd8a671e9cbcf09f21c72ec3076fe87d1e04861f5b33b47d63f0694b568de99c99cd733ee2060515beb6d5
+  version: 3.0.7
+  resolution: "signal-exit@npm:3.0.7"
+  checksum: a2f098f247adc367dffc27845853e9959b9e88b01cb301658cfe4194352d8d2bb32e18467c786a7fe15f1d44b233ea35633d076d5e737870b7139949d1ab6318
   languageName: node
   linkType: hard
 

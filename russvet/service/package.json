@@ -1,0 +1,11 @@
+{
+  "name": "@russvet/service",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@common/utils": "workspace:0.0.1",
+    "@russvet/adapter": "workspace:0.0.1",
+    "camelcase": "^6.3.0"
+  }
+}
