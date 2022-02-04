@@ -1,0 +1,22 @@
+{
+  "name": "masterok",
+  "private": true,
+  "license": "BSD-3 Clause",
+  "workspaces": [
+    "proxy/*",
+    "gateway/*",
+    "externals/*"
+  ],
+  "resolutions": {
+    "@types/node": "16",
+    "typescript": "4.3.5"
+  },
+  "devDependencies": {
+    "@atls/code-service": "^0.0.10",
+    "@types/eslint": "^8",
+    "@types/jest": "^26.0.24",
+    "@types/node": "16",
+    "eslint": "8.4.1",
+    "typescript": "4.3.5"
+  }
+}
