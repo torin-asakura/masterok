@@ -62,6 +62,20 @@ const bootstrap = async () => {
     }
   })
 
+  app.get('/order-lamp', async (req, res) => {
+    try {
+      await proxyService.orderLamp()
+      res.statusCode = 200
+      res.send({
+        message: 'OK',
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`,
+      })
+    }
+  })
+
   app.listen(process.env.PORT || 4000, () => {
     logger.info(`Application started on port ${process.env.PORT || 4000}`)
   })

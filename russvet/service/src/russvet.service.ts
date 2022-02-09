@@ -46,4 +46,30 @@ export class RussvetService implements IRussvetService {
       })
     }
   }
+
+  async orderPositions(codes) {
+    console.log(codes)
+
+    for (const code of codes) {
+      try {
+        const response = await this.russvetAdapter.createOrder({
+          orderNum: 1,
+          deliveryLocationId: '428339',
+          orderLines: [
+            {
+              lineNum: 1,
+              RSCode: code,
+              quantity: 1,
+              uom: 'PCE',
+              itemCode: 'Code321',
+            },
+          ],
+        })
+
+        console.log(response)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+  }
 }

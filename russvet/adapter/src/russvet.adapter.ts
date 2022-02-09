@@ -1,14 +1,10 @@
-import { getBasicAuthToken }    from '@common/utils'
+import { getBasicAuthToken } from '@common/utils'
 
-import axios                    from 'axios'
+import axios                 from 'axios'
 
-import { GetStocksResponse }    from './russvet.interfaces'
-import { GetPositionsResponse } from './russvet.interfaces'
-import { GetPriceResponse }     from './russvet.interfaces'
-import { GetResidueResponse }   from './russvet.interfaces'
-import { GetSpecsResponse }     from './russvet.interfaces'
+import { IRussvetAdapter }   from './russvet.interfaces'
 
-export class RussvetAdapter {
+export class RussvetAdapter implements IRussvetAdapter {
   private readonly headers = {
     Authorization: getBasicAuthToken(
       process.env.RUSSVET_LOGIN || '',
@@ -19,7 +15,7 @@ export class RussvetAdapter {
 
   constructor() {}
 
-  async getStocks(): Promise<GetStocksResponse> {
+  async getStocks() {
     const stocks = await axios
       .get(`${this.url}/rs/stocks`, { headers: this.headers })
       .catch(() => {})
@@ -35,11 +31,7 @@ export class RussvetAdapter {
     }
   }
 
-  async getPositions(
-    stockId: number,
-    page: number = 1,
-    category: string = 'instock'
-  ): Promise<GetPositionsResponse> {
+  async getPositions(stockId, page = 1, category = 'instock') {
     const url = `${this.url}/rs/position/${stockId}/${category}?page=${page}`
     const positions = await axios.get(url, { headers: this.headers }).catch(() => {})
 
@@ -58,7 +50,7 @@ export class RussvetAdapter {
     }
   }
 
-  async getPrice(position: number): Promise<GetPriceResponse> {
+  async getPrice(position) {
     const price = await axios
       .get(`${this.url}/rs/price/${position}`, { headers: this.headers })
       .catch(() => {})
@@ -77,7 +69,7 @@ export class RussvetAdapter {
     }
   }
 
-  async getResidue(stockId: number, position: number): Promise<GetResidueResponse> {
+  async getResidue(stockId, position) {
     const residue = await axios
       .get(`${this.url}/rs/residue/${stockId}/${position}`, { headers: this.headers })
       .catch(() => {})
@@ -95,7 +87,7 @@ export class RussvetAdapter {
     }
   }
 
-  async getSpecs(position: number): Promise<GetSpecsResponse> {
+  async getSpecs(position) {
     const specs = await axios
       .get(`${this.url}/rs/specs/${position}`, { headers: this.headers })
       .catch(() => {})
@@ -115,5 +107,44 @@ export class RussvetAdapter {
       specs: specs.data.specs,
       img: specs.data.img,
     }
+  }
+
+  async getDeliveryLocations() {
+    const deliveryLocations = await axios.get(`${this.url}/rs/custorders/Delivery/Locations`, {
+      headers: this.headers,
+    })
+
+    if (!deliveryLocations.data) {
+      return {
+        DeliveryLocations: [],
+      }
+    }
+
+    return deliveryLocations.data
+  }
+
+  async createOrder(options) {
+    return axios.post(
+      `${this.url}/rs/custorders/new`,
+      { order: options },
+      { headers: this.headers }
+    )
+  }
+
+  async getOrderDetails(options) {
+    const orderDetails = await axios.get(`${this.url}/rs/custorders/orderinfo`, {
+      headers: {
+        ...this.headers,
+        orderNum: options.orderNum,
+      },
+    })
+
+    if (!orderDetails.data) {
+      return {
+        orderInfo: {},
+      }
+    }
+
+    return orderDetails.data
   }
 }

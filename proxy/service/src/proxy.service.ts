@@ -59,4 +59,8 @@ export class ProxyService {
 
     stream.close()
   }
+
+  async orderLamp() {
+    await this.russvetService.orderPositions(['19565'])
+  }
 }

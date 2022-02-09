@@ -15,11 +15,10 @@ export class MoyskladAdapter {
     ),
     'Content-Type': 'application/json',
   }
+  private logger: Logger
 
-  constructor(private readonly logger?: Logger) {
-    if (!logger) {
-      this.logger = pino()
-    }
+  constructor() {
+    this.logger = pino()
   }
 
   async createProduct(product: Product) {
