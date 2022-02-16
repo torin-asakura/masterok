@@ -11,7 +11,7 @@
     "gateway/**/*"
   ],
   "scripts": {
-    "tmp-script": "node positions-to-ozon.tmp.js"
+    "tmp-script": "node temp/positions-to-ozon.tmp.js"
   },
   "resolutions": {
     "@types/node": "16",
