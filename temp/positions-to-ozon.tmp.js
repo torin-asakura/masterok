@@ -47,7 +47,7 @@ const fetchId = async (id) => {
 
     for (const price of result.data.salePrices) {
       prices.push({
-        [price.priceType.name]: price.value
+        [price.priceType.name]: price.value,
       })
     }
   }

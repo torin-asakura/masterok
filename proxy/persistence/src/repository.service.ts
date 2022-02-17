@@ -1,90 +1,75 @@
-import { Logger }       from 'pino'
-import { pino }         from 'pino'
+import { Logger }           from 'pino'
+import { Connection }       from 'typeorm'
+import { createConnection } from 'typeorm'
 
-import { PrismaClient } from './generated/client'
+import { Attribute }        from './entities'
+import { Position }         from './entities'
 
 export class ProxyRepository {
   private readonly NAME = 'ProxyRepository'
-  private prisma: PrismaClient
+  private connection: Promise<Connection>
 
   constructor(private readonly logger: Logger) {
-    this.prisma = new PrismaClient()
+    this.connection = createConnection({
+      name: 'main',
+      type: 'postgres',
+      host: 'db',
+      port: 5432,
+      username: 'user',
+      password: 'password',
+      database: 'db',
+      entities: [Attribute, Position],
+    })
   }
 
-  async writeAttribute(attribute: any) {
-    this.prisma.attribute
-      .create({
-        data: attribute,
-      })
-      .catch((e) => {
-        this.logger.error('Could not write attribute')
-        throw e
-      })
+  private writeJSON(object: object, prop: string) {
+    return object[prop] ? JSON.stringify(object[prop]) : ''
+  }
+
+  async writeAttribute(newAttribute: any) {
+    const connection = await this.connection
+    const attributeRepository = connection.getRepository(Attribute)
+
+    let attribute = new Attribute()
+    attribute.name = newAttribute.name
+    attribute.key = newAttribute.key
+    attribute.meta = this.writeJSON(newAttribute, 'meta')
+
+    await attributeRepository.save(attribute)
   }
 
   async getAttributes() {
-    return this.prisma.attribute.findMany()
+    const connection = await this.connection
+
+    const attributeRepository = await connection.getRepository(Attribute)
+
+    return attributeRepository.find()
   }
 
-  async writePosition(position: any) {
-    this.prisma.position
-      .create({
-        data: position,
-      })
-      .catch((e) => {
-        this.logger.error(`Could not write position`)
-        throw e
-      })
+  async writePosition(newPosition: any) {
+    const connection = await this.connection
+    const positionRepository = await connection.getRepository(Position)
+
+    let position = new Position()
+    position.name = newPosition.name
+    position.code = newPosition.code
+    position.brand = newPosition.brand
+    position.category = newPosition.category
+    position.price = this.writeJSON(newPosition, 'price')
+    position.residue = this.writeJSON(newPosition, 'residue')
+    position.info = this.writeJSON(newPosition, 'info')
+    position.barcode = this.writeJSON(newPosition, 'barcode')
+    position.img = this.writeJSON(newPosition, 'img')
+    position.specs = this.writeJSON(newPosition, 'specs')
+
+    await positionRepository.save(position)
   }
 
   async findAllPositions() {
-    return this.prisma.position.findMany()
-  }
+    const connection = await this.connection
 
-  async findPositionByCode(code: string) {
-    return this.prisma.position.findFirst({
-      where: {
-        code,
-      },
-    })
-  }
+    const positionRepository = connection.getRepository(Position)
 
-  async updatePosition(code: string, position: any) {
-    const positionInDb = await this.findPositionByCode(code)
-
-    if (positionInDb) {
-      return this.prisma.position.update({
-        where: {
-          id: positionInDb?.id,
-        },
-        data: position,
-      })
-    }
-
-    throw new Error(
-      `${this.NAME}: Could not updatePosition, entry with code ${code} does not exist`
-    )
-  }
-
-  async syncAttributesWithDb() {
-    const dict = require('../../../.data/attr-dict.json')
-
-    Object.entries(dict).forEach(([key, value]) => {
-      this.prisma.attribute
-        .create({
-          data: {
-            name: key,
-            key: value as string,
-          },
-        })
-        .catch((e) => {
-          this.logger.error('Could not write attribute')
-          throw e
-        })
-    })
-  }
-
-  async $disconnect() {
-    await this.prisma.$disconnect()
+    return positionRepository.find()
   }
 }

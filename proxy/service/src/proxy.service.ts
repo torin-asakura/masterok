@@ -24,24 +24,6 @@ export class ProxyService {
     })
   }
 
-  async writeAttributes() {
-    this.logger.info(`${this.NAME}: Executed writeAttributes`)
-
-    const positions = await this.proxyRepository.findAllPositions()
-
-    for (const position of positions) {
-      if (position.name.search(/Лампа/g) !== -1) {
-        const { specs } = await this.russvetService.getSpecs(Number(position.code))
-
-        for (const spec of specs) {
-          await this.proxyRepository.writeAttribute({
-            name: spec.NAME,
-          })
-        }
-      }
-    }
-  }
-
   async uniqueAttributes() {
     this.logger.info(`${this.NAME}: Executed uniqueAttributes`)
 
@@ -62,5 +44,9 @@ export class ProxyService {
 
   async orderLamp() {
     await this.russvetService.orderPositions(['19565'])
+  }
+
+  async getPositions() {
+    return this.proxyRepository.findAllPositions()
   }
 }

@@ -34,20 +34,6 @@ const bootstrap = async () => {
     }
   })
 
-  app.get('/write-attrs', async (req, res) => {
-    try {
-      await proxyService.writeAttributes()
-      res.statusCode = 200
-      res.send({
-        message: 'OK',
-      })
-    } catch (e) {
-      res.send({
-        message: `Error: ${e}`,
-      })
-    }
-  })
-
   app.get('/unique-attrs', async (req, res) => {
     try {
       await proxyService.uniqueAttributes()
@@ -68,6 +54,21 @@ const bootstrap = async () => {
       res.statusCode = 200
       res.send({
         message: 'OK',
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`,
+      })
+    }
+  })
+
+  app.get('/find-positions', async (req, res) => {
+    try {
+      const positions = await proxyService.getPositions()
+      res.statusCode = 200
+      res.send({
+        message: 'OK',
+        positions,
       })
     } catch (e) {
       res.send({

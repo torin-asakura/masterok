@@ -4,19 +4,16 @@
   "license": "BSD 3-Clause",
   "main": "src/index.ts",
   "scripts": {
-    "cleanup": "rm -rf node_modules | rm -rf package-lock.json && yarn add -D _http_common@workspace:0.0.0",
-    "generate": "yarn remove _http_common && prisma generate && yarn run cleanup",
-    "migrate": "prisma migrate dev --name init --skip-generate",
-    "migrate-reset": "prisma migrate reset --skip-generate --force",
-    "prisma-format": "prisma format"
-  },
-  "dependencies": {
-    "@prisma/client": "^3.8.1",
-    "encoding": "^0.1.13"
+    "migration:generate": "yarn run typeorm migration:generate -f ./ormconfig.ts",
+    "migration:run": "yarn run typeorm migration:run",
+    "typeorm": "TS_NODE_PROJECT=./typeorm.tsconfig.json node --require ts-node/register $(yarn bin typeorm)"
   },
   "devDependencies": {
-    "_http_common": "workspace:0.0.0",
+    "@types/pg": "^8",
+    "pg": "^8.7.3",
     "pino": "^7.6.5",
-    "prisma": "^3.8.1"
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.5.0",
+    "typeorm": "^0.2.41"
   }
 }

@@ -26,39 +26,6 @@ services:
     depends_on:
       - db
 
-  migrate:
-    image: node:16-alpine
-    working_dir: /workspace
-    volumes:
-      - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run migrate
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
-
-  migrate-reset:
-    image: node:16-alpine
-    working_dir: /workspace
-    volumes:
-      - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run migrate-reset
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
-
-  prisma-generate:
-    image: node:16-alpine
-    working_dir: /workspace
-    volumes:
-      - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run generate
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
-
   db:
     image: postgres
     restart: always
