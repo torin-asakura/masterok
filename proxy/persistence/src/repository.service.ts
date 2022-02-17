@@ -7,6 +7,7 @@ import { Position }         from './entities'
 
 export class ProxyRepository {
   private readonly NAME = 'ProxyRepository'
+
   private connection: Promise<Connection>
 
   constructor(private readonly logger: Logger) {
@@ -30,7 +31,7 @@ export class ProxyRepository {
     const connection = await this.connection
     const attributeRepository = connection.getRepository(Attribute)
 
-    let attribute = new Attribute()
+    const attribute = new Attribute()
     attribute.name = newAttribute.name
     attribute.key = newAttribute.key
     attribute.meta = this.writeJSON(newAttribute, 'meta')
@@ -50,7 +51,7 @@ export class ProxyRepository {
     const connection = await this.connection
     const positionRepository = await connection.getRepository(Position)
 
-    let position = new Position()
+    const position = new Position()
     position.name = newPosition.name
     position.code = newPosition.code
     position.brand = newPosition.brand

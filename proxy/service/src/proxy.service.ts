@@ -6,8 +6,11 @@ import { WarehouseService } from '@warehouse/service'
 
 export class ProxyService {
   private readonly NAME = 'ProxySync'
+
   private proxyRepository: ProxyRepository
+
   private warehouseService: WarehouseService
+
   private russvetService: RussvetService
 
   constructor(private readonly logger: Logger) {

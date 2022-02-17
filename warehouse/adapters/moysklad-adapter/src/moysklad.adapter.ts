@@ -15,6 +15,7 @@ export class MoyskladAdapter {
     ),
     'Content-Type': 'application/json',
   }
+
   private logger: Logger
 
   constructor() {

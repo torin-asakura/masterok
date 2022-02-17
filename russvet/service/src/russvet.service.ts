@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+
 import { mapKeys }         from '@common/utils'
 import { repeat }          from '@common/utils'
 
@@ -48,11 +50,9 @@ export class RussvetService implements IRussvetService {
   }
 
   async orderPositions(codes) {
-    console.log(codes)
-
     for (const code of codes) {
       try {
-        const response = await this.russvetAdapter.createOrder({
+        await this.russvetAdapter.createOrder({
           orderNum: 1,
           deliveryLocationId: '428339',
           orderLines: [
@@ -65,10 +65,8 @@ export class RussvetService implements IRussvetService {
             },
           ],
         })
-
-        console.log(response)
       } catch (e) {
-        console.error(e)
+        // do nothing
       }
     }
   }

@@ -11,14 +11,11 @@ export class RussvetAdapter implements IRussvetAdapter {
       process.env.RUSSVET_PASSWORD || ''
     ),
   }
+
   private readonly url = process.env.RUSSVET_URL || ''
 
-  constructor() {}
-
   async getStocks() {
-    const stocks = await axios
-      .get(`${this.url}/rs/stocks`, { headers: this.headers })
-      .catch(() => {})
+    const stocks = await axios.get(`${this.url}/rs/stocks`, { headers: this.headers })
 
     if (!stocks) {
       return {
@@ -33,7 +30,7 @@ export class RussvetAdapter implements IRussvetAdapter {
 
   async getPositions(stockId, page = 1, category = 'instock') {
     const url = `${this.url}/rs/position/${stockId}/${category}?page=${page}`
-    const positions = await axios.get(url, { headers: this.headers }).catch(() => {})
+    const positions = await axios.get(url, { headers: this.headers })
 
     if (!positions) {
       return {
@@ -51,9 +48,7 @@ export class RussvetAdapter implements IRussvetAdapter {
   }
 
   async getPrice(position) {
-    const price = await axios
-      .get(`${this.url}/rs/price/${position}`, { headers: this.headers })
-      .catch(() => {})
+    const price = await axios.get(`${this.url}/rs/price/${position}`, { headers: this.headers })
 
     if (!price) {
       return {
@@ -70,9 +65,9 @@ export class RussvetAdapter implements IRussvetAdapter {
   }
 
   async getResidue(stockId, position) {
-    const residue = await axios
-      .get(`${this.url}/rs/residue/${stockId}/${position}`, { headers: this.headers })
-      .catch(() => {})
+    const residue = await axios.get(`${this.url}/rs/residue/${stockId}/${position}`, {
+      headers: this.headers,
+    })
 
     if (!residue) {
       return {
@@ -88,9 +83,7 @@ export class RussvetAdapter implements IRussvetAdapter {
   }
 
   async getSpecs(position) {
-    const specs = await axios
-      .get(`${this.url}/rs/specs/${position}`, { headers: this.headers })
-      .catch(() => {})
+    const specs = await axios.get(`${this.url}/rs/specs/${position}`, { headers: this.headers })
 
     if (!specs) {
       return {
