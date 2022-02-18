@@ -1,4 +1,4 @@
-import { Logger }           from 'pino'
+import { Logger }           from '@atls/logger'
 
 import { ProxyRepository }  from '@proxy/persistence'
 import { RussvetService }   from '@russvet/service'
@@ -13,10 +13,13 @@ export class ProxyService {
 
   private russvetService: RussvetService
 
-  constructor(private readonly logger: Logger) {
-    this.proxyRepository = new ProxyRepository(logger)
+  private logger: Logger
+
+  constructor() {
+    this.proxyRepository = new ProxyRepository()
     this.warehouseService = new WarehouseService()
     this.russvetService = new RussvetService()
+    this.logger = new Logger('Proxy-Service')
   }
 
   async syncDbWithRussvet() {
@@ -51,5 +54,80 @@ export class ProxyService {
 
   async getPositions() {
     return this.proxyRepository.findAllPositions()
+  }
+
+  async genICML() {
+    class PositionDecorator {
+      constructor(private entity) {
+        this.entity.price = JSON.parse(this.entity.price)
+        this.entity.residue = JSON.parse(this.entity.residue)
+        this.entity.info = JSON.parse(this.entity.info)
+        this.entity.barcode = JSON.parse(this.entity.barcode)
+        this.entity.img = JSON.parse(this.entity.img)
+        this.entity.specs = JSON.parse(this.entity.specs)
+
+        Object.freeze(this.entity)
+      }
+
+     toObject() {
+        return {
+          name: this.entity.name,
+          code: this.entity.code,
+          externalCode: this.entity.externalCode,
+          price: (this.entity.price.Retail * 75)/100 + this.entity.price.Retail,
+          purchasePrice: this.entity.price.Retail,
+          category: this.entity.info.ETIM_GROUP_NAME.split('/')[0],
+          pictures: this.entity.img.map(({ URL }) => URL),
+          vendor: this.entity.brand,
+          barcode: this.entity.barcode.EAN
+        }
+     }
+    }
+
+    const getCategories = (positions) => {
+      const categories = {
+        categories: [],
+        subcategories: []
+      }
+
+      for (const position of positions) {
+        const extracted = JSON.parse(position.info).ETIM_GROUP_NAME.split('/')
+
+        categories.categories.push(extracted[1])
+        categories.subcategories.push({
+          name: extracted[0],
+          parentCategory: extracted[1]
+        })
+      }
+
+      return categories
+    }
+
+    const getFirstTwo = async () => {
+      const allPositions = await this.proxyRepository.findAllPositions()
+      const exact = await this.proxyRepository.findPositionByCode(1445190)
+      const extracted = await Promise.all([allPositions[0], allPositions[1], exact[0]]
+        .map(async (position) => {
+          const p = await this.warehouseService.findProductByCode(position.code)
+
+          return {
+            ...position,
+            externalCode: p?.externalCode || ''
+          }
+        }))
+
+      return extracted
+    }
+
+    const firstTwo = await getFirstTwo()
+
+    return this.warehouseService.genICML({
+      ...getCategories(firstTwo),
+      offers: firstTwo.map(position => new PositionDecorator(position).toObject())
+    })
+  }
+
+  async getPositionByCode(code) {
+    return this.proxyRepository.findPositionByCode(code)
   }
 }

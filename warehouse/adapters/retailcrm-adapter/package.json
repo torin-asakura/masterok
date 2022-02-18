@@ -1,13 +1,13 @@
 {
-  "name": "@warehouse/moysklad-adapter",
+  "name": "@warehouse/retailcrm-adapter",
   "version": "0.0.1",
   "license": "BSD 3-Clause",
   "main": "src/index.ts",
   "dependencies": {
-    "@common/utils": "workspace:0.0.1",
-    "axios": "^0.24.0"
+    "axios": "^0.24.0",
+    "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
-    "@atls/logger": "^0.0.1"
+    "pino": "^7.6.5"
   }
 }

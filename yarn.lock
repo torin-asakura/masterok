@@ -40,6 +40,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@atls/logger@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@atls/logger@npm:0.0.1"
+  dependencies:
+    pino: ^6.11.3
+  checksum: ad4fc939b618d6924a852ed1580933bc89265dd907a6631d3eaf458a28748a69c0e8174fb07fc3273d99bfef89928e8e4f394ec9561e486f509393847f54b1a7
+  languageName: node
+  linkType: hard
+
 "@atls/webpack-proto-imports-loader@npm:0.0.6":
   version: 0.0.6
   resolution: "@atls/webpack-proto-imports-loader@npm:0.0.6"
@@ -132,14 +141,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@gateway/service-entrypoint@workspace:gateway/entrypoints/service"
   dependencies:
+    "@atls/logger": ^0.0.1
     "@proxy/service": "workspace:0.0.1"
     "@types/express": ^4
     "@types/node": 16
     express: ^4.17.1
     nodemon: ^2.0.15
     os: ^0.1.2
-    pino: ^7.6.5
-    pino-pretty: ^7.3.0
     typescript: ^4.5.4
   languageName: unknown
   linkType: soft
@@ -226,9 +234,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@proxy/persistence@workspace:proxy/persistence"
   dependencies:
+    "@atls/logger": ^0.0.1
     "@types/pg": ^8
     pg: ^8.7.3
-    pino: ^7.6.5
     reflect-metadata: ^0.1.13
     ts-node: ^10.5.0
     typeorm: ^0.2.41
@@ -239,6 +247,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@proxy/service@workspace:proxy/service"
   dependencies:
+    "@atls/logger": ^0.0.1
     "@proxy/persistence": "workspace:0.0.1"
     "@russvet/service": "workspace:0.0.1"
     "@warehouse/service": "workspace:0.0.1"
@@ -597,9 +606,19 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@warehouse/moysklad-adapter@workspace:warehouse/adapters/moysklad-adapter"
   dependencies:
+    "@atls/logger": ^0.0.1
     "@common/utils": "workspace:0.0.1"
     axios: ^0.24.0
+  languageName: unknown
+  linkType: soft
+
+"@warehouse/retailcrm-adapter@workspace:0.0.1, @warehouse/retailcrm-adapter@workspace:warehouse/adapters/retailcrm-adapter":
+  version: 0.0.0-use.local
+  resolution: "@warehouse/retailcrm-adapter@workspace:warehouse/adapters/retailcrm-adapter"
+  dependencies:
+    axios: ^0.24.0
     pino: ^7.6.5
+    xmlbuilder: ^15.1.1
   languageName: unknown
   linkType: soft
 
@@ -608,6 +627,7 @@ __metadata:
   resolution: "@warehouse/service@workspace:warehouse/service"
   dependencies:
     "@warehouse/moysklad-adapter": "workspace:0.0.1"
+    "@warehouse/retailcrm-adapter": "workspace:0.0.1"
   languageName: unknown
   linkType: soft
 
@@ -2836,7 +2856,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-safe-stringify@npm:^2.0.7":
+"fast-safe-stringify@npm:^2.0.7, fast-safe-stringify@npm:^2.0.8":
   version: 2.1.1
   resolution: "fast-safe-stringify@npm:2.1.1"
   checksum: a851cbddc451745662f8f00ddb622d6766f9bd97642dabfd9a405fb0d646d69fc0b9a1243cbf67f5f18a39f40f6fa821737651ff1bceeba06c9992ca2dc5bd3d
@@ -2928,6 +2948,13 @@ __metadata:
     flatted: ^3.1.0
     rimraf: ^3.0.2
   checksum: 4fdd10ecbcbf7d520f9040dd1340eb5dfe951e6f0ecf2252edeec03ee68d989ec8b9a20f4434270e71bcfd57800dc09b3344fca3966b2eb8f613072c7d9a2365
+  languageName: node
+  linkType: hard
+
+"flatstr@npm:^1.0.12":
+  version: 1.0.12
+  resolution: "flatstr@npm:1.0.12"
+  checksum: e1bb562c94b119e958bf37e55738b172b5f8aaae6532b9660ecd877779f8559dbbc89613ba6b29ccc13447e14c59277d41450f785cf75c30df9fce62f459e9a8
   languageName: node
   linkType: hard
 
@@ -5075,10 +5102,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pino-std-serializers@npm:^3.1.0":
+  version: 3.2.0
+  resolution: "pino-std-serializers@npm:3.2.0"
+  checksum: 77e29675b116e42ae9fe6d4ef52ef3a082ffc54922b122d85935f93ddcc20277f0b0c873c5c6c5274a67b0409c672aaae3de6bcea10a2d84699718dda55ba95b
+  languageName: node
+  linkType: hard
+
 "pino-std-serializers@npm:^4.0.0":
   version: 4.0.0
   resolution: "pino-std-serializers@npm:4.0.0"
   checksum: 89d487729b58c9d3273a0ee851ead068d6d2e2ccc1af8e1c1d28f1b3442423679bec7ec04d9a2aba36f94f335e82be9f4de19dc4fbc161e71c136aaa15b85ad3
+  languageName: node
+  linkType: hard
+
+"pino@npm:^6.11.3":
+  version: 6.14.0
+  resolution: "pino@npm:6.14.0"
+  dependencies:
+    fast-redact: ^3.0.0
+    fast-safe-stringify: ^2.0.8
+    flatstr: ^1.0.12
+    pino-std-serializers: ^3.1.0
+    process-warning: ^1.0.0
+    quick-format-unescaped: ^4.0.3
+    sonic-boom: ^1.0.2
+  bin:
+    pino: bin.js
+  checksum: eb13e12e3a3d682abe4a4da426455a9f4e041e55e4fa57d72d9677ee8d188a9c952f69347e728a3761c8262cdce76ef24bee29e1a53ab15aa9c5e851099163d0
   languageName: node
   linkType: hard
 
@@ -5855,6 +5906,16 @@ __metadata:
     ip: ^1.1.5
     smart-buffer: ^4.1.0
   checksum: 2ca9d616e424f645838ebaabb04f85d94ea999e0f8393dc07f86c435af22ed88cb83958feeabd1bb7bc537c635ed47454255635502c6808a6df61af1f41af750
+  languageName: node
+  linkType: hard
+
+"sonic-boom@npm:^1.0.2":
+  version: 1.4.1
+  resolution: "sonic-boom@npm:1.4.1"
+  dependencies:
+    atomic-sleep: ^1.0.0
+    flatstr: ^1.0.12
+  checksum: 189fa8fe5c2dc05d3513fc1a4926a2f16f132fa6fa0b511745a436010cdcd9c1d3b3cb6a9d7c05bd32a965dc77673a5ac0eb0992e920bdedd16330d95323124f
   languageName: node
   linkType: hard
 
@@ -6859,6 +6920,13 @@ __metadata:
     sax: ">=0.6.0"
     xmlbuilder: ~11.0.0
   checksum: ca0cf2dfbf6deeaae878a891c8fbc0db6fd04398087084edf143cdc83d0509ad0fe199b890f62f39c4415cf60268a27a6aed0d343f0658f8779bd7add690fa98
+  languageName: node
+  linkType: hard
+
+"xmlbuilder@npm:^15.1.1":
+  version: 15.1.1
+  resolution: "xmlbuilder@npm:15.1.1"
+  checksum: 14f7302402e28d1f32823583d121594a9dca36408d40320b33f598bd589ca5163a352d076489c9c64d2dc1da19a790926a07bf4191275330d4de2b0d85bb1843
   languageName: node
   linkType: hard
 

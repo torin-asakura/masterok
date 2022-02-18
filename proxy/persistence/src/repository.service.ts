@@ -1,4 +1,4 @@
-import { Logger }           from 'pino'
+import { Logger }           from '@atls/logger'
 import { Connection }       from 'typeorm'
 import { createConnection } from 'typeorm'
 
@@ -10,7 +10,9 @@ export class ProxyRepository {
 
   private connection: Promise<Connection>
 
-  constructor(private readonly logger: Logger) {
+  private readonly logger: Logger
+
+  constructor() {
     this.connection = createConnection({
       name: 'main',
       type: 'postgres',
@@ -21,6 +23,7 @@ export class ProxyRepository {
       database: 'db',
       entities: [Attribute, Position],
     })
+    this.logger = new Logger('Repository-Service')
   }
 
   private writeJSON(object: object, prop: string) {
@@ -72,5 +75,17 @@ export class ProxyRepository {
     const positionRepository = connection.getRepository(Position)
 
     return positionRepository.find()
+  }
+
+  async findPositionByCode(code) {
+    const connection = await this.connection
+
+    const positionRepository = connection.getRepository(Position)
+
+    return positionRepository.find({
+      where: {
+        code
+      }
+    })
   }
 }

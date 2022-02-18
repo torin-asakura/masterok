@@ -49,6 +49,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:warehouse/adapters/moysklad-adapter"
       },
       {
+        "name": "@warehouse/retailcrm-adapter",
+        "reference": "workspace:warehouse/adapters/retailcrm-adapter"
+      },
+      {
         "name": "@warehouse/service",
         "reference": "workspace:warehouse/service"
       }
@@ -63,6 +67,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@russvet/adapter", ["workspace:russvet/adapter"]],
       ["@russvet/service", ["workspace:russvet/service"]],
       ["@warehouse/moysklad-adapter", ["workspace:warehouse/adapters/moysklad-adapter"]],
+      ["@warehouse/retailcrm-adapter", ["workspace:warehouse/adapters/retailcrm-adapter"]],
       ["@warehouse/service", ["workspace:warehouse/service"]],
       ["masterok", ["workspace:."]]
     ],
@@ -119,6 +124,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@atls-config-typescript-npm-0.0.1-fae47b2e6f-3f23207ff4.zip/node_modules/@atls/config-typescript/",
           "packageDependencies": [
             ["@atls/config-typescript", "npm:0.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@atls/logger", [
+        ["npm:0.0.1", {
+          "packageLocation": "./.yarn/cache/@atls-logger-npm-0.0.1-87e1241a58-ad4fc939b6.zip/node_modules/@atls/logger/",
+          "packageDependencies": [
+            ["@atls/logger", "npm:0.0.1"],
+            ["pino", "npm:6.14.0"]
           ],
           "linkType": "HARD",
         }]
@@ -232,14 +247,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./gateway/entrypoints/service/",
           "packageDependencies": [
             ["@gateway/service-entrypoint", "workspace:gateway/entrypoints/service"],
+            ["@atls/logger", "npm:0.0.1"],
             ["@proxy/service", "workspace:proxy/service"],
             ["@types/express", "npm:4.17.13"],
             ["@types/node", "npm:16.11.21"],
             ["express", "npm:4.17.2"],
             ["nodemon", "npm:2.0.15"],
             ["os", "npm:0.1.2"],
-            ["pino", "npm:7.6.5"],
-            ["pino-pretty", "npm:7.5.1"],
             ["typescript", "patch:typescript@npm%3A4.3.5#~builtin<compat/typescript>::version=4.3.5&hash=de8f8a"]
           ],
           "linkType": "SOFT",
@@ -338,9 +352,9 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./proxy/persistence/",
           "packageDependencies": [
             ["@proxy/persistence", "workspace:proxy/persistence"],
+            ["@atls/logger", "npm:0.0.1"],
             ["@types/pg", "npm:8.6.4"],
             ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
-            ["pino", "npm:7.6.5"],
             ["reflect-metadata", "npm:0.1.13"],
             ["ts-node", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:10.5.0"],
             ["typeorm", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:0.2.41"]
@@ -353,6 +367,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./proxy/service/",
           "packageDependencies": [
             ["@proxy/service", "workspace:proxy/service"],
+            ["@atls/logger", "npm:0.0.1"],
             ["@proxy/persistence", "workspace:proxy/persistence"],
             ["@russvet/service", "workspace:russvet/service"],
             ["@warehouse/service", "workspace:warehouse/service"],
@@ -771,9 +786,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./warehouse/adapters/moysklad-adapter/",
           "packageDependencies": [
             ["@warehouse/moysklad-adapter", "workspace:warehouse/adapters/moysklad-adapter"],
+            ["@atls/logger", "npm:0.0.1"],
             ["@common/utils", "workspace:common"],
+            ["axios", "npm:0.24.0"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@warehouse/retailcrm-adapter", [
+        ["workspace:warehouse/adapters/retailcrm-adapter", {
+          "packageLocation": "./warehouse/adapters/retailcrm-adapter/",
+          "packageDependencies": [
+            ["@warehouse/retailcrm-adapter", "workspace:warehouse/adapters/retailcrm-adapter"],
             ["axios", "npm:0.24.0"],
-            ["pino", "npm:7.6.5"]
+            ["pino", "npm:7.6.5"],
+            ["xmlbuilder", "npm:15.1.1"]
           ],
           "linkType": "SOFT",
         }]
@@ -783,7 +810,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./warehouse/service/",
           "packageDependencies": [
             ["@warehouse/service", "workspace:warehouse/service"],
-            ["@warehouse/moysklad-adapter", "workspace:warehouse/adapters/moysklad-adapter"]
+            ["@warehouse/moysklad-adapter", "workspace:warehouse/adapters/moysklad-adapter"],
+            ["@warehouse/retailcrm-adapter", "workspace:warehouse/adapters/retailcrm-adapter"]
           ],
           "linkType": "SOFT",
         }]
@@ -3742,6 +3770,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["flatstr", [
+        ["npm:1.0.12", {
+          "packageLocation": "./.yarn/cache/flatstr-npm-1.0.12-4311d37d16-e1bb562c94.zip/node_modules/flatstr/",
+          "packageDependencies": [
+            ["flatstr", "npm:1.0.12"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["flatted", [
         ["npm:3.2.4", {
           "packageLocation": "./.yarn/cache/flatted-npm-3.2.4-b14c5985c7-7d33846428.zip/node_modules/flatted/",
@@ -6131,6 +6168,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["pino", [
+        ["npm:6.14.0", {
+          "packageLocation": "./.yarn/cache/pino-npm-6.14.0-d486952bad-eb13e12e3a.zip/node_modules/pino/",
+          "packageDependencies": [
+            ["pino", "npm:6.14.0"],
+            ["fast-redact", "npm:3.0.2"],
+            ["fast-safe-stringify", "npm:2.1.1"],
+            ["flatstr", "npm:1.0.12"],
+            ["pino-pretty", "npm:7.4.0"],
+            ["pino-std-serializers", "npm:3.2.0"],
+            ["process-warning", "npm:1.0.0"],
+            ["quick-format-unescaped", "npm:4.0.4"],
+            ["sonic-boom", "npm:1.4.1"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:7.6.5", {
           "packageLocation": "./.yarn/cache/pino-npm-7.6.5-9eaea6e55b-57a3dedb2e.zip/node_modules/pino/",
           "packageDependencies": [
@@ -6202,6 +6254,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["pino-std-serializers", [
+        ["npm:3.2.0", {
+          "packageLocation": "./.yarn/cache/pino-std-serializers-npm-3.2.0-9fd67503a4-77e29675b1.zip/node_modules/pino-std-serializers/",
+          "packageDependencies": [
+            ["pino-std-serializers", "npm:3.2.0"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:4.0.0", {
           "packageLocation": "./.yarn/cache/pino-std-serializers-npm-4.0.0-391192ed8b-89d487729b.zip/node_modules/pino-std-serializers/",
           "packageDependencies": [
@@ -7082,6 +7141,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["sonic-boom", [
+        ["npm:1.4.1", {
+          "packageLocation": "./.yarn/cache/sonic-boom-npm-1.4.1-e42b921f99-189fa8fe5c.zip/node_modules/sonic-boom/",
+          "packageDependencies": [
+            ["sonic-boom", "npm:1.4.1"],
+            ["atomic-sleep", "npm:1.0.0"],
+            ["flatstr", "npm:1.0.12"]
+          ],
+          "linkType": "HARD",
+        }],
         ["npm:2.4.1", {
           "packageLocation": "./.yarn/cache/sonic-boom-npm-2.4.1-029e0221a7-77369f6211.zip/node_modules/sonic-boom/",
           "packageDependencies": [
@@ -8257,6 +8325,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/xmlbuilder-npm-11.0.1-b8b04dc929-7152695e16.zip/node_modules/xmlbuilder/",
           "packageDependencies": [
             ["xmlbuilder", "npm:11.0.1"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:15.1.1", {
+          "packageLocation": "./.yarn/cache/xmlbuilder-npm-15.1.1-becc60bf4e-14f7302402.zip/node_modules/xmlbuilder/",
+          "packageDependencies": [
+            ["xmlbuilder", "npm:15.1.1"]
           ],
           "linkType": "HARD",
         }]

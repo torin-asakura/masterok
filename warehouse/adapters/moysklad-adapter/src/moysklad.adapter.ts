@@ -1,8 +1,7 @@
 import { getBasicAuthToken } from '@common/utils'
 
 import axios                 from 'axios'
-import { Logger }            from 'pino'
-import { pino }              from 'pino'
+import { Logger }            from '@atls/logger'
 
 import { Product }           from './moysklad.interfaces'
 import { Stock }             from './moysklad.interfaces'
@@ -19,7 +18,7 @@ export class MoyskladAdapter {
   private logger: Logger
 
   constructor() {
-    this.logger = pino()
+    this.logger = new Logger('Moysklad-Adapter')
   }
 
   async createProduct(product: Product) {
@@ -78,5 +77,17 @@ export class MoyskladAdapter {
       .catch((e) => this.logger.error(e.response.data.errors))
 
     return response?.data?.rows
+  }
+
+  async findProductByCode(code: number): Promise<any> {
+    const response: any = await axios
+      .get(`https://online.moysklad.ru/api/remap/1.2/entity/product?search=${code}`, {
+        headers: this.headers,
+      })
+      .catch(e => {
+        // do nothing
+      })
+
+    return response?.data?.rows[0]
   }
 }

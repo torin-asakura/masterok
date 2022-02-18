@@ -1,5 +1,5 @@
 import * as entities from './src/entities'
-// import * as migrations from './src/migrations'
+import * as migrations from './src/migrations'
 
 export default {
   type: 'postgres',
@@ -8,7 +8,7 @@ export default {
   username: 'user',
   password: 'password',
   database: 'db',
-  // migrations: Object.values(migrations),
+  migrations: Object.values(migrations),
   entities: Object.values(entities),
   uuidExtension: 'pgcrypto',
   logging: true,

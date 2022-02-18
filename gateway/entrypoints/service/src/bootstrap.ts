@@ -1,7 +1,5 @@
 import express                      from 'express'
-import pino                         from 'pino'
-import pretty                       from 'pino-pretty'
-import { Logger }                   from 'pino'
+import { Logger } from '@atls/logger'
 
 import { ProxyService }             from '@proxy/service'
 
@@ -10,13 +8,9 @@ import { createRouteLogMiddleware } from './middlewares'
 const bootstrap = async () => {
   const app = express()
 
-  const logger: Logger = pino(
-    pretty({
-      colorize: true,
-    })
-  )
+  const logger = new Logger('gateway')
 
-  const proxyService = new ProxyService(logger)
+  const proxyService = new ProxyService()
 
   app.use(createRouteLogMiddleware(logger))
 
@@ -69,6 +63,37 @@ const bootstrap = async () => {
       res.send({
         message: 'OK',
         positions,
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`,
+      })
+    }
+  })
+
+  app.get('/gen-icml', async (req, res) => {
+    try {
+      const icml = await proxyService.genICML()
+      const fs = require('fs')
+      fs.writeFileSync(`${__dirname}/icml.xml`, icml)
+      res.statusCode = 200
+      res.send({
+        message: 'OK'
+      })
+    } catch (e) {
+      res.send({
+        message: `Error: ${e}`,
+      })
+    }
+  })
+
+  app.get('/fbc', async (req, res) => {
+    try {
+      const position = await proxyService.getPositionByCode(1445190)
+      res.statusCode = 200
+      res.send({
+        message: 'OK',
+        position
       })
     } catch (e) {
       res.send({
