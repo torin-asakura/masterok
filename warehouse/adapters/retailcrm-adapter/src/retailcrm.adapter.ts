@@ -1,15 +1,19 @@
-import builder from 'xmlbuilder'
+import builder               from 'xmlbuilder'
 
 import { IRetailCRMAdapter } from './retailcrm.interfaces'
 
-export class RetailCRMAdapter implements IRetailCRMAdapter{
+export class RetailCRMAdapter implements IRetailCRMAdapter {
   generateICML(object) {
     const date = new Date()
     const currentDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()} ${date.getHours()}:${date.getMinutes()}`
 
     object.offers = object.offers.map((offer, idx) => {
       offer.picture = offer.pictures
-      offer.categoryId = object.categories.length + object.subcategories.indexOf(object.subcategories.find(({ name }) => name === offer.category))
+      offer.categoryId =
+        object.categories.length +
+        object.subcategories.indexOf(
+          object.subcategories.find(({ name }) => name === offer.category)
+        )
       offer.xmlId = offer.externalCode
 
       delete offer.pictures
@@ -22,7 +26,7 @@ export class RetailCRMAdapter implements IRetailCRMAdapter{
         param: {
           '@name': 'Артикул',
           '@code': 'article',
-          '#text': offer.code
+          '#text': offer.code,
         },
         ...offer,
       }
@@ -31,13 +35,13 @@ export class RetailCRMAdapter implements IRetailCRMAdapter{
       return {
         '@id': object.categories.length + idx,
         '@parentId': object.categories.indexOf(subcategory.parentCategory),
-        '#text': subcategory.name
+        '#text': subcategory.name,
       }
     })
     object.categories = object.categories.map((category, idx) => {
       return {
         '#text': category,
-        '@id': idx
+        '@id': idx,
       }
     })
 
@@ -48,13 +52,13 @@ export class RetailCRMAdapter implements IRetailCRMAdapter{
           name: 'masterok-market',
           company: 'masterok-market',
           categories: {
-            category: [...object.categories, ...object.subcategories]
+            category: [...object.categories, ...object.subcategories],
           },
           offers: {
-            offer: object.offers
-          }
-        }
-      }
+            offer: object.offers,
+          },
+        },
+      },
     }
 
     const xml = builder.create(writeable).end({ pretty: true })

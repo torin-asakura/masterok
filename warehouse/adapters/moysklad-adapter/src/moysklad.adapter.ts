@@ -1,7 +1,7 @@
+import { Logger }            from '@atls/logger'
 import { getBasicAuthToken } from '@common/utils'
 
 import axios                 from 'axios'
-import { Logger }            from '@atls/logger'
 
 import { Product }           from './moysklad.interfaces'
 import { Stock }             from './moysklad.interfaces'
@@ -84,7 +84,7 @@ export class MoyskladAdapter {
       .get(`https://online.moysklad.ru/api/remap/1.2/entity/product?search=${code}`, {
         headers: this.headers,
       })
-      .catch(e => {
+      .catch((e) => {
         // do nothing
       })
 

@@ -69,25 +69,25 @@ export class ProxyService {
         Object.freeze(this.entity)
       }
 
-     toObject() {
+      toObject() {
         return {
           name: this.entity.name,
           code: this.entity.code,
           externalCode: this.entity.externalCode,
-          price: (this.entity.price.Retail * 75)/100 + this.entity.price.Retail,
+          price: (this.entity.price.Retail * 75) / 100 + this.entity.price.Retail,
           purchasePrice: this.entity.price.Retail,
           category: this.entity.info.ETIM_GROUP_NAME.split('/')[0],
           pictures: this.entity.img.map(({ URL }) => URL),
           vendor: this.entity.brand,
-          barcode: this.entity.barcode.EAN
+          barcode: this.entity.barcode.EAN,
         }
-     }
+      }
     }
 
     const getCategories = (positions) => {
       const categories = {
         categories: [],
-        subcategories: []
+        subcategories: [],
       }
 
       for (const position of positions) {
@@ -96,7 +96,7 @@ export class ProxyService {
         categories.categories.push(extracted[1])
         categories.subcategories.push({
           name: extracted[0],
-          parentCategory: extracted[1]
+          parentCategory: extracted[1],
         })
       }
 
@@ -106,15 +106,16 @@ export class ProxyService {
     const getFirstTwo = async () => {
       const allPositions = await this.proxyRepository.findAllPositions()
       const exact = await this.proxyRepository.findPositionByCode(1445190)
-      const extracted = await Promise.all([allPositions[0], allPositions[1], exact[0]]
-        .map(async (position) => {
+      const extracted = await Promise.all(
+        [allPositions[0], allPositions[1], exact[0]].map(async (position) => {
           const p = await this.warehouseService.findProductByCode(position.code)
 
           return {
             ...position,
-            externalCode: p?.externalCode || ''
+            externalCode: p?.externalCode || '',
           }
-        }))
+        })
+      )
 
       return extracted
     }
@@ -123,7 +124,7 @@ export class ProxyService {
 
     return this.warehouseService.genICML({
       ...getCategories(firstTwo),
-      offers: firstTwo.map(position => new PositionDecorator(position).toObject())
+      offers: firstTwo.map((position) => new PositionDecorator(position).toObject()),
     })
   }
 

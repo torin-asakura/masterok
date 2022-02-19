@@ -1,7 +1,8 @@
+import { Logger }       from '@atls/logger'
+
 import { Request }      from 'express'
 import { Response }     from 'express'
 import { NextFunction } from 'express'
-import { Logger }       from '@atls/logger'
 
 const createRouteLogMiddleware = (logger: Logger) =>
   (req: Request, res: Response, next: NextFunction) => {

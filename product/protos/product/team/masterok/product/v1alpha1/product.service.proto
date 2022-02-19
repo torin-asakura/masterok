@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/product.payloads.proto";
+
+service ProductService {
+    rpc CreateProduct (CreateProductRequest) returns (CreateProductResponse) {}
+}

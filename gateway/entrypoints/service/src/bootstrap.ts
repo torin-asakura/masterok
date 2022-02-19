@@ -1,5 +1,6 @@
+import { Logger }                   from '@atls/logger'
+
 import express                      from 'express'
-import { Logger } from '@atls/logger'
 
 import { ProxyService }             from '@proxy/service'
 
@@ -78,7 +79,7 @@ const bootstrap = async () => {
       fs.writeFileSync(`${__dirname}/icml.xml`, icml)
       res.statusCode = 200
       res.send({
-        message: 'OK'
+        message: 'OK',
       })
     } catch (e) {
       res.send({
@@ -93,7 +94,7 @@ const bootstrap = async () => {
       res.statusCode = 200
       res.send({
         message: 'OK',
-        position
+        position,
       })
     } catch (e) {
       res.send({

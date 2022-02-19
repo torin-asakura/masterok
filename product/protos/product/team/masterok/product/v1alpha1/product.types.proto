@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+message Product {}

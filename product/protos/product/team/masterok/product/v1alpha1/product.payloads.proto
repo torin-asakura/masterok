@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/product.types.proto";
+
+message CreateProductRequest {
+  string name = 1;
+}
+
+message CreateProductResponse {
+  string id = 1;
+}

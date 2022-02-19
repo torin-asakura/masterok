@@ -1,4 +1,5 @@
 import { Logger }           from '@atls/logger'
+
 import { Connection }       from 'typeorm'
 import { createConnection } from 'typeorm'
 
@@ -84,8 +85,8 @@ export class ProxyRepository {
 
     return positionRepository.find({
       where: {
-        code
-      }
+        code,
+      },
     })
   }
 }

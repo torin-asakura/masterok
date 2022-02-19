@@ -1,4 +1,4 @@
-import * as entities from './src/entities'
+import * as entities   from './src/entities'
 import * as migrations from './src/migrations'
 
 export default {
