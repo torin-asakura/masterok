@@ -6,8 +6,36 @@ import "team/masterok/product/v1alpha1/product.types.proto";
 
 message CreateProductRequest {
   string name = 1;
+  string category = 2;
+  string subcategory = 3;
+  Price price = 4;
+  string article = 5;
+  string supplierCode = 6;
+  string brand = 7;
 }
 
 message CreateProductResponse {
+  string id = 1;
+}
+
+message ListProductsRequest {}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+message UpdateProductRequest {
+  Product product = 1;
+}
+
+message UpdateProductResponse {
+  string id = 1;
+}
+
+message DeleteProductRequest {
+  string id = 1;
+}
+
+message DeleteProductResponse {
   string id = 1;
 }
