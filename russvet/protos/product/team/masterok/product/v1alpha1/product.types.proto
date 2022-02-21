@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+message BaseProduct {
+  string name = 1;
+  string code = 2;
+  string brand = 3;
+  string category = 4;
+}
+
+message Price {
+  string personal = 1;
+  string retail = 2;
+}
+
+message Attribute {
+  string name = 1;
+  string value = 2;
+  string uom = 3;
+}
+
+message ProductDetails {
+  string description = 1;
+  string primaryUom = 2;
+  string multiplicity = 3;
+  string etimClass = 4;
+  string etimClassName = 5;
+  string etimGroup = 6;
+  string etimGroupName = 7;
+  string vendorCode = 8;
+  string series = 9;
+  string originCountry = 10;
+  string warranty = 11;
+  string itemsPerUnit = 12;
+  string barcode = 13;
+  repeated Attribute attributes = 14;
+  repeated string images = 15;
+  Price price = 16;
+}
+
+message Product {
+  BaseProduct info = 1;
+  ProductDetails details = 2;
+}

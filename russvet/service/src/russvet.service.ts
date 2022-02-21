@@ -5,7 +5,7 @@ import { repeat }          from '@common/utils'
 
 import camelcase           from 'camelcase'
 
-import { RussvetAdapter }  from '@russvet/adapter'
+import { RussvetAdapter }  from '@russvet/russvet-adapter'
 
 import { IRussvetService } from './russvet.interfaces'
 
