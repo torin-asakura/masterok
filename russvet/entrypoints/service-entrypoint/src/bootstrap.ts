@@ -1,7 +1,7 @@
-import { NestLogger }                    from '@atls/nestjs-logger'
-import { NestFactory }                   from '@nestjs/core'
+import { NestLogger }                     from '@atls/nestjs-logger'
+import { NestFactory }                    from '@nestjs/core'
 
-import { serverOptions }                 from '@russvet/product-proto'
+import { serverOptions }                  from '@russvet/product-proto'
 
 import { ProductServiceEntrypointModule } from './product-service-entrypoint.module'
 

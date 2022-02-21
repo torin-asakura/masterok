@@ -3,7 +3,7 @@
   "private": true,
   "license": "BSD-3 Clause",
   "workspaces": [
-    "russvet/*",
+    "russvet/**/*",
     "warehouse/**/*",
     "common",
     "proxy/**/*",

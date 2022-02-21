@@ -1,4 +1,4 @@
-import { Module }                  from '@nestjs/common'
+import { Module }                   from '@nestjs/common'
 
 import { ProductGrpcAdapterModule } from '@product/product-grpc-adapter-module'
 

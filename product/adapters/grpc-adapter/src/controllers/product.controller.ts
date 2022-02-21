@@ -6,10 +6,10 @@ import { UsePipes }                        from '@nestjs/common'
 
 import { v4 as uuid }                      from 'uuid'
 
-import { CreateProductResponse }            from '@product/product-proto'
+import { CreateProductResponse }           from '@product/product-proto'
 import { ListProductsResponse }            from '@product/product-proto'
-import { UpdateProductResponse }            from '@product/product-proto'
-import { DeleteProductResponse }            from '@product/product-proto'
+import { UpdateProductResponse }           from '@product/product-proto'
+import { DeleteProductResponse }           from '@product/product-proto'
 import { ProductServiceControllerMethods } from '@product/product-proto'
 import { ProductServiceController }        from '@product/product-proto'
 
@@ -23,7 +23,7 @@ export class ProductController implements ProductServiceController {
   async createProduct(request): Promise<CreateProductResponse> {
     const product = {
       id: uuid(),
-      ...request
+      ...request,
     }
 
     this.products.push(product)
@@ -34,13 +34,13 @@ export class ProductController implements ProductServiceController {
   @UsePipes(new GrpcValidationPipe())
   async listProducts(request): Promise<ListProductsResponse> {
     return {
-      products: this.products
+      products: this.products,
     }
   }
 
   @UsePipes(new GrpcValidationPipe())
   async updateProduct(request): Promise<UpdateProductResponse> {
-    const index = this.products.findIndex(product => {
+    const index = this.products.findIndex((product) => {
       return product.id === request.product.id
     })
 
@@ -50,7 +50,7 @@ export class ProductController implements ProductServiceController {
     }
 
     return {
-      id: this.products[index].id
+      id: this.products[index].id,
     }
   }
 
@@ -58,7 +58,7 @@ export class ProductController implements ProductServiceController {
   async deleteProduct(request): Promise<DeleteProductResponse> {
     let deleted: any
 
-    this.products = this.products.filter(product => {
+    this.products = this.products.filter((product) => {
       if (product.id === request.id) {
         deleted = { ...product }
         return false
@@ -68,7 +68,7 @@ export class ProductController implements ProductServiceController {
     })
 
     return {
-      id: deleted?.id || ''
+      id: deleted?.id || '',
     }
   }
 }

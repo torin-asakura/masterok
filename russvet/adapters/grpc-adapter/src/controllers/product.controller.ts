@@ -8,8 +8,8 @@ import { v4 as uuid }                      from 'uuid'
 
 import { ProductServiceController }        from '@russvet/product-proto'
 import { ProductServiceControllerMethods } from '@russvet/product-proto'
-import { ListProductsResponse } from '@russvet/product-proto'
-import { ListProductDetailsResponse } from '@russvet/product-proto'
+import { ListProductsResponse }            from '@russvet/product-proto'
+import { ListProductDetailsResponse }      from '@russvet/product-proto'
 
 @Controller()
 @ProductServiceControllerMethods()
@@ -18,14 +18,14 @@ export class ProductController implements ProductServiceController {
   @UsePipes(new GrpcValidationPipe())
   async listProducts(request): Promise<ListProductsResponse> {
     return {
-      products: []
+      products: [],
     }
   }
 
   @UsePipes(new GrpcValidationPipe())
   async listProductDetails(request): Promise<ListProductDetailsResponse> {
     return {
-      details: {}
+      details: {},
     }
   }
 }
