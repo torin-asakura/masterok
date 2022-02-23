@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package team.masterok.ozonProduct.v1alpha1;
+
+import "team/masterok/ozon-product/v1alpha1/ozon-product.payloads.proto";
+
+service OzonProductService {
+  rpc CreateOzonProduct (CreateOzonProductRequest) returns (CreateOzonProductResponse) {}
+}

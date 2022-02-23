@@ -5,6 +5,7 @@
   "workspaces": [
     "russvet/**/*",
     "warehouse/**/*",
+    "marketplace/**/*",
     "common",
     "proxy/**/*",
     "gateway/**/*",
