@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package team.masterok.ozonProduct.v1alpha1;
+package team.masterok.product.v1alpha1;
 
 message Attribute {
   int64 complex_id = 1;

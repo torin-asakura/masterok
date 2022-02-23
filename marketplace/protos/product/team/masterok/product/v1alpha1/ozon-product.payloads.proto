@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package team.masterok.ozonProduct.v1alpha1;
+package team.masterok.product.v1alpha1;
 
-import "team/masterok/ozon-product/v1alpha1/ozon-product.types.proto";
+import "team/masterok/product/v1alpha1/ozon-product.types.proto";
 
 message CreateOzonProductRequest {
   message Item {

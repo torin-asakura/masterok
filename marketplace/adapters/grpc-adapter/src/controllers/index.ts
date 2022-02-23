@@ -1,1 +1,1 @@
-export * from './ozon-product.controller'
+export * from './product.controller'

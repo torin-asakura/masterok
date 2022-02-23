@@ -352,9 +352,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@marketplace/ozon-product-proto@workspace:0.0.1, @marketplace/ozon-product-proto@workspace:marketplace/protos/ozon-product":
+"@marketplace/ozon-product-proto@workspace:0.0.1, @marketplace/ozon-product-proto@workspace:marketplace/protos/product":
   version: 0.0.0-use.local
-  resolution: "@marketplace/ozon-product-proto@workspace:marketplace/protos/ozon-product"
+  resolution: "@marketplace/ozon-product-proto@workspace:marketplace/protos/product"
   dependencies:
     "@atls/nestjs-grpc-reflection": ^0.0.2
     "@grpc/grpc-js": ^1.4.1
