@@ -6,6 +6,6 @@ export * from '../../gen/nestjs/team/masterok/product/v1alpha1/ozon-product.payl
 export * from '../../gen/nestjs/team/masterok/product/v1alpha1/wildberries-product.payloads'
 export * from '../../gen/nestjs/team/masterok/product/v1alpha1/yandex-product.payloads'
 
-export * from './ozon-product-service.client-module'
+export * from './product-service.client-module'
 export * from './gateway-handler.options'
 export * from './server.options'

@@ -43,9 +43,9 @@ export class ProductServiceClientModule {
 
     return {
       global: true,
-      module: OzonProductServiceClientModule,
-      providers: [ozonProductServiceClientProvider],
-      exports: [ozonProductServiceClientProvider],
+      module: ProductServiceClientModule,
+      providers: [productServiceClientProvider],
+      exports: [productServiceClientProvider],
     }
   }
 }
