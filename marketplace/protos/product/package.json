@@ -1,5 +1,5 @@
 {
-  "name": "@marketplace/ozon-product-proto",
+  "name": "@marketplace/product-proto",
   "version": "0.0.1",
   "license": "MIT",
   "main": "src/index.ts",

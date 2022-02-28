@@ -3,7 +3,9 @@ syntax = "proto3";
 package team.masterok.product.v1alpha1;
 
 import "team/masterok/product/v1alpha1/ozon-product.payloads.proto";
+import "team/masterok/product/v1alpha1/wildberries-product.payloads.proto";
 
 service ProductService {
   rpc CreateOzonProduct (CreateOzonProductRequest) returns (CreateOzonProductResponse) {}
+  rpc CreateWildberriesProduct (CreateWildberriesProductRequest) returns (CreateWildberriesProductResponse) {}
 }

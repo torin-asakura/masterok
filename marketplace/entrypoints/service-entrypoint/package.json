@@ -20,7 +20,7 @@
     "@grpc/grpc-js": "^1.4.1",
     "@grpc/proto-loader": "^0.6.5",
     "@marketplace/grpc-adapter-module": "workspace:0.0.1",
-    "@marketplace/ozon-product-proto": "workspace:0.0.1",
+    "@marketplace/product-proto": "workspace:0.0.1",
     "@nestjs/core": "^8.1.1",
     "@nestjs/cqrs": "^8.0.0",
     "@nestjs/microservices": "^8.1.1",

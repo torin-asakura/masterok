@@ -4,7 +4,7 @@ import { GrpcPlaygroundModule } from '@atls/nestjs-grpc-playground'
 import { DynamicModule }        from '@nestjs/common'
 import { Module }               from '@nestjs/common'
 
-import { serverOptions }        from '@marketplace/ozon-product-proto'
+import { serverOptions }        from '@marketplace/product-proto'
 
 @Module({})
 export class MarketplaceGrpcAdapterModule {

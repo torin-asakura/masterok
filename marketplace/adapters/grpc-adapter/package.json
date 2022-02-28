@@ -8,7 +8,7 @@
     "@atls/nestjs-grpc-errors": "^0.0.3",
     "@atls/nestjs-grpc-identity": "^0.0.5",
     "@atls/nestjs-grpc-playground": "0.0.5",
-    "@marketplace/ozon-product-proto": "workspace:0.0.1",
+    "@marketplace/product-proto": "workspace:0.0.1",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "rxjs": "^7.4.0",

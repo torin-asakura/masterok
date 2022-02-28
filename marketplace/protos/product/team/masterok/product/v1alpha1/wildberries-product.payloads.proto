@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/wildberries-product.types.proto";
+
+message CreateWildberriesProductRequest {
+  string id = 1;
+  string jsonrpc = 2;
+  Params params = 3;
+}
+
+message CreateWildberriesProductResponse {
+  optional int32 code = 1;
+  optional Empty data = 2;
+  optional string message = 3;
+  optional ErrorPayload error = 4;
+  optional string id = 5;
+  optional string jsonrpc = 6;
+}

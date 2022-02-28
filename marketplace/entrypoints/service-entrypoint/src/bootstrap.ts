@@ -1,7 +1,7 @@
 import { NestLogger }                         from '@atls/nestjs-logger'
 import { NestFactory }                        from '@nestjs/core'
 
-import { serverOptions }                      from '@marketplace/ozon-product-proto'
+import { serverOptions }                      from '@marketplace/product-proto'
 
 import { MarketplaceServiceEntrypointModule } from './marketplace-service-entrypoint.module'
 
