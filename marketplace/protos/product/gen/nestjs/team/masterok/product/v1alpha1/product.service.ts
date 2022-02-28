@@ -11,8 +11,10 @@ import { Observable }                   from 'rxjs'
 import { CreateOzonProductRequest } from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
 import { CreateOzonProductResponse } from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
 import { CreateWildberriesProductRequest } from '../../../../team/masterok/product/v1alpha1/wildberries-product.payloads'
-
 import { CreateWildberriesProductResponse } from '../../../../team/masterok/product/v1alpha1/wildberries-product.payloads'
+import { CreateYandexProductRequest } from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
+
+import { CreateYandexProductResponse } from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'
 
@@ -28,6 +30,11 @@ export interface ProductServiceClient {
     request: CreateWildberriesProductRequest,
     metadata?: Metadata
   ): Observable<CreateWildberriesProductResponse>
+
+  createYandexProduct(
+    request: CreateYandexProductRequest,
+    metadata?: Metadata
+  ): Observable<CreateYandexProductResponse>
 }
 
 export interface ProductServiceController {
@@ -46,11 +53,23 @@ export interface ProductServiceController {
     | Promise<CreateWildberriesProductResponse>
     | Observable<CreateWildberriesProductResponse>
     | CreateWildberriesProductResponse
+
+  createYandexProduct(
+    request: CreateYandexProductRequest,
+    metadata?: Metadata
+  ):
+    | Promise<CreateYandexProductResponse>
+    | Observable<CreateYandexProductResponse>
+    | CreateYandexProductResponse
 }
 
 export function ProductServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ['createOzonProduct', 'createWildberriesProduct']
+    const grpcMethods: string[] = [
+      'createOzonProduct',
+      'createWildberriesProduct',
+      'createYandexProduct',
+    ]
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method)
       GrpcMethod('ProductService', method)(constructor.prototype[method], method, descriptor)
