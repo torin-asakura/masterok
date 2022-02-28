@@ -6,8 +6,8 @@ import { createConnection } from 'typeorm'
 import { Attribute }        from './entities'
 import { Position }         from './entities'
 
-export class ProxyRepository {
-  private readonly NAME = 'ProxyRepository'
+export class SyncRepository {
+  private readonly NAME = 'SyncRepository'
 
   private connection: Promise<Connection>
 
@@ -24,7 +24,7 @@ export class ProxyRepository {
       database: 'db',
       entities: [Attribute, Position],
     })
-    this.logger = new Logger('Repository-Service')
+    this.logger = new Logger(this.NAME)
   }
 
   private writeJSON(object: object, prop: string) {

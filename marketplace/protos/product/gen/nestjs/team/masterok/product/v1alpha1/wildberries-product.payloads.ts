@@ -1,12 +1,10 @@
-import _m0  from 'protobufjs/minimal'
+import _m0              from 'protobufjs/minimal'
 /* eslint-disable */
-import Long from 'long'
+import Long             from 'long'
 
-import { Empty } from '../../../../team/masterok/product/v1alpha1/wildberries-product.types'
-
+import { Empty }        from '../../../../team/masterok/product/v1alpha1/wildberries-product.types'
 import { ErrorPayload } from '../../../../team/masterok/product/v1alpha1/wildberries-product.types'
-
-import { Params } from '../../../../team/masterok/product/v1alpha1/wildberries-product.types'
+import { Params }       from '../../../../team/masterok/product/v1alpha1/wildberries-product.types'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'
 

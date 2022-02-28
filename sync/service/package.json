@@ -1,11 +1,11 @@
 {
-  "name": "@proxy/service",
+  "name": "@sync/service",
   "version": "0.0.1",
   "license": "BSD 3-Clause",
   "main": "src/index.ts",
   "dependencies": {
-    "@proxy/persistence": "workspace:0.0.1",
     "@russvet/service": "workspace:0.0.1",
+    "@sync/persistence": "workspace:0.0.1",
     "@warehouse/service": "workspace:0.0.1",
     "axios": "^0.24.0",
     "node-fetch": "^3.1.0",

@@ -1,13 +1,13 @@
 import { Logger }           from '@atls/logger'
 
-import { ProxyRepository }  from '@proxy/persistence'
 import { RussvetService }   from '@russvet/service'
+import { SyncRepository }   from '@sync/persistence'
 import { WarehouseService } from '@warehouse/service'
 
-export class ProxyService {
-  private readonly NAME = 'ProxySync'
+export class SyncService {
+  private readonly NAME = 'SyncService'
 
-  private proxyRepository: ProxyRepository
+  private syncRepository: SyncRepository
 
   private warehouseService: WarehouseService
 
@@ -16,17 +16,17 @@ export class ProxyService {
   private logger: Logger
 
   constructor() {
-    this.proxyRepository = new ProxyRepository()
+    this.syncRepository = new SyncRepository()
     this.warehouseService = new WarehouseService()
     this.russvetService = new RussvetService()
-    this.logger = new Logger('Proxy-Service')
+    this.logger = new Logger(this.NAME)
   }
 
   async syncDbWithRussvet() {
     this.logger.info(`${this.NAME}: Executed syncDbWithRussvet`)
 
     this.russvetService.mapPositions(async (position) => {
-      await this.proxyRepository.writePosition(position)
+      await this.syncRepository.writePosition(position)
     })
   }
 
@@ -36,7 +36,7 @@ export class ProxyService {
     const { join } = await import('path')
     const { createWriteStream } = await import('fs')
 
-    const attributes = await this.proxyRepository.getAttributes()
+    const attributes = await this.syncRepository.getAttributes()
     const uniqueAttributes = new Set(attributes.map((attr) => attr.name))
 
     const stream = createWriteStream(join(__dirname, './attrs.txt'))
@@ -53,7 +53,7 @@ export class ProxyService {
   }
 
   async getPositions() {
-    return this.proxyRepository.findAllPositions()
+    return this.syncRepository.findAllPositions()
   }
 
   async genICML() {
@@ -104,8 +104,8 @@ export class ProxyService {
     }
 
     const getFirstTwo = async () => {
-      const allPositions = await this.proxyRepository.findAllPositions()
-      const exact = await this.proxyRepository.findPositionByCode(1445190)
+      const allPositions = await this.syncRepository.findAllPositions()
+      const exact = await this.syncRepository.findPositionByCode(1445190)
       const extracted = await Promise.all(
         [allPositions[0], allPositions[1], exact[0]].map(async (position) => {
           const p = await this.warehouseService.findProductByCode(position.code)
@@ -129,6 +129,6 @@ export class ProxyService {
   }
 
   async getPositionByCode(code) {
-    return this.proxyRepository.findPositionByCode(code)
+    return this.syncRepository.findPositionByCode(code)
   }
 }

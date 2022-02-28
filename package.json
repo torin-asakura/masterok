@@ -7,7 +7,7 @@
     "warehouse/**/*",
     "marketplace/**/*",
     "common",
-    "proxy/**/*",
+    "sync/**/*",
     "gateway/**/*",
     "product/**/*"
   ],

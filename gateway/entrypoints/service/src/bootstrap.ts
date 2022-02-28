@@ -2,7 +2,7 @@ import { Logger }                   from '@atls/logger'
 
 import express                      from 'express'
 
-import { ProxyService }             from '@proxy/service'
+import { SyncService }              from '@sync/service'
 
 import { createRouteLogMiddleware } from './middlewares'
 
@@ -11,13 +11,13 @@ const bootstrap = async () => {
 
   const logger = new Logger('gateway')
 
-  const proxyService = new ProxyService()
+  const syncService = new SyncService()
 
   app.use(createRouteLogMiddleware(logger))
 
   app.get('/sync-with-db', async (req, res) => {
     try {
-      await proxyService.syncDbWithRussvet()
+      await syncService.syncDbWithRussvet()
       res.statusCode = 200
       res.send({
         message: 'OK',
@@ -31,7 +31,7 @@ const bootstrap = async () => {
 
   app.get('/unique-attrs', async (req, res) => {
     try {
-      await proxyService.uniqueAttributes()
+      await syncService.uniqueAttributes()
       res.statusCode = 200
       res.send({
         message: 'OK',
@@ -45,7 +45,7 @@ const bootstrap = async () => {
 
   app.get('/order-lamp', async (req, res) => {
     try {
-      await proxyService.orderLamp()
+      await syncService.orderLamp()
       res.statusCode = 200
       res.send({
         message: 'OK',
@@ -59,7 +59,7 @@ const bootstrap = async () => {
 
   app.get('/find-positions', async (req, res) => {
     try {
-      const positions = await proxyService.getPositions()
+      const positions = await syncService.getPositions()
       res.statusCode = 200
       res.send({
         message: 'OK',
@@ -74,7 +74,7 @@ const bootstrap = async () => {
 
   app.get('/gen-icml', async (req, res) => {
     try {
-      const icml = await proxyService.genICML()
+      const icml = await syncService.genICML()
       const fs = require('fs')
       fs.writeFileSync(`${__dirname}/icml.xml`, icml)
       res.statusCode = 200
@@ -90,7 +90,7 @@ const bootstrap = async () => {
 
   app.get('/fbc', async (req, res) => {
     try {
-      const position = await proxyService.getPositionByCode(1445190)
+      const position = await syncService.getPositionByCode(1445190)
       res.statusCode = 200
       res.send({
         message: 'OK',

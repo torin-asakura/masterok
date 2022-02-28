@@ -53,14 +53,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:product/protos/product"
       },
       {
-        "name": "@proxy/persistence",
-        "reference": "workspace:proxy/persistence"
-      },
-      {
-        "name": "@proxy/service",
-        "reference": "workspace:proxy/service"
-      },
-      {
         "name": "@russvet/grpc-adapter-module",
         "reference": "workspace:russvet/adapters/grpc-adapter"
       },
@@ -79,6 +71,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {
         "name": "@russvet/service",
         "reference": "workspace:russvet/service"
+      },
+      {
+        "name": "@sync/persistence",
+        "reference": "workspace:sync/persistence"
+      },
+      {
+        "name": "@sync/service",
+        "reference": "workspace:sync/service"
       },
       {
         "name": "@warehouse/moysklad-adapter",
@@ -104,13 +104,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@product/product-grpc-adapter-module", ["virtual:249f1f92a64eeea2c6e1625dd680d1c76b7a90ed296277c12eed735717541e99166ed22c6271c430f4cad7fcf00a70939f4acd0d274af90ae3014790a9ef5b48#workspace:product/adapters/grpc-adapter", "workspace:product/adapters/grpc-adapter"]],
       ["@product/product-proto", ["virtual:100684f5ec209ad8754c4fafc4aeea1a5f82c9db7a730afa6c05657a47867aa3ceaa428afe34b527e269f34694d7cffdd6ba78c45077d0622d0a6abde33aa87f#workspace:product/protos/product", "virtual:249f1f92a64eeea2c6e1625dd680d1c76b7a90ed296277c12eed735717541e99166ed22c6271c430f4cad7fcf00a70939f4acd0d274af90ae3014790a9ef5b48#workspace:product/protos/product", "workspace:product/protos/product"]],
       ["@product/service-entrypoint", ["workspace:product/entrypoints/service-entrypoint"]],
-      ["@proxy/persistence", ["workspace:proxy/persistence"]],
-      ["@proxy/service", ["workspace:proxy/service"]],
       ["@russvet/grpc-adapter-module", ["virtual:8a60db885a2b0278fd59d74d81447356be91ad7f120ad52d762d3b55e7182a11c68e28abfc52bfe6967669ff551110c6f313d002473e019f997080250701cac6#workspace:russvet/adapters/grpc-adapter", "workspace:russvet/adapters/grpc-adapter"]],
       ["@russvet/product-proto", ["virtual:2f8abc91c8ecdb1622703e1d14efaec8d324c896cccf722cf7b2476b473d8e719b9428f86a5df721d5fc8604bbc9ae2c745e26f90b12022861fee18f0950c3e0#workspace:russvet/protos/product", "virtual:8a60db885a2b0278fd59d74d81447356be91ad7f120ad52d762d3b55e7182a11c68e28abfc52bfe6967669ff551110c6f313d002473e019f997080250701cac6#workspace:russvet/protos/product", "workspace:russvet/protos/product"]],
       ["@russvet/russvet-adapter", ["workspace:russvet/adapters/russvet-adapter"]],
       ["@russvet/service", ["workspace:russvet/service"]],
       ["@russvet/service-entrypoint", ["workspace:russvet/entrypoints/service-entrypoint"]],
+      ["@sync/persistence", ["workspace:sync/persistence"]],
+      ["@sync/service", ["workspace:sync/service"]],
       ["@warehouse/moysklad-adapter", ["workspace:warehouse/adapters/moysklad-adapter"]],
       ["@warehouse/retailcrm-adapter", ["workspace:warehouse/adapters/retailcrm-adapter"]],
       ["@warehouse/service", ["workspace:warehouse/service"]],
@@ -2212,7 +2212,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@gateway/service-entrypoint", "workspace:gateway/entrypoints/service"],
             ["@atls/logger", "npm:0.0.1"],
-            ["@proxy/service", "workspace:proxy/service"],
+            ["@sync/service", "workspace:sync/service"],
             ["@types/express", "npm:4.17.13"],
             ["@types/node", "npm:16.11.21"],
             ["express", "npm:4.17.2"],
@@ -4893,38 +4893,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@proxy/persistence", [
-        ["workspace:proxy/persistence", {
-          "packageLocation": "./proxy/persistence/",
-          "packageDependencies": [
-            ["@proxy/persistence", "workspace:proxy/persistence"],
-            ["@atls/logger", "npm:0.0.1"],
-            ["@types/pg", "npm:8.6.4"],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
-            ["reflect-metadata", "npm:0.1.13"],
-            ["ts-node", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:10.5.0"],
-            ["typeorm", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:0.2.41"]
-          ],
-          "linkType": "SOFT",
-        }]
-      ]],
-      ["@proxy/service", [
-        ["workspace:proxy/service", {
-          "packageLocation": "./proxy/service/",
-          "packageDependencies": [
-            ["@proxy/service", "workspace:proxy/service"],
-            ["@atls/logger", "npm:0.0.1"],
-            ["@proxy/persistence", "workspace:proxy/persistence"],
-            ["@russvet/service", "workspace:russvet/service"],
-            ["@warehouse/service", "workspace:warehouse/service"],
-            ["axios", "npm:0.24.0"],
-            ["node-fetch", "npm:3.2.0"],
-            ["pino", "npm:7.6.5"],
-            ["pino-pretty", "npm:7.5.1"]
-          ],
-          "linkType": "SOFT",
-        }]
-      ]],
       ["@russvet/grpc-adapter-module", [
         ["virtual:8a60db885a2b0278fd59d74d81447356be91ad7f120ad52d762d3b55e7182a11c68e28abfc52bfe6967669ff551110c6f313d002473e019f997080250701cac6#workspace:russvet/adapters/grpc-adapter", {
           "packageLocation": "./.yarn/__virtual__/@russvet-grpc-adapter-module-virtual-0b12e35ff3/1/russvet/adapters/grpc-adapter/",
@@ -5170,6 +5138,38 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@sqltools/formatter", "npm:1.2.3"]
           ],
           "linkType": "HARD",
+        }]
+      ]],
+      ["@sync/persistence", [
+        ["workspace:sync/persistence", {
+          "packageLocation": "./sync/persistence/",
+          "packageDependencies": [
+            ["@sync/persistence", "workspace:sync/persistence"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@types/pg", "npm:8.6.4"],
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"],
+            ["reflect-metadata", "npm:0.1.13"],
+            ["ts-node", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:10.5.0"],
+            ["typeorm", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:0.2.41"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@sync/service", [
+        ["workspace:sync/service", {
+          "packageLocation": "./sync/service/",
+          "packageDependencies": [
+            ["@sync/service", "workspace:sync/service"],
+            ["@atls/logger", "npm:0.0.1"],
+            ["@russvet/service", "workspace:russvet/service"],
+            ["@sync/persistence", "workspace:sync/persistence"],
+            ["@warehouse/service", "workspace:warehouse/service"],
+            ["axios", "npm:0.24.0"],
+            ["node-fetch", "npm:3.2.0"],
+            ["pino", "npm:7.6.5"],
+            ["pino-pretty", "npm:7.5.1"]
+          ],
+          "linkType": "SOFT",
         }]
       ]],
       ["@szmarczak/http-timer", [
@@ -11857,16 +11857,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3", {
-          "packageLocation": "./.yarn/__virtual__/pg-virtual-099605e50a/0/cache/pg-npm-8.7.3-5d68c1b41b-d0e7040967.zip/node_modules/pg/",
+        ["virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3", {
+          "packageLocation": "./.yarn/__virtual__/pg-virtual-7f556d0e10/0/cache/pg-npm-8.7.3-5d68c1b41b-d0e7040967.zip/node_modules/pg/",
           "packageDependencies": [
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"],
             ["@types/pg-native", null],
             ["buffer-writer", "npm:2.0.0"],
             ["packet-reader", "npm:1.0.0"],
             ["pg-connection-string", "npm:2.5.0"],
             ["pg-native", null],
-            ["pg-pool", "virtual:099605e50a4558b81d61b7bf628cdcbb2d10ff3fd974c5e98f1e38d1c335b66d3362edaf5b192e62d646e92fb466aaed3ccd11b6dde4122e2984fd2416b62551#npm:3.5.1"],
+            ["pg-pool", "virtual:7f556d0e10fcd369aa8a3c584e32bb55f46dd224c1898b925c6f46fc6cb7d93fcdf803d4cafab2c94739548c8fa01053c8c9f27b5546e27450b55f4f4e45536f#npm:3.5.1"],
             ["pg-protocol", "npm:1.5.0"],
             ["pg-types", "npm:2.2.0"],
             ["pgpass", "npm:1.0.5"]
@@ -11900,7 +11900,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["pg-cursor", "virtual:57f27e70a12afce35a8b106519d32faa737d8959d5e86e0a8888f41e6af7dead536e707573fb5b569e6272f25b054d304ed60bc939c33bc199070138d9a74a8d#npm:2.7.3"],
             ["@types/pg", null],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"]
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"]
           ],
           "packagePeers": [
             "@types/pg",
@@ -11926,12 +11926,12 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:099605e50a4558b81d61b7bf628cdcbb2d10ff3fd974c5e98f1e38d1c335b66d3362edaf5b192e62d646e92fb466aaed3ccd11b6dde4122e2984fd2416b62551#npm:3.5.1", {
-          "packageLocation": "./.yarn/__virtual__/pg-pool-virtual-69c220d032/0/cache/pg-pool-npm-3.5.1-cba2f25ddc-42833c25f1.zip/node_modules/pg-pool/",
+        ["virtual:7f556d0e10fcd369aa8a3c584e32bb55f46dd224c1898b925c6f46fc6cb7d93fcdf803d4cafab2c94739548c8fa01053c8c9f27b5546e27450b55f4f4e45536f#npm:3.5.1", {
+          "packageLocation": "./.yarn/__virtual__/pg-pool-virtual-b66196b441/0/cache/pg-pool-npm-3.5.1-cba2f25ddc-42833c25f1.zip/node_modules/pg-pool/",
           "packageDependencies": [
-            ["pg-pool", "virtual:099605e50a4558b81d61b7bf628cdcbb2d10ff3fd974c5e98f1e38d1c335b66d3362edaf5b192e62d646e92fb466aaed3ccd11b6dde4122e2984fd2416b62551#npm:3.5.1"],
+            ["pg-pool", "virtual:7f556d0e10fcd369aa8a3c584e32bb55f46dd224c1898b925c6f46fc6cb7d93fcdf803d4cafab2c94739548c8fa01053c8c9f27b5546e27450b55f4f4e45536f#npm:3.5.1"],
             ["@types/pg", null],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"]
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"]
           ],
           "packagePeers": [
             "@types/pg",
@@ -11954,7 +11954,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/pg-query-stream-npm-4.2.3-57f27e70a1-70cea5c298.zip/node_modules/pg-query-stream/",
           "packageDependencies": [
             ["pg-query-stream", "npm:4.2.3"],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"],
             ["pg-cursor", "virtual:57f27e70a12afce35a8b106519d32faa737d8959d5e86e0a8888f41e6af7dead536e707573fb5b569e6272f25b054d304ed60bc939c33bc199070138d9a74a8d#npm:2.7.3"]
           ],
           "linkType": "HARD",
@@ -13217,16 +13217,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],
       ["sqlite3", [
         ["npm:5.0.2", {
-          "packageLocation": "./.yarn/unplugged/sqlite3-virtual-0390962e6d/node_modules/sqlite3/",
+          "packageLocation": "./.yarn/unplugged/sqlite3-virtual-b9c6077521/node_modules/sqlite3/",
           "packageDependencies": [
             ["sqlite3", "npm:5.0.2"]
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:1bb478749d54fa1e355b53d4ed97f66c59a6227f59b0a112ea7c0e93511c1cc4fdd39752fa73ed6a96b5486f9d48e830c7a2c44de482226882b3279f408a1c25#npm:5.0.2", {
-          "packageLocation": "./.yarn/unplugged/sqlite3-virtual-0390962e6d/node_modules/sqlite3/",
+        ["virtual:654365540ebe30bbbec05d08e13dfe6e7300ca635b4481309965785fcfc25cdf6b903d7070c7f9ba7bc23d24190ed73726305ac023ba651211a746e543efbc04#npm:5.0.2", {
+          "packageLocation": "./.yarn/unplugged/sqlite3-virtual-b9c6077521/node_modules/sqlite3/",
           "packageDependencies": [
-            ["sqlite3", "virtual:1bb478749d54fa1e355b53d4ed97f66c59a6227f59b0a112ea7c0e93511c1cc4fdd39752fa73ed6a96b5486f9d48e830c7a2c44de482226882b3279f408a1c25#npm:5.0.2"],
+            ["sqlite3", "virtual:654365540ebe30bbbec05d08e13dfe6e7300ca635b4481309965785fcfc25cdf6b903d7070c7f9ba7bc23d24190ed73726305ac023ba651211a746e543efbc04#npm:5.0.2"],
             ["@types/node-gyp", null],
             ["node-addon-api", "npm:3.2.1"],
             ["node-gyp", "npm:3.8.0"],
@@ -13841,10 +13841,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
-        ["virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:10.5.0", {
-          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-6342f3a92c/0/cache/ts-node-npm-10.5.0-818635380a-d51ac8a9b3.zip/node_modules/ts-node/",
+        ["virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:10.5.0", {
+          "packageLocation": "./.yarn/__virtual__/ts-node-virtual-062d4b76ef/0/cache/ts-node-npm-10.5.0-818635380a-d51ac8a9b3.zip/node_modules/ts-node/",
           "packageDependencies": [
-            ["ts-node", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:10.5.0"],
+            ["ts-node", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:10.5.0"],
             ["@cspotcode/source-map-support", "npm:0.7.0"],
             ["@swc/core", null],
             ["@swc/wasm", null],
@@ -14032,6 +14032,89 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],
           "linkType": "SOFT",
         }],
+        ["virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:0.2.41", {
+          "packageLocation": "./.yarn/__virtual__/typeorm-virtual-654365540e/0/cache/typeorm-npm-0.2.41-a6cfe0064b-edae24c359.zip/node_modules/typeorm/",
+          "packageDependencies": [
+            ["typeorm", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:0.2.41"],
+            ["@sap/hana-client", null],
+            ["@sqltools/formatter", "npm:1.2.3"],
+            ["@types/better-sqlite3", null],
+            ["@types/hdb-pool", null],
+            ["@types/ioredis", null],
+            ["@types/mongodb", null],
+            ["@types/mssql", null],
+            ["@types/mysql2", null],
+            ["@types/oracledb", null],
+            ["@types/pg", "npm:8.6.4"],
+            ["@types/pg-native", null],
+            ["@types/pg-query-stream", null],
+            ["@types/redis", null],
+            ["@types/sap__hana-client", null],
+            ["@types/sql.js", null],
+            ["@types/sqlite3", null],
+            ["@types/typeorm-aurora-data-api-driver", null],
+            ["app-root-path", "npm:3.0.0"],
+            ["better-sqlite3", null],
+            ["buffer", "npm:6.0.3"],
+            ["chalk", "npm:4.1.2"],
+            ["cli-highlight", "npm:2.1.11"],
+            ["debug", "virtual:c5047b1a614e99fe6b75d408de7ab562f066eafded43a58c4f67c9eefe1bd11b7ff6f52f38875c28f7c604cac2f764aaf9e248f06a0ae5ebba2c90935b438df3#npm:4.3.3"],
+            ["dotenv", "npm:8.6.0"],
+            ["glob", "npm:7.2.0"],
+            ["hdb-pool", null],
+            ["ioredis", null],
+            ["js-yaml", "npm:4.1.0"],
+            ["mkdirp", "npm:1.0.4"],
+            ["mongodb", null],
+            ["mssql", null],
+            ["mysql2", null],
+            ["oracledb", null],
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"],
+            ["pg-native", null],
+            ["pg-query-stream", "npm:4.2.3"],
+            ["redis", null],
+            ["reflect-metadata", "npm:0.1.13"],
+            ["sha.js", "npm:2.4.11"],
+            ["sql.js", null],
+            ["sqlite3", "virtual:654365540ebe30bbbec05d08e13dfe6e7300ca635b4481309965785fcfc25cdf6b903d7070c7f9ba7bc23d24190ed73726305ac023ba651211a746e543efbc04#npm:5.0.2"],
+            ["tslib", "npm:2.3.1"],
+            ["typeorm-aurora-data-api-driver", null],
+            ["xml2js", "npm:0.4.23"],
+            ["yargs", "npm:17.3.1"],
+            ["zen-observable-ts", "npm:1.2.3"]
+          ],
+          "packagePeers": [
+            "@sap/hana-client",
+            "@types/better-sqlite3",
+            "@types/hdb-pool",
+            "@types/ioredis",
+            "@types/mongodb",
+            "@types/mssql",
+            "@types/mysql2",
+            "@types/oracledb",
+            "@types/pg-native",
+            "@types/pg-query-stream",
+            "@types/pg",
+            "@types/redis",
+            "@types/sap__hana-client",
+            "@types/sql.js",
+            "@types/sqlite3",
+            "@types/typeorm-aurora-data-api-driver",
+            "better-sqlite3",
+            "hdb-pool",
+            "ioredis",
+            "mongodb",
+            "mssql",
+            "mysql2",
+            "oracledb",
+            "pg-native",
+            "pg",
+            "redis",
+            "sql.js",
+            "typeorm-aurora-data-api-driver"
+          ],
+          "linkType": "HARD",
+        }],
         ["virtual:5c4c6dbf69d33f9ee8cab1540bad08397e1bd93f275b645e0ad770f15b3b684dcf8c16b3d16897b13c0d38617a92c7edd9c666cff5b723e2d3f57199bff98a5b#npm:0.2.43", {
           "packageLocation": "./.yarn/__virtual__/typeorm-virtual-07ff60676e/0/cache/typeorm-npm-0.2.43-59dafe6928-cd9dd1f580.zip/node_modules/typeorm/",
           "packageDependencies": [
@@ -14069,14 +14152,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["mssql", null],
             ["mysql2", null],
             ["oracledb", null],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
+            ["pg", "virtual:2d3b5d9908d9ff6b76918ad1add6ff0f49cb7bb1e080c2bd1caa18cb08785472c38786cfc3ffca335d6ce3f7383bb6cbb16a079b03d1d23bb49a6101f330fd32#npm:8.7.3"],
             ["pg-native", null],
             ["pg-query-stream", "npm:4.2.3"],
             ["redis", null],
             ["reflect-metadata", "npm:0.1.13"],
             ["sha.js", "npm:2.4.11"],
             ["sql.js", null],
-            ["sqlite3", "virtual:1bb478749d54fa1e355b53d4ed97f66c59a6227f59b0a112ea7c0e93511c1cc4fdd39752fa73ed6a96b5486f9d48e830c7a2c44de482226882b3279f408a1c25#npm:5.0.2"],
+            ["sqlite3", "virtual:654365540ebe30bbbec05d08e13dfe6e7300ca635b4481309965785fcfc25cdf6b903d7070c7f9ba7bc23d24190ed73726305ac023ba651211a746e543efbc04#npm:5.0.2"],
             ["tslib", "npm:2.3.1"],
             ["typeorm-aurora-data-api-driver", null],
             ["uuid", "npm:8.3.2"],
@@ -14109,89 +14192,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "mysql2",
             "oracledb",
             "pg-native",
-            "redis",
-            "sql.js",
-            "typeorm-aurora-data-api-driver"
-          ],
-          "linkType": "HARD",
-        }],
-        ["virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:0.2.41", {
-          "packageLocation": "./.yarn/__virtual__/typeorm-virtual-1bb478749d/0/cache/typeorm-npm-0.2.41-a6cfe0064b-edae24c359.zip/node_modules/typeorm/",
-          "packageDependencies": [
-            ["typeorm", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:0.2.41"],
-            ["@sap/hana-client", null],
-            ["@sqltools/formatter", "npm:1.2.3"],
-            ["@types/better-sqlite3", null],
-            ["@types/hdb-pool", null],
-            ["@types/ioredis", null],
-            ["@types/mongodb", null],
-            ["@types/mssql", null],
-            ["@types/mysql2", null],
-            ["@types/oracledb", null],
-            ["@types/pg", "npm:8.6.4"],
-            ["@types/pg-native", null],
-            ["@types/pg-query-stream", null],
-            ["@types/redis", null],
-            ["@types/sap__hana-client", null],
-            ["@types/sql.js", null],
-            ["@types/sqlite3", null],
-            ["@types/typeorm-aurora-data-api-driver", null],
-            ["app-root-path", "npm:3.0.0"],
-            ["better-sqlite3", null],
-            ["buffer", "npm:6.0.3"],
-            ["chalk", "npm:4.1.2"],
-            ["cli-highlight", "npm:2.1.11"],
-            ["debug", "virtual:c5047b1a614e99fe6b75d408de7ab562f066eafded43a58c4f67c9eefe1bd11b7ff6f52f38875c28f7c604cac2f764aaf9e248f06a0ae5ebba2c90935b438df3#npm:4.3.3"],
-            ["dotenv", "npm:8.6.0"],
-            ["glob", "npm:7.2.0"],
-            ["hdb-pool", null],
-            ["ioredis", null],
-            ["js-yaml", "npm:4.1.0"],
-            ["mkdirp", "npm:1.0.4"],
-            ["mongodb", null],
-            ["mssql", null],
-            ["mysql2", null],
-            ["oracledb", null],
-            ["pg", "virtual:cd336e65cc76fe41944cf552ebd1a79e83dda6a27ffca17180a6e2d5d99e9ace16ca07f718c4de77d1548df0c1874ce1b66d6ffacf0bf1884fc144bd1e302f8f#npm:8.7.3"],
-            ["pg-native", null],
-            ["pg-query-stream", "npm:4.2.3"],
-            ["redis", null],
-            ["reflect-metadata", "npm:0.1.13"],
-            ["sha.js", "npm:2.4.11"],
-            ["sql.js", null],
-            ["sqlite3", "virtual:1bb478749d54fa1e355b53d4ed97f66c59a6227f59b0a112ea7c0e93511c1cc4fdd39752fa73ed6a96b5486f9d48e830c7a2c44de482226882b3279f408a1c25#npm:5.0.2"],
-            ["tslib", "npm:2.3.1"],
-            ["typeorm-aurora-data-api-driver", null],
-            ["xml2js", "npm:0.4.23"],
-            ["yargs", "npm:17.3.1"],
-            ["zen-observable-ts", "npm:1.2.3"]
-          ],
-          "packagePeers": [
-            "@sap/hana-client",
-            "@types/better-sqlite3",
-            "@types/hdb-pool",
-            "@types/ioredis",
-            "@types/mongodb",
-            "@types/mssql",
-            "@types/mysql2",
-            "@types/oracledb",
-            "@types/pg-native",
-            "@types/pg-query-stream",
-            "@types/pg",
-            "@types/redis",
-            "@types/sap__hana-client",
-            "@types/sql.js",
-            "@types/sqlite3",
-            "@types/typeorm-aurora-data-api-driver",
-            "better-sqlite3",
-            "hdb-pool",
-            "ioredis",
-            "mongodb",
-            "mssql",
-            "mysql2",
-            "oracledb",
-            "pg-native",
-            "pg",
             "redis",
             "sql.js",
             "typeorm-aurora-data-api-driver"

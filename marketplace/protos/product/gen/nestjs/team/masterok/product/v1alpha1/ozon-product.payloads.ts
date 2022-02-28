@@ -1,14 +1,11 @@
-import _m0  from 'protobufjs/minimal'
+import _m0               from 'protobufjs/minimal'
 /* eslint-disable */
-import Long from 'long'
+import Long              from 'long'
 
-import { Attribute } from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
-
+import { Attribute }     from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
 import { DimensionUnit } from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
-
-import { ServiceType } from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
-
-import { WeightUnit } from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
+import { ServiceType }   from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
+import { WeightUnit }    from '../../../../team/masterok/product/v1alpha1/ozon-product.types'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'
 
