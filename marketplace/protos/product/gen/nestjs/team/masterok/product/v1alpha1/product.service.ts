@@ -1,18 +1,20 @@
-import { Metadata }                         from '@grpc/grpc-js'
+import { Metadata }                     from '@grpc/grpc-js'
 /* eslint-disable */
-import { GrpcMethod }                       from '@nestjs/microservices'
-import { GrpcStreamMethod }                 from '@nestjs/microservices'
+import { GrpcMethod }                   from '@nestjs/microservices'
 
-import _m0                                  from 'protobufjs/minimal'
-import Long                                 from 'long'
-import { Observable }                       from 'rxjs'
+import { GrpcStreamMethod } from '@nestjs/microservices'
 
-import { CreateOzonProductRequest }         from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
-import { CreateOzonProductResponse }        from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
-import { CreateWildberriesProductRequest }  from '../../../../team/masterok/product/v1alpha1/wildberries-product.payloads'
+import _m0                              from 'protobufjs/minimal'
+import Long                             from 'long'
+import { Observable }                   from 'rxjs'
+
+import { CreateOzonProductRequest } from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
+import { CreateOzonProductResponse } from '../../../../team/masterok/product/v1alpha1/ozon-product.payloads'
+import { CreateWildberriesProductRequest } from '../../../../team/masterok/product/v1alpha1/wildberries-product.payloads'
 import { CreateWildberriesProductResponse } from '../../../../team/masterok/product/v1alpha1/wildberries-product.payloads'
-import { CreateYandexProductRequest }       from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
-import { CreateYandexProductResponse }      from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
+import { CreateYandexProductRequest } from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
+
+import { CreateYandexProductResponse } from '../../../../team/masterok/product/v1alpha1/yandex-product.payloads'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'
 

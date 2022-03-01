@@ -1,8 +1,9 @@
-import { Module }                       from '@nestjs/common'
+import { Module }                        from '@nestjs/common'
 
-import { MarketplaceGrpcAdapterModule } from '@marketplace/grpc-adapter-module'
+import { MarketplaceApplicationeModule } from '@marketplace/application-module'
+import { MarketplaceGrpcAdapterModule }  from '@marketplace/grpc-adapter-module'
 
 @Module({
-  imports: [MarketplaceGrpcAdapterModule.register()],
+  imports: [MarketplaceGrpcAdapterModule.register(), MarketplaceApplicationeModule.register()],
 })
 export class MarketplaceServiceEntrypointModule {}

@@ -1,20 +1,31 @@
-import _m0         from 'protobufjs/minimal'
+import _m0  from 'protobufjs/minimal'
 /* eslint-disable */
-import Long        from 'long'
+import Long from 'long'
 
-import { Price }   from '../../../../team/masterok/product/v1alpha1/product.types'
+import { Price } from '../../../../team/masterok/product/v1alpha1/product.types'
+
 import { Product } from '../../../../team/masterok/product/v1alpha1/product.types'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'
 
 export interface CreateProductRequest {
+  /** O + */
   name: string
+  /** O ? */
   category: string
+  /** O ? */
   subcategory: string
+  /** O + */
   price?: Price
+  /** O -? */
   article: string
+  /** O -? */
   supplierCode: string
+  /** O -? */
   brand: string
+  /** 0 + */
+  barcode?: string | undefined
+  images: string[]
 }
 
 export interface CreateProductResponse {

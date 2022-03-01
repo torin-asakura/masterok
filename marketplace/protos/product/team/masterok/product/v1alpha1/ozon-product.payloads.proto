@@ -54,8 +54,8 @@ message CreateOzonProductResponse {
     string value = 2;
   }
 
-  Result result = 1;
-  int32 code = 2;
+  optional Result result = 1;
+  optional int32 code = 2;
   repeated Detail details = 3;
-  string message = 4;
+  optional string message = 4;
 }

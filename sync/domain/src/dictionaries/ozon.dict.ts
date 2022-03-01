@@ -1,0 +1,3 @@
+const ozonDict = {}
+
+export { ozonDict }

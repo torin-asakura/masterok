@@ -326,6 +326,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marketplace/application-module@workspace:0.0.1, @marketplace/application-module@workspace:marketplace/core/application-module":
+  version: 0.0.0-use.local
+  resolution: "@marketplace/application-module@workspace:marketplace/core/application-module"
+  dependencies:
+    "@atls/logger": ^0.0.1
+    "@nestjs/common": ^8.1.1
+    "@nestjs/core": ^8.1.1
+    "@nestjs/cqrs": ^8.0.0
+    "@nestjs/testing": ^8.1.1
+    "@types/node": ^16.11.10
+    axios: ^0.26.0
+    uuid: ^8.3.2
+  peerDependencies:
+    "@nestjs/common": ^8.0.4
+    "@nestjs/core": ^8.0.4
+    "@nestjs/cqrs": ^8.0.0
+  languageName: unknown
+  linkType: soft
+
 "@marketplace/grpc-adapter-module@workspace:0.0.1, @marketplace/grpc-adapter-module@workspace:marketplace/adapters/grpc-adapter":
   version: 0.0.0-use.local
   resolution: "@marketplace/grpc-adapter-module@workspace:marketplace/adapters/grpc-adapter"
@@ -334,6 +353,7 @@ __metadata:
     "@atls/nestjs-grpc-errors": ^0.0.3
     "@atls/nestjs-grpc-identity": ^0.0.5
     "@atls/nestjs-grpc-playground": 0.0.5
+    "@marketplace/application-module": "workspace:0.0.1"
     "@marketplace/product-proto": "workspace:0.0.1"
     "@nestjs/common": ^8.1.1
     "@nestjs/core": ^8.1.1
@@ -389,6 +409,7 @@ __metadata:
     "@atls/nestjs-logger": ^0.2.37
     "@grpc/grpc-js": ^1.4.1
     "@grpc/proto-loader": ^0.6.5
+    "@marketplace/application-module": "workspace:0.0.1"
     "@marketplace/grpc-adapter-module": "workspace:0.0.1"
     "@marketplace/product-proto": "workspace:0.0.1"
     "@nestjs/common": ^8.1.1
@@ -975,6 +996,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sync/domain@workspace:sync/domain":
+  version: 0.0.0-use.local
+  resolution: "@sync/domain@workspace:sync/domain"
+  languageName: unknown
+  linkType: soft
+
+"@sync/ozon-adapter@workspace:sync/adapters/ozon":
+  version: 0.0.0-use.local
+  resolution: "@sync/ozon-adapter@workspace:sync/adapters/ozon"
+  dependencies:
+    "@marketplace/product-proto": "workspace:0.0.1"
+    "@product/product-proto": "workspace:0.0.1"
+    "@sync/shared": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
+
 "@sync/persistence@workspace:0.0.1, @sync/persistence@workspace:sync/persistence":
   version: 0.0.0-use.local
   resolution: "@sync/persistence@workspace:sync/persistence"
@@ -1000,6 +1037,32 @@ __metadata:
     node-fetch: ^3.1.0
     pino: ^7.6.5
     pino-pretty: ^7.3.0
+  languageName: unknown
+  linkType: soft
+
+"@sync/shared@workspace:0.0.1, @sync/shared@workspace:sync/shared":
+  version: 0.0.0-use.local
+  resolution: "@sync/shared@workspace:sync/shared"
+  languageName: unknown
+  linkType: soft
+
+"@sync/wildberries-adapter@workspace:sync/adapters/wildberries":
+  version: 0.0.0-use.local
+  resolution: "@sync/wildberries-adapter@workspace:sync/adapters/wildberries"
+  dependencies:
+    "@marketplace/product-proto": "workspace:0.0.1"
+    "@product/product-proto": "workspace:0.0.1"
+    "@sync/shared": "workspace:0.0.1"
+  languageName: unknown
+  linkType: soft
+
+"@sync/yandex-adapter@workspace:sync/adapters/yandex":
+  version: 0.0.0-use.local
+  resolution: "@sync/yandex-adapter@workspace:sync/adapters/yandex"
+  dependencies:
+    "@marketplace/product-proto": "workspace:0.0.1"
+    "@product/product-proto": "workspace:0.0.1"
+    "@sync/shared": "workspace:0.0.1"
   languageName: unknown
   linkType: soft
 
@@ -2461,7 +2524,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:0.26.0":
+"axios@npm:0.26.0, axios@npm:^0.26.0":
   version: 0.26.0
   resolution: "axios@npm:0.26.0"
   dependencies:

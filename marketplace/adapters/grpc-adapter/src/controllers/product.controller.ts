@@ -6,6 +6,7 @@ import { UsePipes }                         from '@nestjs/common'
 
 import { v4 as uuid }                       from 'uuid'
 
+import { OzonApiService }                   from '@marketplace/application-module'
 import { CreateOzonProductResponse }        from '@marketplace/product-proto'
 import { CreateWildberriesProductResponse } from '@marketplace/product-proto'
 import { CreateYandexProductResponse }      from '@marketplace/product-proto'
@@ -16,9 +17,11 @@ import { ProductServiceController }         from '@marketplace/product-proto'
 @ProductServiceControllerMethods()
 @UseFilters(new GrpcExceptionsFilter())
 export class ProductController implements ProductServiceController {
+  constructor(private readonly ozonApiService: OzonApiService) {}
+
   @UsePipes(new GrpcValidationPipe())
   async createOzonProduct(request): Promise<CreateOzonProductResponse> {
-    return {}
+    return this.ozonApiService.createProduct(request)
   }
 
   @UsePipes(new GrpcValidationPipe())
