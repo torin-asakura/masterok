@@ -49,6 +49,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         "reference": "workspace:product/adapters/grpc-adapter"
       },
       {
+        "name": "@product/application-module",
+        "reference": "workspace:product/core/application-module"
+      },
+      {
+        "name": "@product/domain-module",
+        "reference": "workspace:product/core/domain-module"
+      },
+      {
         "name": "@product/service-entrypoint",
         "reference": "workspace:product/entrypoints/service-entrypoint"
       },
@@ -138,6 +146,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ["@marketplace/grpc-adapter-module", ["virtual:5c4c6dbf69d33f9ee8cab1540bad08397e1bd93f275b645e0ad770f15b3b684dcf8c16b3d16897b13c0d38617a92c7edd9c666cff5b723e2d3f57199bff98a5b#workspace:marketplace/adapters/grpc-adapter", "workspace:marketplace/adapters/grpc-adapter"]],
       ["@marketplace/product-proto", ["virtual:5b1c0dc6be26e03a197db4507c3c86b786a411f8ec08afdfc65a2f93f3c186ee1c991fe9a78f9aa6c7204f4f4aeecc13f008a5cb7fb1335b13e8cc7c20222ba8#workspace:marketplace/protos/product", "virtual:5c4c6dbf69d33f9ee8cab1540bad08397e1bd93f275b645e0ad770f15b3b684dcf8c16b3d16897b13c0d38617a92c7edd9c666cff5b723e2d3f57199bff98a5b#workspace:marketplace/protos/product", "virtual:c7c5b519d5476b4e12933d6fd31e0eea879adebc8c466f4fadb0656158a4f02a36f45691e84e2fac60897c347c4cb44b53227bba720fa2b45c6606477ff5547d#workspace:marketplace/protos/product", "virtual:cbe4b435289802ac4109ff324fc15d0d371dfb91c0a104cdf8dc2432fcf581f58409237eec03ca2a92027aae4e2c1d35749e4f1e139d30a0c9d7288d2a810dd6#workspace:marketplace/protos/product", "virtual:f921c91f99d4f2f39ca511a5c849b460496619f11de98d5a949e193dde1f2b24fc221bcd780f76621283127fa39739d80f1118befc509cadac03fb9245019f02#workspace:marketplace/protos/product", "workspace:marketplace/protos/product"]],
       ["@marketplace/service-entrypoint", ["workspace:marketplace/entrypoints/service-entrypoint"]],
+      ["@product/application-module", ["workspace:product/core/application-module"]],
+      ["@product/domain-module", ["virtual:6d153d28c6c085595ffff0f9ec06feeabad038f4db0bb7b53fdb5128a867bfbe180ff17d52565aa23ed6635101521b340f23c06595d9eb19fddd316aaa2250ee#workspace:product/core/domain-module", "workspace:product/core/domain-module"]],
       ["@product/product-grpc-adapter-module", ["virtual:249f1f92a64eeea2c6e1625dd680d1c76b7a90ed296277c12eed735717541e99166ed22c6271c430f4cad7fcf00a70939f4acd0d274af90ae3014790a9ef5b48#workspace:product/adapters/grpc-adapter", "workspace:product/adapters/grpc-adapter"]],
       ["@product/product-proto", ["virtual:100684f5ec209ad8754c4fafc4aeea1a5f82c9db7a730afa6c05657a47867aa3ceaa428afe34b527e269f34694d7cffdd6ba78c45077d0622d0a6abde33aa87f#workspace:product/protos/product", "virtual:249f1f92a64eeea2c6e1625dd680d1c76b7a90ed296277c12eed735717541e99166ed22c6271c430f4cad7fcf00a70939f4acd0d274af90ae3014790a9ef5b48#workspace:product/protos/product", "virtual:c7c5b519d5476b4e12933d6fd31e0eea879adebc8c466f4fadb0656158a4f02a36f45691e84e2fac60897c347c4cb44b53227bba720fa2b45c6606477ff5547d#workspace:product/protos/product", "workspace:product/protos/product"]],
       ["@product/service-entrypoint", ["workspace:product/entrypoints/service-entrypoint"]],
@@ -7011,6 +7021,61 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@panva/asn1.js", "npm:1.0.0"]
           ],
           "linkType": "HARD",
+        }]
+      ]],
+      ["@product/application-module", [
+        ["workspace:product/core/application-module", {
+          "packageLocation": "./product/core/application-module/",
+          "packageDependencies": [
+            ["@product/application-module", "workspace:product/core/application-module"],
+            ["@nestjs/common", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/core", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/cqrs", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.0.2"],
+            ["@nestjs/testing", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@product/domain-module", "virtual:6d153d28c6c085595ffff0f9ec06feeabad038f4db0bb7b53fdb5128a867bfbe180ff17d52565aa23ed6635101521b340f23c06595d9eb19fddd316aaa2250ee#workspace:product/core/domain-module"],
+            ["@types/node", "npm:16.11.21"],
+            ["uuid", "npm:8.3.2"]
+          ],
+          "linkType": "SOFT",
+        }]
+      ]],
+      ["@product/domain-module", [
+        ["virtual:6d153d28c6c085595ffff0f9ec06feeabad038f4db0bb7b53fdb5128a867bfbe180ff17d52565aa23ed6635101521b340f23c06595d9eb19fddd316aaa2250ee#workspace:product/core/domain-module", {
+          "packageLocation": "./.yarn/__virtual__/@product-domain-module-virtual-3e114b094a/1/product/core/domain-module/",
+          "packageDependencies": [
+            ["@product/domain-module", "virtual:6d153d28c6c085595ffff0f9ec06feeabad038f4db0bb7b53fdb5128a867bfbe180ff17d52565aa23ed6635101521b340f23c06595d9eb19fddd316aaa2250ee#workspace:product/core/domain-module"],
+            ["@nestjs/common", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/core", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/cqrs", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.0.2"],
+            ["@nestjs/testing", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@types/nestjs__common", null],
+            ["@types/nestjs__core", null],
+            ["@types/nestjs__cqrs", null],
+            ["@types/node", "npm:16.11.21"],
+            ["uuid", "npm:8.3.2"]
+          ],
+          "packagePeers": [
+            "@nestjs/common",
+            "@nestjs/core",
+            "@nestjs/cqrs",
+            "@types/nestjs__common",
+            "@types/nestjs__core",
+            "@types/nestjs__cqrs"
+          ],
+          "linkType": "SOFT",
+        }],
+        ["workspace:product/core/domain-module", {
+          "packageLocation": "./product/core/domain-module/",
+          "packageDependencies": [
+            ["@product/domain-module", "workspace:product/core/domain-module"],
+            ["@nestjs/common", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/core", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@nestjs/cqrs", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.0.2"],
+            ["@nestjs/testing", "virtual:57c80b8253e98be29a48dc79e9c4f8c6a7f002d701eb184893cd28749e3be5a46a46af4c72c965f5b5ce4b7febbdfe55c2fda0660cb30aef07cf8f8c206bccda#npm:8.3.1"],
+            ["@types/node", "npm:16.11.21"],
+            ["uuid", "npm:8.3.2"]
+          ],
+          "linkType": "SOFT",
         }]
       ]],
       ["@product/product-grpc-adapter-module", [
