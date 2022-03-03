@@ -23,7 +23,7 @@ export interface CreateOzonProductRequest_Item {
   colorImage?: string | undefined
   complexAttributes: CreateOzonProductRequest_Item_ComplexAttribute[]
   depth: number
-  dimensionUnit: DimensionUnit
+  dimensionUnit?: DimensionUnit | undefined
   geoNames: string[]
   height: number
   images: string[]
@@ -36,9 +36,9 @@ export interface CreateOzonProductRequest_Item {
   pdfList: CreateOzonProductRequest_Item_Pdf[]
   premiumPrice: string
   price: string
-  vat: string
+  vat?: string | undefined
   weight: number
-  weightUnit: WeightUnit
+  weightUnit?: WeightUnit | undefined
   width: number
 }
 

@@ -1,0 +1,3 @@
+syntax = "proto3";
+
+package team.masterok.sync.v1alpha1;

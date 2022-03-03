@@ -20,7 +20,7 @@ export const protobufPackage = 'team.masterok.product.v1alpha1'
 
 export const TEAM_MASTEROK_PRODUCT_V1ALPHA1_PACKAGE_NAME = 'team.masterok.product.v1alpha1'
 
-export interface ProductServiceClient {
+export interface MarketplaceProductServiceClient {
   createOzonProduct(
     request: CreateOzonProductRequest,
     metadata?: Metadata
@@ -37,7 +37,7 @@ export interface ProductServiceClient {
   ): Observable<CreateYandexProductResponse>
 }
 
-export interface ProductServiceController {
+export interface MarketplaceProductServiceController {
   createOzonProduct(
     request: CreateOzonProductRequest,
     metadata?: Metadata
@@ -63,7 +63,7 @@ export interface ProductServiceController {
     | CreateYandexProductResponse
 }
 
-export function ProductServiceControllerMethods() {
+export function MarketplaceProductServiceControllerMethods() {
   return function (constructor: Function) {
     const grpcMethods: string[] = [
       'createOzonProduct',
@@ -72,17 +72,25 @@ export function ProductServiceControllerMethods() {
     ]
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method)
-      GrpcMethod('ProductService', method)(constructor.prototype[method], method, descriptor)
+      GrpcMethod('MarketplaceProductService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor
+      )
     }
     const grpcStreamMethods: string[] = []
     for (const method of grpcStreamMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method)
-      GrpcStreamMethod('ProductService', method)(constructor.prototype[method], method, descriptor)
+      GrpcStreamMethod('MarketplaceProductService', method)(
+        constructor.prototype[method],
+        method,
+        descriptor
+      )
     }
   }
 }
 
-export const PRODUCT_SERVICE_NAME = 'ProductService'
+export const MARKETPLACE_PRODUCT_SERVICE_NAME = 'MarketplaceProductService'
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any

@@ -22,7 +22,7 @@ message CreateOzonProductRequest {
     optional string color_image = 4;
     repeated ComplexAttribute complex_attributes = 5;
     int32 depth = 6;
-    DimensionUnit dimension_unit = 7;
+    optional DimensionUnit dimension_unit = 7;
     repeated string geo_names = 8;
     int32 height = 9;
     repeated string images = 10;
@@ -35,9 +35,9 @@ message CreateOzonProductRequest {
     repeated Pdf pdf_list = 17;
     string premium_price = 18;
     string price = 19;
-    string vat = 20;
+    optional string vat = 20;
     int32 weight = 21;
-    WeightUnit weight_unit = 22;
+    optional WeightUnit weight_unit = 22;
     int32 width = 23;
   }
 

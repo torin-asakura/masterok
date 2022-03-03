@@ -6,7 +6,7 @@ import "team/masterok/product/v1alpha1/ozon-product.payloads.proto";
 import "team/masterok/product/v1alpha1/wildberries-product.payloads.proto";
 import "team/masterok/product/v1alpha1/yandex-product.payloads.proto";
 
-service ProductService {
+service MarketplaceProductService {
   rpc CreateOzonProduct (CreateOzonProductRequest) returns (CreateOzonProductResponse) {}
   rpc CreateWildberriesProduct (CreateWildberriesProductRequest) returns (CreateWildberriesProductResponse) {}
   rpc CreateYandexProduct (CreateYandexProductRequest) returns (CreateYandexProductResponse) {}

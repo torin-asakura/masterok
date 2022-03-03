@@ -5,14 +5,14 @@ package team.masterok.product.v1alpha1;
 import "team/masterok/product/v1alpha1/product.types.proto";
 
 message CreateProductRequest {
-  string name = 1; // O +
-  string category = 2; // O ?
-  string subcategory = 3; // O ?
-  Price price = 4; // O +
-  string article = 5; // O -?
-  string supplierCode = 6; // O -?
-  string brand = 7; // O -?
-  optional string barcode = 8; // 0 +
+  string name = 1;
+  string category = 2;
+  string subcategory = 3;
+  Price price = 4;
+  string article = 5;
+  string supplierCode = 6;
+  string brand = 7;
+  optional string barcode = 8;
   repeated string images = 9;
 }
 

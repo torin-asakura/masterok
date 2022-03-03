@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package team.masterok.sync.v1alpha1;
+
+message TransferPositionToOzonRequest {
+  string id = 1;
+}
+
+message TransferPositionToOzonResponse {
+  string id = 1;
+}
