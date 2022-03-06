@@ -19,6 +19,11 @@ import { RemoveProductResponse }           from '@product/product-proto'
 import { ProductServiceControllerMethods } from '@product/product-proto'
 import { ProductServiceController }        from '@product/product-proto'
 
+import { CreateProductDto }                from '../dto'
+import { UpdateProductDto }                from '../dto'
+import { ListProductsDto }                 from '../dto'
+import { RemoveProductDto }                from '../dto'
+
 @Controller()
 @ProductServiceControllerMethods()
 @UseFilters(new GrpcExceptionsFilter())
@@ -28,7 +33,7 @@ export class ProductController implements ProductServiceController {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   @UsePipes(new GrpcValidationPipe())
-  async createProduct(request): Promise<CreateProductResponse> {
+  async createProduct(request: CreateProductDto): Promise<CreateProductResponse> {
     const command = new CreateProductCommand(
       uuid(),
       request.name,
@@ -48,13 +53,13 @@ export class ProductController implements ProductServiceController {
   }
 
   @UsePipes(new GrpcValidationPipe())
-  async listProducts(request): Promise<ListProductsResponse> {
+  async listProducts(request: ListProductsDto): Promise<ListProductsResponse> {
     const products = await this.queryBus.execute(new GetProductsQuery())
     return { products }
   }
 
   @UsePipes(new GrpcValidationPipe())
-  async updateProduct(request): Promise<UpdateProductResponse> {
+  async updateProduct(request: UpdateProductDto): Promise<UpdateProductResponse> {
     const command = new UpdateProductCommand(
       request.product.id,
       request.product.name,
@@ -72,7 +77,7 @@ export class ProductController implements ProductServiceController {
   }
 
   @UsePipes(new GrpcValidationPipe())
-  async removeProduct(request): Promise<RemoveProductResponse> {
+  async removeProduct(request: RemoveProductDto): Promise<RemoveProductResponse> {
     const command = new RemoveProductCommand(request.id)
 
     await this.commandBus.execute(command)
