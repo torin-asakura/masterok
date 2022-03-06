@@ -1,5 +1,5 @@
 {
-  "name": "@profiles/typeorm-adapter-module",
+  "name": "@product/typeorm-adapter-module",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
@@ -11,10 +11,8 @@
   },
   "dependencies": {
     "@atls/typeorm-logger": "^0.0.1",
-    "@profiles/application-module": "workspace:0.0.1",
-    "@profiles/domain-module": "workspace:0.0.1",
-    "@shared/hub-adapter-module": "workspace:0.0.1",
-    "@ythub/quota-matcher": "^1.2.11",
+    "@product/application-module": "workspace:0.0.1",
+    "@product/domain-module": "workspace:0.0.1",
     "mqtt": "^4.2.8",
     "rxjs": "^7.4.0",
     "uuid": "^8.3.2"

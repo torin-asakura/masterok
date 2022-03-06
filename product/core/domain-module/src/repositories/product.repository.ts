@@ -6,4 +6,8 @@ export abstract class ProductRepository {
   }
 
   abstract save(aggregate: Product): Promise<void>
+
+  abstract findById(id: string): Promise<Product | undefined>
+
+  abstract remove(id: string): Promise<Product | undefined>
 }

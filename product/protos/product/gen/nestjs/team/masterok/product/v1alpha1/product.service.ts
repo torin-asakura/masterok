@@ -9,10 +9,10 @@ import { Observable }            from 'rxjs'
 
 import { CreateProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
 import { CreateProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { DeleteProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { DeleteProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
 import { ListProductsRequest }   from '../../../../team/masterok/product/v1alpha1/product.payloads'
 import { ListProductsResponse }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
+import { RemoveProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
+import { RemoveProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
 import { UpdateProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
 import { UpdateProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
 
@@ -33,10 +33,10 @@ export interface ProductServiceClient {
     metadata?: Metadata
   ): Observable<UpdateProductResponse>
 
-  deleteProduct(
-    request: DeleteProductRequest,
+  removeProduct(
+    request: RemoveProductRequest,
     metadata?: Metadata
-  ): Observable<DeleteProductResponse>
+  ): Observable<RemoveProductResponse>
 }
 
 export interface ProductServiceController {
@@ -55,10 +55,10 @@ export interface ProductServiceController {
     metadata?: Metadata
   ): Promise<UpdateProductResponse> | Observable<UpdateProductResponse> | UpdateProductResponse
 
-  deleteProduct(
-    request: DeleteProductRequest,
+  removeProduct(
+    request: RemoveProductRequest,
     metadata?: Metadata
-  ): Promise<DeleteProductResponse> | Observable<DeleteProductResponse> | DeleteProductResponse
+  ): Promise<RemoveProductResponse> | Observable<RemoveProductResponse> | RemoveProductResponse
 }
 
 export function ProductServiceControllerMethods() {
@@ -67,7 +67,7 @@ export function ProductServiceControllerMethods() {
       'createProduct',
       'listProducts',
       'updateProduct',
-      'deleteProduct',
+      'removeProduct',
     ]
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method)

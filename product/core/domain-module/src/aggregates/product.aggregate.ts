@@ -1,6 +1,7 @@
 import { AggregateRoot }  from '@nestjs/cqrs'
 
 import { ProductCreated } from '../events'
+import { ProductUpdated } from '../events'
 
 export interface Price {
   buy: number
@@ -82,6 +83,19 @@ export class Product extends AggregateRoot {
     return this.#brand
   }
 
+  get properties() {
+    return {
+      id: this.#id,
+      name: this.#name,
+      category: this.#category,
+      subcategory: this.#subcategory,
+      price: this.#price,
+      article: this.#article,
+      supplierCode: this.#supplierCode,
+      brand: this.#brand,
+    }
+  }
+
   async create(
     productId: string,
     name: string,
@@ -106,5 +120,53 @@ export class Product extends AggregateRoot {
     )
 
     return this
+  }
+
+  onProductCreated(event: ProductCreated) {
+    this.#id = event.productId
+    this.#name = event.name
+    this.#category = event.category
+    this.#subcategory = event.subcategory
+    this.#price = event.price
+    this.#article = event.article
+    this.#supplierCode = event.supplierCode
+    this.#brand = event.brand
+  }
+
+  async update(
+    productId: string,
+    name: string,
+    category: string,
+    subcategory: string,
+    price: Price,
+    article: string,
+    supplierCode: string,
+    brand: string
+  ) {
+    this.apply(
+      new ProductUpdated(
+        productId,
+        name,
+        category,
+        subcategory,
+        price,
+        article,
+        supplierCode,
+        brand
+      )
+    )
+
+    return this
+  }
+
+  onProductUpdated(event: ProductUpdated) {
+    this.#id = event.productId
+    this.#name = event.name
+    this.#category = event.category
+    this.#subcategory = event.subcategory
+    this.#price = event.price
+    this.#article = event.article
+    this.#supplierCode = event.supplierCode
+    this.#brand = event.brand
   }
 }

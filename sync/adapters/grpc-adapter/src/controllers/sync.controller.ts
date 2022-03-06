@@ -11,7 +11,6 @@ import { v4 as uuid }                                  from 'uuid'
 
 import { TEAM_MASTEROK_PRODUCT_V1ALPHA1_PACKAGE_NAME } from '@marketplace/product-proto'
 import { MarketplaceProductServiceClient }             from '@marketplace/product-proto'
-import { MARKETPLACE_PRODUCT_SERVICE_NAME }            from '@marketplace/product-proto'
 import { TransferPositionToOzonResponse }              from '@sync/sync-proto'
 import { SyncServiceControllerMethods }                from '@sync/sync-proto'
 import { SyncServiceController }                       from '@sync/sync-proto'

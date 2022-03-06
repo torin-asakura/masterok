@@ -8,5 +8,5 @@ service ProductService {
     rpc CreateProduct (CreateProductRequest) returns (CreateProductResponse) {}
     rpc ListProducts (ListProductsRequest) returns (ListProductsResponse) {}
     rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse) {}
-    rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse) {}
+    rpc RemoveProduct (RemoveProductRequest) returns (RemoveProductResponse) {}
 }

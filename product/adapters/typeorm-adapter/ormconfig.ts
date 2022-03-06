@@ -5,7 +5,7 @@ export default {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'postgres',
+  username: 'user',
   password: 'password',
   database: 'db',
   migrations: Object.values(migrations),

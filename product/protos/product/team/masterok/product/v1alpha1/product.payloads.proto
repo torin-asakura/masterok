@@ -34,10 +34,10 @@ message UpdateProductResponse {
   string id = 1;
 }
 
-message DeleteProductRequest {
+message RemoveProductRequest {
   string id = 1;
 }
 
-message DeleteProductResponse {
+message RemoveProductResponse {
   string id = 1;
 }

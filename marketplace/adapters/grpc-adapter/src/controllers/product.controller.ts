@@ -5,8 +5,6 @@ import { Controller }                                 from '@nestjs/common'
 import { UseFilters }                                 from '@nestjs/common'
 import { UsePipes }                                   from '@nestjs/common'
 
-import { v4 as uuid }                                 from 'uuid'
-
 import { OzonApiService }                             from '@marketplace/application-module'
 import { CreateOzonProductResponse }                  from '@marketplace/product-proto'
 import { CreateWildberriesProductResponse }           from '@marketplace/product-proto'

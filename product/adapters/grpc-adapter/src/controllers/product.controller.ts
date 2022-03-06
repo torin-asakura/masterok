@@ -3,13 +3,19 @@ import { GrpcValidationPipe }              from '@atls/nestjs-grpc-errors'
 import { Controller }                      from '@nestjs/common'
 import { UseFilters }                      from '@nestjs/common'
 import { UsePipes }                        from '@nestjs/common'
+import { CommandBus }                      from '@nestjs/cqrs'
+import { QueryBus }                        from '@nestjs/cqrs'
 
 import { v4 as uuid }                      from 'uuid'
 
+import { CreateProductCommand }            from '@product/application-module'
+import { UpdateProductCommand }            from '@product/application-module'
+import { RemoveProductCommand }            from '@product/application-module'
+import { GetProductsQuery }                from '@product/application-module'
 import { CreateProductResponse }           from '@product/product-proto'
 import { ListProductsResponse }            from '@product/product-proto'
 import { UpdateProductResponse }           from '@product/product-proto'
-import { DeleteProductResponse }           from '@product/product-proto'
+import { RemoveProductResponse }           from '@product/product-proto'
 import { ProductServiceControllerMethods } from '@product/product-proto'
 import { ProductServiceController }        from '@product/product-proto'
 
@@ -19,56 +25,58 @@ import { ProductServiceController }        from '@product/product-proto'
 export class ProductController implements ProductServiceController {
   private products: any[] = []
 
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+
   @UsePipes(new GrpcValidationPipe())
   async createProduct(request): Promise<CreateProductResponse> {
-    const product = {
-      id: uuid(),
-      ...request,
+    const command = new CreateProductCommand(
+      uuid(),
+      request.name,
+      request.category,
+      request.subcategory,
+      request.price,
+      request.article,
+      request.supplierCode,
+      request.brand
+    )
+
+    await this.commandBus.execute(command)
+
+    return {
+      id: command.productId,
     }
-
-    this.products.push(product)
-
-    return product
   }
 
   @UsePipes(new GrpcValidationPipe())
   async listProducts(request): Promise<ListProductsResponse> {
-    return {
-      products: this.products,
-    }
+    const products = await this.queryBus.execute(new GetProductsQuery())
+    return { products }
   }
 
   @UsePipes(new GrpcValidationPipe())
   async updateProduct(request): Promise<UpdateProductResponse> {
-    const index = this.products.findIndex((product) => {
-      return product.id === request.product.id
-    })
+    const command = new UpdateProductCommand(
+      request.product.id,
+      request.product.name,
+      request.product.category,
+      request.product.subcategory,
+      request.product.price,
+      request.product.article,
+      request.product.supplierCode,
+      request.product.brand
+    )
 
-    this.products[index] = {
-      ...this.products[index],
-      ...request.product,
-    }
+    await this.commandBus.execute(command)
 
-    return {
-      id: this.products[index].id,
-    }
+    return { id: command.productId }
   }
 
   @UsePipes(new GrpcValidationPipe())
-  async deleteProduct(request): Promise<DeleteProductResponse> {
-    let deleted: any
+  async removeProduct(request): Promise<RemoveProductResponse> {
+    const command = new RemoveProductCommand(request.id)
 
-    this.products = this.products.filter((product) => {
-      if (product.id === request.id) {
-        deleted = { ...product }
-        return false
-      }
+    await this.commandBus.execute(command)
 
-      return true
-    })
-
-    return {
-      id: deleted?.id || '',
-    }
+    return { id: command.productId }
   }
 }

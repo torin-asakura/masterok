@@ -9,7 +9,11 @@
     "start": "yarn node dist/index.js"
   },
   "dependencies": {
-    "@nestjs/common": "^8.1.1"
+    "@nestjs/common": "^8.1.1",
+    "@product/application-module": "workspace:0.0.1",
+    "@product/cqrs-adapter-module": "workspace:0.0.1",
+    "@product/domain-module": "workspace:0.0.1",
+    "@product/typeorm-adapter-module": "workspace:0.0.1"
   },
   "devDependencies": {
     "@atls/grpc-error-status": "^0.0.3",

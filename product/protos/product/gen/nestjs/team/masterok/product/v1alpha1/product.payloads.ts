@@ -37,11 +37,11 @@ export interface UpdateProductResponse {
   id: string
 }
 
-export interface DeleteProductRequest {
+export interface RemoveProductRequest {
   id: string
 }
 
-export interface DeleteProductResponse {
+export interface RemoveProductResponse {
   id: string
 }
 
