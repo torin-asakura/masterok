@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/yandex-product.types.proto";
+
+message CreateYandexProductRequest {
+  string category = 1;
+  string name = 2;
+  string vendor = 3;
+  string offerId = 4;
+  optional string description = 5;
+  Price price = 6;
+  optional string picture = 7;
+}
+
+message CreateYandexProductResponse {
+  bool success = 1;
+}

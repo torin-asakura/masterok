@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string category = 3;
+  string subcategory = 4;
+  Price price = 5;
+  string article = 6;
+  string supplierCode = 7;
+  string brand = 8;
+  optional string barcode = 9;
+  repeated string images = 10;
+}
+
+message Price {
+  double buy = 1;
+  double sell = 2;
+}

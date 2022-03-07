@@ -1,0 +1,19 @@
+{
+  "name": "@sync/persistence",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "scripts": {
+    "migration:generate": "yarn run typeorm migration:generate -f ./ormconfig.ts",
+    "migration:run": "yarn run typeorm migration:run",
+    "typeorm": "TS_NODE_PROJECT=./typeorm.tsconfig.json node --require ts-node/register $(yarn bin typeorm)"
+  },
+  "devDependencies": {
+    "@atls/logger": "^0.0.1",
+    "@types/pg": "^8",
+    "pg": "^8.7.3",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.5.0",
+    "typeorm": "^0.2.41"
+  }
+}

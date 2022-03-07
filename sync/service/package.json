@@ -1,0 +1,18 @@
+{
+  "name": "@sync/service",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@russvet/service": "workspace:0.0.1",
+    "@sync/persistence": "workspace:0.0.1",
+    "@warehouse/service": "workspace:0.0.1",
+    "axios": "^0.24.0",
+    "node-fetch": "^3.1.0",
+    "pino": "^7.6.5",
+    "pino-pretty": "^7.3.0"
+  },
+  "devDependencies": {
+    "@atls/logger": "^0.0.1"
+  }
+}

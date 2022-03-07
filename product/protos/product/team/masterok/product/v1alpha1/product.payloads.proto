@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/product.types.proto";
+
+message CreateProductRequest {
+  string name = 1;
+  string category = 2;
+  string subcategory = 3;
+  Price price = 4;
+  string article = 5;
+  string supplierCode = 6;
+  string brand = 7;
+  optional string barcode = 8;
+  repeated string images = 9;
+}
+
+message CreateProductResponse {
+  string id = 1;
+}
+
+message ListProductsRequest {}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+message UpdateProductRequest {
+  Product product = 1;
+}
+
+message UpdateProductResponse {
+  string id = 1;
+}
+
+message RemoveProductRequest {
+  string id = 1;
+}
+
+message RemoveProductResponse {
+  string id = 1;
+}

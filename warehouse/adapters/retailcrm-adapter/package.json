@@ -1,0 +1,13 @@
+{
+  "name": "@warehouse/retailcrm-adapter",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "xmlbuilder": "^15.1.1"
+  },
+  "devDependencies": {
+    "pino": "^7.6.5"
+  }
+}

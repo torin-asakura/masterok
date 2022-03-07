@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+message Empty {}
+
+message Addin {
+  message Param {
+    optional int32 count = 1;
+    optional string units = 2;
+    string value = 3;
+  }
+
+  string type = 1;
+  repeated Param params = 2;
+}
+
+message Nomenclature {
+  message Variation {
+    string barcode = 1;
+    repeated Addin addin = 2;
+  }
+
+  string vendorCode = 1;
+  repeated Variation variations = 2;
+  repeated Addin addin = 3;
+}
+
+message ErrorPayload {
+  int32 code = 1;
+  Empty data = 2;
+  string message = 3;
+}
+
+message Card {
+  string countryProduction = 1;
+  string object = 2;
+  string supplierVendorCode = 3;
+  repeated Addin addin = 4;
+  repeated Nomenclature nomenclatures = 5;
+}
+
+message Params {
+  Card card = 1;
+}

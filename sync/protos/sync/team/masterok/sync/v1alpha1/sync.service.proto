@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package team.masterok.sync.v1alpha1;
+
+import "team/masterok/sync/v1alpha1/sync.payloads.proto";
+
+service SyncService {
+  rpc TransferPositionToOzon (TransferPositionToOzonRequest) returns (TransferPositionToOzonResponse) {}
+}

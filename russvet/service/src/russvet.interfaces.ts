@@ -81,4 +81,5 @@ export type MapPositionsCallback = (position: FullPosition) => void
 
 export interface IRussvetService {
   mapPositions(cb: MapPositionsCallback): Promise<void>
+  orderPositions(codes: Array<string>): Promise<void>
 }

@@ -6,7 +6,6 @@ services:
     working_dir: /workspace
     volumes:
       - ./:/workspace
-      - unplugged:/workspace/.yarn/unplugged
     entrypoint: yarn
 
   gateway:
@@ -18,7 +17,6 @@ services:
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
       RUSSVET_URL: https://cdis.russvet.ru
-      STOCKS: Тула Тверь
     env_file:
       - .env
     ports:
@@ -26,38 +24,38 @@ services:
     depends_on:
       - db
 
-  migrate:
+  marketplace:
     image: node:16-alpine
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run migrate
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
+    entrypoint: yarn workspace @marketplace/service-entrypoint dev
+    env_file:
+      - .env
+    ports:
+      - 50051:50051
 
-  migrate-reset:
+  sync:
     image: node:16-alpine
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run migrate-reset
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
+    entrypoint: yarn workspace @sync/service-entrypoint dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
 
-  prisma-generate:
+  russvet:
     image: node:16-alpine
     working_dir: /workspace
     volumes:
       - ./:/workspace
-    entrypoint: yarn workspace @proxy/persistence run generate
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
-    depends_on:
-      - db
+    entrypoint: yarn workspace @russvet/service-entrypoint dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
 
   db:
     image: postgres
@@ -68,6 +66,3 @@ services:
       POSTGRES_DB: db
     ports:
       - 5432:5432
-
-volumes:
-  unplugged:

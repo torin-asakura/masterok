@@ -1,9 +1,10 @@
+/* eslint-disable no-await-in-loop */
+
+import { RussvetAdapter }  from '@russvet/russvet-adapter'
 import { mapKeys }         from '@common/utils'
 import { repeat }          from '@common/utils'
 
 import camelcase           from 'camelcase'
-
-import { RussvetAdapter }  from '@russvet/adapter'
 
 import { IRussvetService } from './russvet.interfaces'
 
@@ -44,6 +45,28 @@ export class RussvetService implements IRussvetService {
           )
         }
       })
+    }
+  }
+
+  async orderPositions(codes) {
+    for (const code of codes) {
+      try {
+        await this.russvetAdapter.createOrder({
+          orderNum: 1,
+          deliveryLocationId: '428339',
+          orderLines: [
+            {
+              lineNum: 1,
+              RSCode: code,
+              quantity: 1,
+              uom: 'PCE',
+              itemCode: 'Code321',
+            },
+          ],
+        })
+      } catch (e) {
+        // do nothing
+      }
     }
   }
 }

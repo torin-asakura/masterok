@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/ozon-product.types.proto";
+
+message CreateOzonProductRequest {
+  message Item {
+    message ComplexAttribute {
+      repeated Attribute attributes = 1;
+    }
+
+    message Pdf {
+      int64 index = 1;
+      string name = 2;
+      string src_url = 3;
+    }
+
+    repeated Attribute attributes = 1;
+    optional string barcode = 2;
+    int64 category_id = 3;
+    optional string color_image = 4;
+    repeated ComplexAttribute complex_attributes = 5;
+    int32 depth = 6;
+    optional DimensionUnit dimension_unit = 7;
+    repeated string geo_names = 8;
+    int32 height = 9;
+    repeated string images = 10;
+    string primary_image = 11;
+    ServiceType service_type = 12;
+    repeated string images360 = 13;
+    string name = 14;
+    string offer_id = 15;
+    string old_price = 16;
+    repeated Pdf pdf_list = 17;
+    string premium_price = 18;
+    string price = 19;
+    optional string vat = 20;
+    int32 weight = 21;
+    optional WeightUnit weight_unit = 22;
+    int32 width = 23;
+  }
+
+  repeated Item items = 1;
+}
+
+message CreateOzonProductResponse {
+  message Result {
+    int64 task_id = 1;
+  }
+
+  message Detail {
+    string typeUrl = 1;
+    string value = 2;
+  }
+
+  optional Result result = 1;
+  optional int32 code = 2;
+  repeated Detail details = 3;
+  optional string message = 4;
+}

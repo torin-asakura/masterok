@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package team.masterok.product.v1alpha1;
+
+import "team/masterok/product/v1alpha1/product.types.proto";
+
+message ListProductsRequest {
+  int32 stockId = 1;
+  int32 page = 2;
+  string category = 3;
+}
+
+message ListProductsResponse {
+  repeated BaseProduct products = 1;
+}
+
+message ListProductDetailsRequest {
+  int32 code = 1;
+}
+
+message ListProductDetailsResponse {
+  ProductDetails details = 1;
+}

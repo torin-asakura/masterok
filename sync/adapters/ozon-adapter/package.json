@@ -1,0 +1,11 @@
+{
+  "name": "@sync/ozon-adapter",
+  "version": "0.0.1",
+  "license": "BSD 3-Clause",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@marketplace/product-proto": "workspace:0.0.1",
+    "@product/product-proto": "workspace:0.0.1",
+    "@sync/shared": "workspace:0.0.1"
+  }
+}

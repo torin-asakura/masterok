@@ -8,6 +8,6 @@
     "axios": "^0.24.0"
   },
   "devDependencies": {
-    "pino": "^7.6.5"
+    "@atls/logger": "^0.0.1"
   }
 }
