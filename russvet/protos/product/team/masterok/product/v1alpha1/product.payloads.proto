@@ -15,7 +15,7 @@ message ListProductsResponse {
 }
 
 message ListProductDetailsRequest {
-  int32 position = 1;
+  int32 code = 1;
 }
 
 message ListProductDetailsResponse {

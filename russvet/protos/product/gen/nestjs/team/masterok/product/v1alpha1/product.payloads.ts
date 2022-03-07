@@ -18,7 +18,7 @@ export interface ListProductsResponse {
 }
 
 export interface ListProductDetailsRequest {
-  position: number
+  code: number
 }
 
 export interface ListProductDetailsResponse {

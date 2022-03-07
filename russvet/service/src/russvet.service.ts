@@ -1,11 +1,10 @@
 /* eslint-disable no-await-in-loop */
 
+import { RussvetAdapter }  from '@russvet/russvet-adapter'
 import { mapKeys }         from '@common/utils'
 import { repeat }          from '@common/utils'
 
 import camelcase           from 'camelcase'
-
-import { RussvetAdapter }  from '@russvet/russvet-adapter'
 
 import { IRussvetService } from './russvet.interfaces'
 

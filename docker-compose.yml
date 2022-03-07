@@ -17,7 +17,6 @@ services:
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/db?schema=public
       RUSSVET_URL: https://cdis.russvet.ru
-      STOCKS: Тула Тверь
     env_file:
       - .env
     ports:
@@ -42,6 +41,17 @@ services:
     volumes:
       - ./:/workspace
     entrypoint: yarn workspace @sync/service-entrypoint dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+
+  russvet:
+    image: node:16-alpine
+    working_dir: /workspace
+    volumes:
+      - ./:/workspace
+    entrypoint: yarn workspace @russvet/service-entrypoint dev
     env_file:
       - .env
     ports:

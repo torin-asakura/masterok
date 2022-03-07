@@ -1098,12 +1098,14 @@ __metadata:
     "@atls/nestjs-grpc-errors": ^0.0.3
     "@atls/nestjs-grpc-identity": ^0.0.5
     "@atls/nestjs-grpc-playground": 0.0.5
+    "@common/utils": "workspace:0.0.1"
     "@nestjs/common": ^8.1.1
     "@nestjs/core": ^8.1.1
     "@nestjs/cqrs": ^8.0.0
     "@nestjs/microservices": ^8.1.1
     "@russvet/product-proto": "workspace:0.0.1"
     "@types/uuid": ^8.3.1
+    axios: ^0.26.0
     class-transformer: ^0.4.0
     class-validator: ^0.13.1
     rxjs: ^7.4.0

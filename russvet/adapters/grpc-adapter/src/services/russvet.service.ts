@@ -1,10 +1,13 @@
+import { Logger }            from '@atls/logger'
 import { getBasicAuthToken } from '@common/utils'
 
 import axios                 from 'axios'
 
-import { IRussvetAdapter }   from './russvet.interfaces'
+export class RussvetService {
+  private readonly NAME = 'RussvetService'
 
-export class RussvetAdapter implements IRussvetAdapter {
+  private logger: Logger
+
   private readonly headers = {
     Authorization: getBasicAuthToken(
       process.env.RUSSVET_LOGIN || '',
@@ -13,6 +16,10 @@ export class RussvetAdapter implements IRussvetAdapter {
   }
 
   private readonly url = process.env.RUSSVET_URL || ''
+
+  constructor() {
+    this.logger = new Logger(this.NAME)
+  }
 
   async getStocks() {
     const stocks = await axios.get(`${this.url}/rs/stocks`, { headers: this.headers })
