@@ -24,7 +24,9 @@ export class UpdateProductCommandHandler implements ICommandHandler<UpdateProduc
       command.price,
       command.article,
       command.supplierCode,
-      command.brand
+      command.brand,
+      command.barcode,
+      command.images
     )
 
     await this.productRepository.save(product)

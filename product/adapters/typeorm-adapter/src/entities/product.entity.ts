@@ -27,4 +27,10 @@ export class ProductEntity {
 
   @Column()
   brand!: string
+
+  @Column()
+  barcode!: string
+
+  @Column('simple-array')
+  images!: string[]
 }

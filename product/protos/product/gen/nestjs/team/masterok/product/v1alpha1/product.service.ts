@@ -1,19 +1,27 @@
-import { Metadata }              from '@grpc/grpc-js'
+import { Metadata }                     from '@grpc/grpc-js'
 /* eslint-disable */
-import { GrpcMethod }            from '@nestjs/microservices'
-import { GrpcStreamMethod }      from '@nestjs/microservices'
+import { GrpcMethod }                   from '@nestjs/microservices'
 
-import _m0                       from 'protobufjs/minimal'
-import Long                      from 'long'
-import { Observable }            from 'rxjs'
+import { GrpcStreamMethod } from '@nestjs/microservices'
 
-import { CreateProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
+import _m0                              from 'protobufjs/minimal'
+import Long                             from 'long'
+import { Observable }                   from 'rxjs'
+
+import { CreateProductRequest } from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
 import { CreateProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { ListProductsRequest }   from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { ListProductsResponse }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { RemoveProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
+import { ListProductsRequest } from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
+import { ListProductsResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
+import { RemoveProductRequest } from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
 import { RemoveProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
-import { UpdateProductRequest }  from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
+import { UpdateProductRequest } from '../../../../team/masterok/product/v1alpha1/product.payloads'
+
 import { UpdateProductResponse } from '../../../../team/masterok/product/v1alpha1/product.payloads'
 
 export const protobufPackage = 'team.masterok.product.v1alpha1'

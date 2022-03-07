@@ -13,5 +13,7 @@ export class UpdateProductDto implements UpdateProductRequest {
     article: string
     supplierCode: string
     brand: string
+    barcode: string
+    images: string[]
   }
 }

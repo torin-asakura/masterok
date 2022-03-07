@@ -11,6 +11,8 @@ message Product {
   string article = 6;
   string supplierCode = 7;
   string brand = 8;
+  optional string barcode = 9;
+  repeated string images = 10;
 }
 
 message Price {

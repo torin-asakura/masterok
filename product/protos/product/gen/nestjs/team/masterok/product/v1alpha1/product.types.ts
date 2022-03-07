@@ -13,6 +13,8 @@ export interface Product {
   article: string
   supplierCode: string
   brand: string
+  barcode?: string | undefined
+  images: string[]
 }
 
 export interface Price {

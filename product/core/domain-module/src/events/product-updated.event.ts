@@ -10,6 +10,8 @@ export class ProductUpdated {
     },
     public readonly article: string,
     public readonly supplierCode: string,
-    public readonly brand: string
+    public readonly brand: string,
+    public readonly barcode: string,
+    public readonly images: string[]
   ) {}
 }

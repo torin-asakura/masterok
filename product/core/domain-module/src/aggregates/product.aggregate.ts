@@ -17,6 +17,8 @@ export interface ProductProperties {
   article: string
   supplierCode: string
   brand: string
+  barcode: string
+  images: string[]
 }
 
 export class Product extends AggregateRoot {
@@ -36,6 +38,10 @@ export class Product extends AggregateRoot {
 
   #brand!: string
 
+  #barcode!: string
+
+  #images!: string[]
+
   constructor(properties?: ProductProperties) {
     super()
 
@@ -48,6 +54,8 @@ export class Product extends AggregateRoot {
       this.#article = properties.article
       this.#supplierCode = properties.supplierCode
       this.#brand = properties.brand
+      this.#barcode = properties.barcode
+      this.#images = properties.images
     }
   }
 
@@ -83,6 +91,14 @@ export class Product extends AggregateRoot {
     return this.#brand
   }
 
+  get barcode() {
+    return this.#barcode
+  }
+
+  get images() {
+    return this.#images
+  }
+
   get properties() {
     return {
       id: this.#id,
@@ -93,6 +109,8 @@ export class Product extends AggregateRoot {
       article: this.#article,
       supplierCode: this.#supplierCode,
       brand: this.#brand,
+      barcode: this.#barcode,
+      images: this.#images,
     }
   }
 
@@ -104,7 +122,9 @@ export class Product extends AggregateRoot {
     price: Price,
     article: string,
     supplierCode: string,
-    brand: string
+    brand: string,
+    barcode: string,
+    images: string[]
   ) {
     this.apply(
       new ProductCreated(
@@ -115,7 +135,9 @@ export class Product extends AggregateRoot {
         price,
         article,
         supplierCode,
-        brand
+        brand,
+        barcode,
+        images
       )
     )
 
@@ -131,6 +153,8 @@ export class Product extends AggregateRoot {
     this.#article = event.article
     this.#supplierCode = event.supplierCode
     this.#brand = event.brand
+    this.#barcode = event.barcode
+    this.#images = event.images
   }
 
   async update(
@@ -141,7 +165,9 @@ export class Product extends AggregateRoot {
     price: Price,
     article: string,
     supplierCode: string,
-    brand: string
+    brand: string,
+    barcode: string,
+    images: string[]
   ) {
     this.apply(
       new ProductUpdated(
@@ -152,7 +178,9 @@ export class Product extends AggregateRoot {
         price,
         article,
         supplierCode,
-        brand
+        brand,
+        barcode,
+        images
       )
     )
 
@@ -168,5 +196,7 @@ export class Product extends AggregateRoot {
     this.#article = event.article
     this.#supplierCode = event.supplierCode
     this.#brand = event.brand
+    this.#barcode = event.barcode
+    this.#images = event.images
   }
 }

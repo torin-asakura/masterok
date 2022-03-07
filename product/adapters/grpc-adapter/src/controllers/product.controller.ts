@@ -28,8 +28,6 @@ import { RemoveProductDto }                from '../dto'
 @ProductServiceControllerMethods()
 @UseFilters(new GrpcExceptionsFilter())
 export class ProductController implements ProductServiceController {
-  private products: any[] = []
-
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   @UsePipes(new GrpcValidationPipe())
@@ -42,7 +40,9 @@ export class ProductController implements ProductServiceController {
       request.price,
       request.article,
       request.supplierCode,
-      request.brand
+      request.brand,
+      request.barcode,
+      request.images
     )
 
     await this.commandBus.execute(command)
@@ -68,7 +68,9 @@ export class ProductController implements ProductServiceController {
       request.product.price,
       request.product.article,
       request.product.supplierCode,
-      request.product.brand
+      request.product.brand,
+      request.product.barcode,
+      request.product.images
     )
 
     await this.commandBus.execute(command)

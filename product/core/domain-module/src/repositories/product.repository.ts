@@ -9,5 +9,5 @@ export abstract class ProductRepository {
 
   abstract findById(id: string): Promise<Product | undefined>
 
-  abstract remove(id: string): Promise<Product | undefined>
+  abstract remove(id: string): Promise<void>
 }
